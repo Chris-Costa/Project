@@ -1,0 +1,42 @@
+header, footer{
+    background-color: lightpink;
+    border: solid 1px black;
+}
+body {
+    background-color: lightgray;
+}
+footer{
+    padding: 10px;
+    border-radius: 3px;
+}
+
+a{
+    color: black;
+    
+}
+
+#main{
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    color: #202020;
+    margin: 5px;
+}
+#main input[type=submit]{
+    background-color: green;
+    color: #ccc;
+    border-radius: 15px;
+    padding: 3px;
+    margin-top: 5px;
+}
+.boader-image{
+    border: solid 1px black;
+}
+
+header nav {
+    float: right;
+    margin-right: 5px;
+}
+
+header nav li{
+    display: inline;
+}
