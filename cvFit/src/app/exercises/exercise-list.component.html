@@ -6,12 +6,12 @@
         <div class='row'>
             <div class='col-md-2'>Filter by:</div>
             <div class='col-md-4'>
-                <input type='text' />
+                <input type='text' [(ngModel)]='listFilter' />
             </div>
         </div>
         <div class='row'>
             <div class='col-md-6'>
-                <h4>Filtered by: </h4>
+                <h4>Filtered by: {{listFilter}} </h4>
             </div>
         </div>
         <div class='table-responsive'>
@@ -19,27 +19,27 @@
                 <thead>
                     <tr>
                         <th>
-                            <button class='btn btn-primary'>
-                                Show Image
+                            <button class='btn btn-primary' (click)='toggleImage()'>
+                                {{showImage? 'Hide' : 'Show'}} Image
                             </button>
                         </th>
                         <th>Exercise</th>
                         <th>Muscle Group</th>
                         <th>Description</th>
                         <th>Rep Range</th>
-                        <th>Star Rating</th>
+                        <th>Difficulty</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor='let exercise of exercises'>
+                    <tr *ngFor='let exercise of filteredExercises'>
                         <td>
-                            <img [src]='exercise.imageUrl' [title]="exercise.exerciseName" [style.width.px]='imageWidth' [style.marign.px]='imageMargin'>
+                            <img *ngIf='showImage' [src]='exercise.imageUrl' [title]="exercise.exerciseName" [style.width.px]='imageWidth' [style.marign.px]='imageMargin'>
                         </td>
                         <td>{{exercise.exerciseName}}</td>
-                        <td>{{exercise.group}}</td>
+                        <td>{{exercise.muscleGroup}}</td>
                         <td>{{exercise.description}}</td>
                         <td>{{exercise.repRange}}</td>
-                        <td>{{exercise.starRating}}</td>
+                        <td>{{exercise.difficulty}}</td>
                     </tr>
                 </tbody>
             </table>

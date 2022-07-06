@@ -1,0 +1,45 @@
+[
+    {
+        "exerciseId": 1,
+        "exerciseName": "Dumbell Rows",
+        "muscleGroup": "Back",
+        "description": "Use a dumbell and row",
+        "repRange": "8-12",
+        "difficulty": "Intermediate",
+        "imageUrl": "assets/images/Row.png"
+    },
+    {
+        "exerciseId": 2,
+        "exerciseName": "Lat Pulldowns",
+        "muscleGroup": "Back",
+        "description": "Use a cable machine and pull down",
+        "repRange": "8-12",
+        "difficulty": "Easy",
+        "imageUrl": "assets/images/LatPulldown.webp"
+    },
+    {
+        "exerciseId": 3,
+        "exerciseName": "Deadlift",
+        "muscleGroup": "Compound",
+        "description": "Compound movement for back, core, hamstrings, quads",
+        "repRange": "1-4",
+        "difficulty": "Advanced",
+        "imageUrl": "assets/images/leaf_rake.png"
+    },
+    {
+        "exerciseId": 4,
+        "exerciseName": "Leaf Rake",
+        "muscleGroup": "GDN-0011",
+        "description": "Leaf rake with 48-inch wooden handle.",
+        "repRange": 19.95,
+        "difficulty": "assets/images/leaf_rake.png"
+    },
+    {
+        "exerciseId": 5,
+        "exerciseName": "Leaf Rake",
+        "muscleGroup": "GDN-0011",
+        "description": "Leaf rake with 48-inch wooden handle.",
+        "repRange": 19.95,
+        "difficulty": "assets/images/leaf_rake.png"
+    }
+  ]
