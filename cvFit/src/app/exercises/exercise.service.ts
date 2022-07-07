@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, Observable, tap, throwError } from "rxjs";
+import { catchError, map, Observable, tap, throwError } from "rxjs";
 import { IExercise } from "./exercise";
 
 @Injectable({
@@ -17,6 +17,12 @@ export class ExerciseService{
             catchError(this.handleError)
         );
     }
+    getExercise(id: number): Observable<IExercise | undefined> {
+        return this.getExercises()
+          .pipe(
+            map((products: IExercise[]) => products.find(p => p.exerciseId === id))
+          );
+      }
     private handleError(err: HttpErrorResponse){
         let errorMessage = '';
         if (err.error instanceof ErrorEvent){

@@ -22,7 +22,7 @@ import { WelcomeComponent } from './home/welcome.component';
     HttpClientModule,
     RouterModule.forRoot([
       {path: 'exercises', component: ExerciseListComponent},
-      {path: 'exeercises/:id', component: ExerciseDetailComponent},
+      {path: 'exercises/:id', component: ExerciseDetailComponent},
       {path: 'welcome', component: WelcomeComponent},
       {path: '', redirectTo: 'welcome', pathMatch: 'full'},
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'}

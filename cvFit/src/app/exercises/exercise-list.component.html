@@ -35,7 +35,9 @@
                         <td>
                             <img *ngIf='showImage' [src]='exercise.imageUrl' [title]="exercise.exerciseName" [style.width.px]='imageWidth' [style.marign.px]='imageMargin'>
                         </td>
-                        <td>{{exercise.exerciseName}}</td>
+                        <td>
+                            <a [routerLink]="['/exercises', exercise.exerciseId]">
+                            {{exercise.exerciseName}}</a></td>
                         <td>{{exercise.muscleGroup}}</td>
                         <td>{{exercise.description}}</td>
                         <td>{{exercise.repRange}}</td>
