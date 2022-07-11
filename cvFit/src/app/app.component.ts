@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
     <ul class='nav nav-pills'>
       <li><a class='nav-link' routerLink='/welcome'>Home</a></li>
       <li><a class='nav-link' routerLink='/exercises'>Exercise List</a></li>
+      <li><a class='nav-link' routerLink=''>Blog</a></li>
     </ul>
   </nav>
   <div class='container'>
@@ -16,5 +17,5 @@ import { Component } from '@angular/core';
   `
 })
 export class AppComponent {
-  pageTitle = 'cvFit';
+  pageTitle = 'Robin Rimbock PT';
 }
