@@ -1,4 +1,8 @@
 .jumbotron{
     height: 20vh;
-    background-color: lightblue;
+    background-image: url("./background.jpg");
+}
+.card-body{
+    background-color: aliceblue;
+    background-image: url("./background.jpg");
 }
