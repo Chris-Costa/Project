@@ -2,6 +2,7 @@
     height: 50vh;
     background-image: url("./background.jpg");
     margin: 5px;
+    color: white;
 }
 
 footer{
@@ -28,4 +29,13 @@ footer{
     margin: 5px;
     border-radius: 15px;
     float:left;
+}
+.example-card {
+    max-width: 360px;
+    margin-bottom: 8px;
+    margin: 5px;
+    float: left;
+}
+footer{
+    padding: 5px;
 }

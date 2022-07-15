@@ -11,6 +11,7 @@ import { WelcomeComponent } from './home/welcome.component';
 import { ContactUsComponent } from './form/contactUs.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material.module';
+import {MatCardModule} from '@angular/material/card';
 
 
 
@@ -19,13 +20,15 @@ import { MaterialModule } from './shared/material.module';
     AppComponent,
     ExerciseListComponent,
     ExerciseDetailComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     MaterialModule,
+    MatCardModule,
     RouterModule.forRoot([
       {path: 'exercises', component: ExerciseListComponent},
       {path: 'exercises/:id', component: ExerciseDetailComponent},

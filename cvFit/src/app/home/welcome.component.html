@@ -17,20 +17,21 @@
 
     <div id="trainer1">
       <img src="./assets/images/head2.png" width="150" height="150" alt="Trainer2">
-      <h3>Chris Bumstead</h3>
-      <p>Chris is a graduate from temple univeristy with a degree in exercise science.  He has a passion for fitness
-        and has spent over 14 years in the industry.  He has trained a multitued of clients personally and understands 
-        that each individuals fitness journey and goals are different.  with this knowledge he makes plans that fit your
-        goals.
+      <h3>Tommy</h3>
+      <p> Tommy Smith is a group exercise instructor at Next Level Personal Training. He has always 
+        had a passion for health & fitness and maintaining an active lifestyle. He is an avid runner 
+        of over 10 years and continues to participate in events ranging from 5ks & obstacle events to 
+        ultramarathons. His goal is to get people excited about exercise and help them find joy in living
+         an active lifestyle. 
       </p>
     </div>
     <div id="trainer2">
       <img src="./assets/images/head1.png" width="150" height="150" alt="Trainer1">
-      <h3>Sully</h3>
-      <p>Chris is a graduate from temple univeristy with a degree in exercise science.  He has a passion for fitness
-        and has spent over 14 years in the industry.  He has trained a multitued of clients personally and understands 
-        that each individuals fitness journey and goals are different.  with this knowledge he makes plans that fit your
-        goals.
+      <h3>Susan</h3>
+      <p>Susan Harvey is a native of Philadelphia. This mother of 3, has a background in track & field and distance 
+        running.  She has over 10 years experience working with clients helping them to improve their quality of 
+        life through health, fitness and nutrition. Shani has also been a leader in women's bodybuilding not only
+         as a 3x medal competitor, but also as a coach. 
       </p>
     </div>
   </div>
@@ -39,23 +40,27 @@
       <h1><i>Services</i></h1>
     </div>
     <div class="service-plan">
-      <h4>Basic</h4>
-      <p>This plan includes all videos and lesson plans</p>
-      <h5>Free</h5>
+      <h2><b>Basic</b></h2>
+      <p>Create an account today at no charge to explore our content with no commitments.  This plan includes
+        written descriptions, images, video tutorials, customizable workout plans, and community blog.  
+      </p>
+      <h3><i>Free</i></h3>
     </div>
     <div class="service-plan">
-      <h4>Starter</h4>
-      <p>This plan includes all videos and lesson plans
-        Plus two training sessions per week
+      <h2><b>Starter</b></h2>
+      <p>This plan includes access to all the features availble with the <i>Basic Package</i>.  In additon to these base 
+        features our team of certified trainers will create specific exercise plans based on your needs.  These trainers
+        are always availble to answer any questions or concerns you will have along your fitness journey. 
       </p>
-      <h5>$25/month</h5>
+      <h3><i>$25/month</i></h3>
     </div>
     <div class="service-plan">
-      <h4>Advanced</h4>
-      <p>This plan includes all videos and lesson plans
-        Plus 5 training sessions per week
+      <h2><b>Andvanced</b></h2>
+      <p>This plan includes everything availble within the <i>Starter Package</i>.  In additon clients will be able 
+        to schedule in person training sessions.  Users will have five 1-hour sessions that can be scheduled at anytime.  
+        These in-person sessions are create for newbies who learn best with hands on instruction.
       </p>
-      <h5>$60/month</h5>
+      <h3><i>$65/month</i></h3>
     </div>
     
     
@@ -67,13 +72,40 @@
     </div>
     <div id="container">
       <div id="test1">
-        <h1>Test1</h1>
+        <mat-card class="example-card">
+          <mat-card-title-group>
+            <mat-card-title>Chris Bumstead</mat-card-title>
+            <mat-card-subtitle>Mr. Olympia</mat-card-subtitle>
+            <img mat-card-sm-image src="./assets/images/test1.png" >
+          </mat-card-title-group>
+          <mat-card-content>
+            {{longTextChris}}
+          </mat-card-content>
+        </mat-card>
       </div>
       <div id="test2">
-        <h1>Test2</h1>
+        <mat-card class="example-card">
+          <mat-card-title-group>
+            <mat-card-title>Arnold Schwarzenegger</mat-card-title>
+            <mat-card-subtitle>38th Govener of California</mat-card-subtitle>
+            <img mat-card-sm-image src="./assets/images/test2.jpg" >
+          </mat-card-title-group>
+          <mat-card-content>
+            {{longTextArnold}}
+          </mat-card-content>
+        </mat-card>
       </div>
       <div id="test3">
-        <h1>Test3</h1>
+        <mat-card class="example-card">
+          <mat-card-title-group>
+            <mat-card-title>Simone Biles</mat-card-title>
+            <mat-card-subtitle>Olympic Gold Medalist</mat-card-subtitle>
+            <img mat-card-sm-image src="./assets/images/test3.jpg" >
+          </mat-card-title-group>
+          <mat-card-content>
+            {{longTextSimone}}
+          </mat-card-content>
+        </mat-card>
       </div>
     </div>
 
