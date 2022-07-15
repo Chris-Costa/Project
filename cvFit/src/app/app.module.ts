@@ -8,25 +8,33 @@ import { ExerciseListComponent } from './exercises/exercise-list.component';
 import { RouterModule } from '@angular/router';
 import { ExerciseDetailComponent } from './exercises/exercise-detail.component';
 import { WelcomeComponent } from './home/welcome.component';
+import { ContactUsComponent } from './form/contactUs.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './shared/material.module';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ExerciseListComponent,
-    ExerciseDetailComponent
+    ExerciseDetailComponent,
+    ContactUsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    MaterialModule,
     RouterModule.forRoot([
       {path: 'exercises', component: ExerciseListComponent},
       {path: 'exercises/:id', component: ExerciseDetailComponent},
       {path: 'welcome', component: WelcomeComponent},
+      {path: 'contact-us', component: ContactUsComponent},
       {path: '', redirectTo: 'welcome', pathMatch: 'full'},
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'}
-    ])
+    ]),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

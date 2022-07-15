@@ -1,8 +1,31 @@
 .jumbotron{
-    height: 20vh;
+    height: 50vh;
     background-image: url("./background.jpg");
+    margin: 5px;
 }
-.card-body{
+
+footer{
+    background-color: lightgray;
+}
+#trainer1{
+    position: absolute;
+    width: 500px;
+    text-align: center;
+}
+#trainer2{
+    width: 500px;
+    margin-left: 625px;
+    text-align: center;
+}
+#container{
     background-color: aliceblue;
-    background-image: url("./background.jpg");
+}
+.service-plan{
+    border: 5px solid black;
+    width: 355px;
+    text-align: center;
+    background-color: bisque;
+    margin: 5px;
+    border-radius: 15px;
+    float:left;
 }

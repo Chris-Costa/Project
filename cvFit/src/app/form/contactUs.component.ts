@@ -4,8 +4,7 @@ import { ContactUs } from "./contactUs";
 
 @Component({
     selector: 'app-contactUs',
-    templateUrl: './contactUs.component.html',
-    styleUrls: ['./customer.componetn.css']
+    templateUrl: './contactUs.component.html'
 })
 export class ContactUsComponent implements OnInit{
     contactUs = new ContactUs();

@@ -7,10 +7,11 @@
         <div class="form-group row mb-2">
             <label class="col-md-2 col-form-label" for="firstNameId">First Name</label>
             <div class="col-md-8">
-                <input class="form-control" id="firstNameId" type="text" placeholder="First name" required minlength="2" [(ngModel)]=contactUs.firstName name=firstName #firstNameVar="ngModel" [ngClass]="{'is-invalid': (fistNameVar.touched || firstNameVar.dirty) && !firstNameVar.valid}" />
-            <span class="invalid-feedback">
-                <span *ngIf="firstNameVar.errors?.required">Please enter your first name</span>
-            </span>
+                <input class="form-control" id="firstNameId" type="text" placeholder="First name" 
+                    required minlength="2" [(ngModel)]=contactUs.firstName name=firstName #firstNameVar="ngModel" 
+                    [ngClass]="{'is-invalid': (firstNameVar.touched || firstNameVar.dirty) && !firstNameVar.valid}" />
+            
+           
             </div>
         </div>
     </form>
