@@ -1,9 +1,9 @@
 ﻿<body>
   <div class="contianer">
     <div class="jumbotron">
-      <h2>Robin Rimbock PT</h2>
-        <h3>Start your fitness journey</h3>
-        <p>We are a team of dedicated fitness professionals helping you reach
+      <h1 id="main-title">CV Coaching</h1>
+        <h3 id="motto">Start your fitness journey today!</h3>
+        <p id="quick-info">We are a team of dedicated fitness professionals helping you reach
         your goals.  Start today and gain access to world class instruciton 
         through tutorial videos, workout plans, community discusions, and individual 
         workout sessions.
@@ -26,7 +26,7 @@
       </p>
     </div>
     <div id="trainer2">
-      <img src="./assets/images/head1.png" width="150" height="150" alt="Trainer1">
+      <img src="./assets/images/trainer1.jpg" width="150" height="150" alt="Trainer1">
       <h3>Susan</h3>
       <p>Susan Harvey is a native of Philadelphia. This mother of 3, has a background in track & field and distance 
         running.  She has over 10 years experience working with clients helping them to improve their quality of 
@@ -71,7 +71,7 @@
       <h1><i>Testimonials</i></h1>
     </div>
     <div id="container">
-      <div id="test1">
+      <div id="test" style="display:flex; flex-direction: row;">
         <mat-card class="example-card">
           <mat-card-title-group>
             <mat-card-title>Chris Bumstead</mat-card-title>
@@ -82,8 +82,6 @@
             {{longTextChris}}
           </mat-card-content>
         </mat-card>
-      </div>
-      <div id="test2">
         <mat-card class="example-card">
           <mat-card-title-group>
             <mat-card-title>Arnold Schwarzenegger</mat-card-title>
@@ -94,8 +92,6 @@
             {{longTextArnold}}
           </mat-card-content>
         </mat-card>
-      </div>
-      <div id="test3">
         <mat-card class="example-card">
           <mat-card-title-group>
             <mat-card-title>Simone Biles</mat-card-title>
@@ -107,11 +103,24 @@
           </mat-card-content>
         </mat-card>
       </div>
-    </div>
-
+      </div>
   </div>
 </body>
 <footer>
-
-  <p>this is the footer</p>
+  <div class="footer-title" class="text-center">
+    <h4><b>Contact Us</b></h4>
+  </div>
+  <div class="footer-section">
+    <p>123 Center St</p>
+    <p>Philadelphia, Pa 18754</p>
+    <p>Phone Number: (215)432-1987</p>
+  </div>
+  <div class="footer-section" id="text">
+    For social media links
+  </div>
+  <div class="footer-section" id="text2">
+    <button class="contactForm" routerLink='/contact-us'>Contact Us</button>
+    contact form link
+  </div>
+  
 </footer>

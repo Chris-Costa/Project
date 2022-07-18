@@ -1,25 +1,48 @@
 .jumbotron{
     height: 50vh;
-    background-image: url("./background.jpg");
+    background-image: url('./backDrop.jpg');
+    height: 400px;
     margin: 5px;
     color: white;
 }
-
-footer{
+#main-title{
+    font-size: 50px;
+    text-align: center;
+    padding: 10px;
+}
+#motto{
+    font-size: 35px;
+    text-align: center;
+    padding: 10px;
+}
+#quick-info{
+    font-size: 20px;
+    text-align: center;
+    
+}
+#about-us{
+    width: auto;  
+}
+#services{
+    height: 350px;
     background-color: lightgray;
+}
+#testimonials{
+    height: 375x;
+}
+footer{
+    margin: 2px;
+    background-color: black;
 }
 #trainer1{
     position: absolute;
-    width: 500px;
+    width: 495px;
     text-align: center;
 }
 #trainer2{
-    width: 500px;
+    width: 495px;
     margin-left: 625px;
     text-align: center;
-}
-#container{
-    background-color: aliceblue;
 }
 .service-plan{
     border: 5px solid black;
@@ -31,11 +54,24 @@ footer{
     float:left;
 }
 .example-card {
-    max-width: 360px;
+    max-width: 375px;
     margin-bottom: 8px;
     margin: 5px;
-    float: left;
 }
 footer{
+    color: white;
     padding: 5px;
+    
+}
+.footer-section{
+    width: 355px;
+    display: inline-block;
+    background-color: aqua;
+    margin: 5px;
+}
+#text{
+    text-align: center;
+}
+#text2{
+    text-align: right;
 }
