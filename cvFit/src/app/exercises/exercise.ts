@@ -7,4 +7,5 @@ export interface IExercise{
     starRating: number;
     difficulty: string;
     imageUrl: string;
+    video: string;
 }

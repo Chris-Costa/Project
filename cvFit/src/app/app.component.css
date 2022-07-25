@@ -4,13 +4,4 @@ nav .navbar-brand {
 body {
     background-color: lightblue;
 }
-.sign-In{
-    position: absolute;
-    right: 50px;
-    top: 15px;
-}
-.contactForm{
-    position: fixed;
-    bottom: 5px;
-    right: 50px;
-}
+

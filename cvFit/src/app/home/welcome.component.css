@@ -1,8 +1,63 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 .jumbotron{
-    height: 50vh;
     background-image: url('./backDrop.jpg');
-    height: 400px;
+    height: 350px;
+    color: white;
+    text-align: center;
+}
+.flex-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.item{
+    width: 355px;
+    height: 275px;
+    margin: 10px;
+    color: white;
+    background: lightcoral;
+
+    border: 5px solid black;
+    border-radius: 15px;
+    text-align: center;
+    /*display: flex;*/
+    justify-content: center;
+    align-items: center;
+}
+.trainer{
+    text-align: center;
+    width: 500px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+footer{
+    background-color: black;
+    color: white;
+}
+
+.activity{
+    text-align: center;
+   
+}
+.testimonial-card {
+    max-width: 375px;
+    margin-bottom: 8px;
     margin: 5px;
+}
+/*
+.jumbotron{
+ 
+    background-image: url('./backDrop.jpg');
+    
+    margin: 0 auto;
     color: white;
 }
 #main-title{
@@ -75,3 +130,4 @@ footer{
 #text2{
     text-align: right;
 }
+*/

@@ -6,7 +6,8 @@
         "description": "Use a dumbell and row",
         "repRange": "8-12",
         "difficulty": "Intermediate",
-        "imageUrl": "assets/images/Row.png"
+        "imageUrl": "assets/images/Row.png",
+        "video": "https://www.youtube.com/embed/tgbNymZ7vqY"
     },
     {
         "exerciseId": 2,
