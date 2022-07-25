@@ -4,7 +4,7 @@
     <li><a class='nav-link' routerLink='/exercises'>Exercise List</a></li>
     <li><a class='nav-link' routerLink=''>Blog</a></li>
     <li><a *ngIf="!auth.isAuth()" class='nav-link' routerLink='/login'>Sign In</a></li>
-    <li><a *ngIf="auth.isAuth()" class='nav-link' routerLink=''> Welcome {{auth.currentUser.firstName}}</a></li>
+    <li><a *ngIf="auth.isAuth()" class='nav-link' routerLink=''> Welcome </a></li>
     <!--
     <li><button mat-button class="sign-In" routerLink='/login'>Sign In</button></li>
     -->
