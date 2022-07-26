@@ -1,10 +1,13 @@
 import { Injectable } from "@angular/core";
 import { IUser } from './user.model';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class AuthService {
-    currentUser: IUser | undefined ;
+    currentUser!: IUser;
     loginUser(userName: string, password: string){
+    
         this.currentUser = {
             id: 1,
             userName: userName,

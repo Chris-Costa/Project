@@ -1,0 +1,17 @@
+.testimonial-card{
+    margin: 7px;;
+}
+.post-button{
+    text-align: center;
+}
+.btn-primary{
+    background-color: lightcoral;
+}
+#postCreation{
+    text-align: center;
+    border: 1px solid black;
+    margin: 4px;
+}
+.blog-card{
+    border: 1px solid black;
+}

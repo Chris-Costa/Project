@@ -10,10 +10,13 @@ export class LoginComponent{
     userName: any;
     password: any;
 
-    constructor(private authService:AuthService){
-
-    }
+    constructor(private authService:AuthService, private router:Router){ }
+    
     login(formValues: any){
-        this.authService.loginUser(formValues.userName, formValues.password)
+        this.authService.loginUser(formValues.userName, formValues.password);
+        this.router.navigate(['welcome']);
+    }
+    cancel(){
+        this.router.navigate(['welcome']);
     }
 }

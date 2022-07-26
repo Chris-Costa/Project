@@ -16,6 +16,7 @@ import { MaterialModule } from './shared/material.module';
 import {MatCardModule} from '@angular/material/card';
 
 import { AuthService } from './form/auth.service';
+import { BlogComponent } from './blog/blog.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AuthService } from './form/auth.service';
     ContactUsComponent,
     WelcomeComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    BlogComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +41,7 @@ import { AuthService } from './form/auth.service';
       {path: 'welcome', component: WelcomeComponent},
       {path: 'login', component: LoginComponent},
       {path: 'contact-us', component: ContactUsComponent},
+      {path: 'blog', component: BlogComponent},
       {path: '', redirectTo: 'welcome', pathMatch: 'full'},
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'}
     ]),
