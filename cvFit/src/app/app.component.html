@@ -3,19 +3,12 @@
     <li><a class='nav-link' routerLink='/welcome'>Home</a></li>
     <li><a class='nav-link' routerLink='/exercises'>Exercise List</a></li>
     <li><a class='nav-link' routerLink='/blog'>Blog</a></li>
-    <!--
-    <li><a *ngIf="!auth.isAuth()" class='nav-link' routerLink='/login'>Sign In</a></li>
-    <li><a *ngIf="auth.isAuth()" class='nav-link' routerLink=''> Welcome {{auth.currentUser.firstName}} </a></li>
-    -->
-  </ul>
-  <ul class='nav nav-pills' id="right">
-    <li class="signIn" ><a *ngIf="!auth.isAuth()" class='nav-link' routerLink='/login'>Sign In</a></li>
-    <li class="signIn" ><a *ngIf="auth.isAuth()" class='nav-link' routerLink=''> Welcome {{auth.currentUser.firstName}} </a></li>
+    <div id="right">
+      <li><a *ngIf="!auth.isAuth()" class='nav-link' routerLink='/login'>Sign In</a></li>
+      <li><a *ngIf="auth.isAuth()" class='nav-link' routerLink=''> Welcome {{auth.currentUser.firstName}} </a></li>
+    </div>
   </ul>
 </nav>
-
-
-
 <div class='container'>
   <router-outlet></router-outlet>
 </div>

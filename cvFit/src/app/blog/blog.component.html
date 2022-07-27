@@ -21,20 +21,20 @@
     </div>
 </div>
 
-<div class="col-md-4">
-      <div class="flex-container">
-        <mat-card class="blog-card">
-          <mat-card-title-group>
-            <mat-card-title>{{blogTitle}}</mat-card-title>
-            <mat-card-subtitle>{{blogAuthor}}</mat-card-subtitle>
+
+    <div class="flex-container">
+      <mat-card class="blog-card" *ngFor='let blogPost of blogPosts'>
+        <mat-card-title-group>
+          <mat-card-title>{{blogPost.blogTitle}}</mat-card-title>
+          <mat-card-subtitle>{{blogPost.blogAuthor}}</mat-card-subtitle>
+            <!--Avatar
             <img mat-card-sm-image src="./assets/images/test1.png" >
-          </mat-card-title-group>
-          <mat-card-content>{{blogPost}}</mat-card-content>
-          <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>COMMENT</button>
-          </mat-card-actions>
-        </mat-card>
-        
+            -->
+        </mat-card-title-group>
+        <mat-card-content>{{blogPost.blogContent}}</mat-card-content>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>COMMENT</button>
+        </mat-card-actions>
+      </mat-card>
     </div>
-</div>

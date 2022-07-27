@@ -3,14 +3,11 @@ body {
     background-color: lightblue;
 }
 #right{
-    list-style-type: none;
-padding: 0;
-margin: 0;
-    text-align: right;
+    position: absolute;
+    right: 2px;
 }
 .signIn{
     background-position: 100% .4em;
     padding-right: .6em;
     background-repeat: no-repeat;
-
 }

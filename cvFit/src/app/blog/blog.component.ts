@@ -1,21 +1,18 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { BlogService } from "./blog.service";
+import { IBlogPost } from "./blogPost";
 
 @Component({
     templateUrl: './blog.component.html',
     styleUrls: ['./blog.component.css']
 })
-export class BlogComponent{
-
-    blogTitle: string = 'Good apps for tracking macros??';
-    blogAuthor: string = 'Tommy Hamilton';
-    blogPost: string = 'Does anyone have suggestions for apps to track my macro intakes.  Why do you recommend?';
+export class BlogComponent implements OnInit {
     showForm: boolean = false;
+    //input fields for new post
     title: any;
     author: any;
     post: any;
     
-
-
     togglePostForm(): void{
         this.showForm = !this.showForm;
     }
@@ -23,4 +20,18 @@ export class BlogComponent{
         console.log(formValues)
     }
 
+    //new
+    blogPosts: IBlogPost[] = [];
+    errorMessage: any;
+    constructor (private blogService: BlogService){ }
+
+    ngOnInit(): void{
+        this.blogService.getBlogPosts().subscribe({
+            next: blogPosts => {
+                this.blogPosts = blogPosts;
+            },
+            error: err => this.errorMessage = err
+        });
+        
+    }
 }

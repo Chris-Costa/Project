@@ -1,26 +1,26 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { IBlogPost } from "./blogPost";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { catchError, map, Observable, tap, throwError } from "rxjs";
-import { IExercise } from "./exercise";
 
 @Injectable({
     providedIn: 'root'
 })
-export class ExerciseService{
-    private exerciseUrl = 'assets/json/exercises.json';
 
+export class BlogService{
+    private blogUrl = 'assets/json/blogs.json';
     constructor (private http: HttpClient) { }
-    
-    getExercises(): Observable<IExercise[]>{
-        return this.http.get<IExercise[]>(this.exerciseUrl).pipe(
+
+    getBlogPosts(): Observable<IBlogPost[]>{
+        return this.http.get<IBlogPost[]>(this.blogUrl).pipe(
             tap(data => console.log('All: ', JSON.stringify(data))), 
             catchError(this.handleError)
         );
     }
-    getExercise(id: number): Observable<IExercise | undefined> {
-        return this.getExercises()
+    getBlogPost(id: number): Observable<IBlogPost | undefined> {
+        return this.getBlogPosts()
           .pipe(
-            map((products: IExercise[]) => products.find(p => p.exerciseId === id))
+            map((products: IBlogPost[]) => products.find(p => p.blogId === id))
           );
       }
     private handleError(err: HttpErrorResponse){

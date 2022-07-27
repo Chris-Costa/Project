@@ -1,3 +1,8 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 .testimonial-card{
     margin: 7px;;
 }
@@ -14,4 +19,13 @@
 }
 .blog-card{
     border: 1px solid black;
+    max-width: 375px;
+    margin-bottom: 8px;
+    margin: 5px;
+    
+}
+.flex-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }

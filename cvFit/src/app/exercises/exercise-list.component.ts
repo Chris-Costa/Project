@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵisListLikeIterable } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IExercise } from './exercise';
 import { ExerciseService } from './exercise.service';
 
