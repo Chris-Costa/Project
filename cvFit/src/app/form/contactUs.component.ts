@@ -17,6 +17,6 @@ export class ContactUsComponent {
         console.log(formValues)
     }
     back(){
-        this.router.navigate(['welcome']);
+        this.router.navigate(['blog']);
     }
 }
