@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from './form/auth.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +8,6 @@ import { AuthService } from './form/auth.service';
 })
 export class AppComponent {
   constructor(public auth:AuthService) {}
+  displayButton: boolean = true;
+
 }

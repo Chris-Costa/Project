@@ -34,4 +34,10 @@ export class BlogComponent implements OnInit {
         });
         
     }
+    incrementLikes(){
+
+    }
+    incrementComments(){
+        
+    }
 }

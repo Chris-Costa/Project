@@ -3,18 +3,24 @@
         "blogId": 1,
         "blogTitle": "Good apps for tracking macros??",
         "blogAuthor": "Tommy Hamilton",
-        "blogContent": "Does anyone have suggestions for apps to track my macro intakes.  Why do you recommend?"
+        "blogContent": "Does anyone have suggestions for apps to track my macro intakes.  Why do you recommend?",
+        "likes": 10,
+        "comments": 5
     },
     {
         "blogId": 2,
         "blogTitle": "Mind Muscle Connection Help",
         "blogAuthor": "Gina Smith",
-        "blogContent": "When chest pressing I can only feel tension in my biceps and sholders.  Any tips to engage chest and triceps?"
+        "blogContent": "When chest pressing I can only feel tension in my biceps and sholders.  Any tips to engage chest and triceps?",
+        "likes": 4,
+        "comments": 3
     },
     {
         "blogId": 3,
         "blogTitle": "Best form of cardio?",
         "blogAuthor": "Mike Glennon",
-        "blogContent": "What type of cardio do people prefer.  Looking to lose weight fast and have a good sweat."
+        "blogContent": "What type of cardio do people prefer.  Looking to lose weight fast and have a good sweat.",
+        "likes": 16,
+        "comments": 15
     }
 ]

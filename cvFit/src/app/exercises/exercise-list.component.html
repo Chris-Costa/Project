@@ -7,6 +7,11 @@
             <div class='col-md-2'>Filter by:</div>
             <div class='col-md-4'>
                 <input type='text' [(ngModel)]='listFilter' />
+                <button class="lifts" mat-button [matMenuTriggerFor]="menu">My Workouts</button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>View Existing Workouts</button>
+                        <button mat-menu-item>Create New Workout</button>
+                    </mat-menu>
             </div>
         </div>
         <div class='table-responsive'>
