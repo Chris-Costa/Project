@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from './form/auth.service';
+import { ProfileComponent } from './form/profile.component';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +9,14 @@ import { AuthService } from './form/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(public auth:AuthService) {}
+  constructor(public auth:AuthService, public dialog: MatDialog) {}
   displayButton: boolean = true;
+  
+
+  openDialog() {
+    this.dialog.open(ProfileComponent, {
+      width: '500px',
+    });
+  }
 
 }

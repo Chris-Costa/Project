@@ -1,22 +1,19 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from '@angular/router';
+
 
 @Component({
     selector: 'app-contactUs',
     templateUrl: './contactUs.component.html'
 })
 export class ContactUsComponent {
-    firstName: any;
-    lastName: any;
-    email: any;
-    notes: any;
+    firstName: string;
+    lastName: string;
+    email: string;
+    notes: string;
 
-    constructor(private router:Router){ }
-
-    contact(formValues: any){
+    contact(formValues: string){
         console.log(formValues)
     }
-    back(){
-        this.router.navigate(['blog']);
-    }
+   
+    
 }

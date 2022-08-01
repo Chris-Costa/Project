@@ -14,7 +14,7 @@ export class ExerciseListComponent implements OnInit {
     showImage: boolean = false;
     
     private _listFilter: string ="";
-    errorMessage: any;
+    errorMessage: string;
     get listFilter(): string{
         return this._listFilter
     }

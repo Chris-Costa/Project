@@ -10,8 +10,7 @@
     </div>
   </ul>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink=''>My Workouts</button>
-    <button mat-menu-item routerLink='/profile'>Edit Profile</button>
+    <button mat-menu-item (click)="openDialog()">Edit Profile</button>
     <button mat-menu-item>Log Out</button>
   </mat-menu>
 

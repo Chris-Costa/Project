@@ -12,8 +12,6 @@ import { ExerciseService } from './exercise.service';
 export class ExerciseDetailComponent implements OnInit {
   errorMessage=' ';
   exercise: IExercise | undefined;
-  pageTitle: string = 'Exercise Details';
-
 
   constructor(private route: ActivatedRoute, 
     private router: Router,

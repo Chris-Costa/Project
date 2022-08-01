@@ -9,20 +9,20 @@ import { IBlogPost } from "./blogPost";
 export class BlogComponent implements OnInit {
     showForm: boolean = false;
     //input fields for new post
-    title: any;
-    author: any;
-    post: any;
+    title: string;
+    author: string;
+    post: string;
     
     togglePostForm(): void{
         this.showForm = !this.showForm;
     }
-    blog(formValues: any){
+    blog(formValues: string){
         console.log(formValues)
     }
 
-    //new
     blogPosts: IBlogPost[] = [];
-    errorMessage: any;
+    errorMessage: string;
+
     constructor (private blogService: BlogService){ }
 
     ngOnInit(): void{
