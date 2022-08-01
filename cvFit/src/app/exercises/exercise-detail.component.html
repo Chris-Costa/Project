@@ -1,0 +1,40 @@
+
+<div class='card'>
+    <div class='card-header'>
+      Exercise Details
+    </div>
+  
+    <div class='card-body'
+         *ngIf='exercise'>
+      <div class='row'>
+        <div class='col-md-8'>
+          <div class='row'>
+            <div class='col-md-4'>Name:</div>
+            <div class='col-md-8'>{{exercise.exerciseName}}</div>
+          </div>
+          <div class='row'>
+            <div class='col-md-4'>Description:</div>
+            <div class='col-md-8'>{{exercise.description}}</div>
+          </div>
+          <!--
+          <div class='row'>
+            <div class='col-md-4'>Tutorial: {{exercise.video}}</div>
+          </div>
+          -->
+        </div>
+  
+        <div class='col-md-4'>
+          <img id='images' class='center-block img-responsive'
+               [src]='exercise.imageUrl'
+               [title]='exercise.exerciseName'>
+        </div>
+      </div>
+    </div>
+  
+    <div class='card-footer'>
+      <button id='back' class='btn btn-outline-secondary'
+              (click)='onBack()'>
+        <i class='fa fa-chevron-left'></i> Back
+      </button>
+    </div>
+  </div>

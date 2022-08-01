@@ -1,0 +1,228 @@
+[
+    {
+        "exerciseId": 1,
+        "exerciseName": "Rows",
+        "muscleGroup": "Back",
+        "description": "Use a dumbell and row",
+        "repRange": "8-12",
+        "difficulty": "Intermediate",
+        "imageUrl": "assets/images/Row.png",
+        "video": "https://www.youtube.com/embed/tgbNymZ7vqY"
+    },
+    {
+        "exerciseId": 2,
+        "exerciseName": "Lat Pulldowns",
+        "muscleGroup": "Back",
+        "description": "Use a cable machine and pull down",
+        "repRange": "8-12",
+        "difficulty": "Beginner",
+        "imageUrl": "assets/images/LatPulldown.webp"
+    },
+    {
+        "exerciseId": 3,
+        "exerciseName": "Deadlift",
+        "muscleGroup": "Compound",
+        "description": "Compound movement for back, core, hamstrings, quads",
+        "repRange": "1-4",
+        "difficulty": "Advanced",
+        "imageUrl": "assets/images/deadLift.jpg"
+    },
+    {
+        "exerciseId": 4,
+        "exerciseName": "Squat (Back)",
+        "muscleGroup": "Legs",
+        "description": "Barbell back squat",
+        "repRange": "4-8",
+        "difficulty": "Intermediate",
+        "imageUrl": "assets/images/backSquat.jpg"
+    },
+    {
+        "exerciseId": 5,
+        "exerciseName": "Squat (Front)",
+        "muscleGroup": "Legs",
+        "description": "Barbell front squat.  The most pure of squat movements to target quads muscles",
+        "repRange": "4-8",
+        "difficulty": "Intermediate",
+        "imageUrl": "assets/images/frontSquat.jpg"
+    },
+    {
+        "exerciseId": 6,
+        "exerciseName": "Bulgarian Split Squats",
+        "muscleGroup": "Legs",
+        "description": "From a standing position, bend your knees and push your hips back as you would for a regular squat. Stop when your thighs are parallel to the ground. Pause briefly with your knees over, but not beyond, your toes. Push through your heels to return to the starting position, giving your glutes a squeeze at the top",
+        "repRange": "8-12",
+        "difficulty": "Beginner",
+        "imageUrl": "assets/images/bulgarian.jpg"
+    },
+    {
+        "exerciseId": 7,
+        "exerciseName": "Leg Extensions",
+        "muscleGroup": "Legs",
+        "description": "Leg extensions are exercises usually done with a lever machine. You sit on a padded seat and raise a padded bar with your legs. The exercise works mainly the quadriceps muscles of the front of the thigh—the rectus femoris and the vastus muscles.",
+        "repRange": "8-12",
+        "difficulty": "Beginner",
+        "imageUrl": "assets/images/legExtensions.jpg"
+    },
+    {
+        "exerciseId": 8,
+        "exerciseName": "Hamstring Curls",
+        "muscleGroup": "Legs",
+        "description": "The hamstring curl, also called a leg curl, is an exercise that strengthens the hamstrings. It involves bending your knees and moving your heels toward your butt while the rest of your body stays still. Typically, the exercise is done on a leg curl machine",
+        "repRange": "8-12",
+        "difficulty": "Beginner",
+        "imageUrl": "assets/images/hamstringCurls.jpg"
+    },
+    {
+        "exerciseId": 9,
+        "exerciseName": "Calf Raises",
+        "muscleGroup": "Calfs",
+        "description": "Exercises don't come much simpler than the calf raise. Stand up straight, then push through the balls of your feet and raise your heel until you are standing on your toes. Then lower slowly back to the start.",
+        "repRange": "12-15",
+        "difficulty": "Beginner",
+        "imageUrl": "assets/images/calfRaises.jpg"
+    },
+    {
+        "exerciseId": 10,
+        "exerciseName": "Romanian Deadlifts",
+        "muscleGroup": "Hamstrings",
+        "description": "The Romanian deadlift (RDL) is a traditional barbell lift used to develop the strength of the posterior chain muscles, including the erector spinae, gluteus maximus, hamstrings and adductors. When done correctly, the RDL is an effective exercise that helps strengthen both the core and the lower body with one move.",
+        "repRange": "8-12",
+        "difficulty": "Advanced",
+        "imageUrl": "assets/images/rdls.webp"
+    },
+    {
+        "exerciseId": 11,
+        "exerciseName": "Hack Squat",
+        "muscleGroup": "Legs",
+        "description": "The HS is a Squat variation that is performed on a machine and involves pushing the weight away from you, at an angle, as you stand back up. You must stand on the plate with your body leaning back against the pads. The weight is moved during the concentric phase of the movement.",
+        "repRange": "8-12",
+        "difficulty": "Beginner",
+        "imageUrl": "assets/images/hackSquat.jpg"
+    },
+    {
+        "exerciseId": 12,
+        "exerciseName": "Arnlod Press",
+        "muscleGroup": "Sholders",
+        "description": "The Arnold presses is defined by a wrist rotation movement that ends when your palms face forward at the top of the press. The Arnold press uses dumbbells to work many of the main muscle groups in your upper body, including the triceps, trapezius, and the delts.",
+        "repRange": "8-12",
+        "difficulty": "Beginner",
+        "imageUrl": "assets/images/arnolds.jpg"
+    },
+    {
+        "exerciseId": 13,
+        "exerciseName": "Lateral Raise",
+        "muscleGroup": "Sholders",
+        "description": "A lateral raise is a strength training shoulder exercise characterized by lifting a pair of dumbbells away from your body in an external rotation. Lateral raises work the trapezius muscle in your upper back as well as the deltoid muscle group in your shoulders—particularly the anterior and lateral deltoids.",
+        "repRange": "8-12",
+        "difficulty": "Beginner",
+        "imageUrl": "assets/images/lateralRaise.webp"
+    },
+    {
+        "exerciseId": 14,
+        "exerciseName": "Face Pulls",
+        "muscleGroup": "Sholders",
+        "description": "What Is the Face Pull Exercise? The face pull is an isolation exercise that activates muscles in your lower back and upper back—specifically the rear deltoids on the back of your shoulders. Practice face pulls by standing in front of a cable pulley machine. Grab the rope attachment with an overhand grip.",
+        "repRange": "8-12",
+        "difficulty": "Beginner",
+        "imageUrl": "assets/images/facePulls.jpg"
+    },
+    {
+        "exerciseId": 15,
+        "exerciseName": "Front Raise",
+        "muscleGroup": "Sholders",
+        "description": "The front raise, also known as the dumbbell front raise, is a weight training exercise that targets your shoulder muscles. Perform front raises by standing and using an overhand grip to lift a pair of dumbbells from the front of your thighs to shoulder level in front of your body.",
+        "repRange": "8-12",
+        "difficulty": "Beginner",
+        "imageUrl": "assets/images/frontRaise.png"
+    },
+    {
+        "exerciseId": 16,
+        "exerciseName": "Reverse Fly",
+        "muscleGroup": "Sholders",
+        "description": "Lean forward, letting your arms hang down next to your calves with your elbows slightly bent. Slowly raise the weights until your elbows are level with your shoulders. Then slowly lower the weights to the starting position. You'll feel tension in your shoulders and the muscles across your upper back",
+        "repRange": "8-12",
+        "difficulty": "Beginner",
+        "imageUrl": "assets/images/reverseFly.jpg"
+    },
+    {
+        "exerciseId": 17,
+        "exerciseName": "Pull ups",
+        "muscleGroup": "Back",
+        "description": "A pullup is a challenging upper body exercise where you grip an overhead bar and lift your body until your chin is above that bar. It's a hard exercise to execute — so hard, in fact, that a U.S. Marine can receive a passing score on the annual physical fitness test without doing pullups at all.",
+        "repRange": "8-12",
+        "difficulty": "Intermediate",
+        "imageUrl": "assets/images/pullUp.jpg"
+    },
+    {
+        "exerciseId": 18,
+        "exerciseName": "Bicep Curl",
+        "muscleGroup": "Arms",
+        "description": "Hold the barbell with both hands facing up so the wrists, elbows, and shoulders are in a straight line about shoulder-width apart. Lift the barbell toward the shoulders while bending the elbows and keeping them next to the middle of the body. Slowly lower the weight to return to the starting position.",
+        "repRange": "8-12",
+        "difficulty": "Beginner",
+        "imageUrl": "assets/images/bicepCurls.jpg"
+    },
+    {
+        "exerciseId": 19,
+        "exerciseName": "Skull Crushers",
+        "muscleGroup": "Arms",
+        "description": "The more mundane name for skull crushers is “lying triceps extensions.” This exercise is typically performed lying on your back (supine) with a barbell or dumbbells. Skull crushers work your triceps — the muscle on the back of your upper arm. The triceps, as the name implies, is a muscle with three heads.",
+        "repRange": "8-12",
+        "difficulty": "Beginner",
+        "imageUrl": "assets/images/skullCrushers.jpg"
+    },
+    {
+        "exerciseId": 20,
+        "exerciseName": "Hammer Curls",
+        "muscleGroup": "Arms",
+        "description": "The hammer curl, also known as the dumbbell hammer curl or the neutral grip dumbbell curl, is a strength training exercise that targets your biceps and forearms. The hammer curl varies from the traditional bicep curl by using a neutral grip with your palms facing each other during the full range of motion",
+        "repRange": "8-12",
+        "difficulty": "Beginner",
+        "imageUrl": "assets/images/hammerCurls.webp"
+    },
+    {
+        "exerciseId": 21,
+        "exerciseName": "Bench Press",
+        "muscleGroup": "Compound",
+        "description": "The bench press is a compound exercise that targets the muscles of the upper body. It involves lying on a bench and pressing weight upward using either a barbell or a pair of dumbbells. During a bench press, you lower the weight down to chest level and then press upwards while extending your arms",
+        "repRange": "8-12",
+        "difficulty": "Intermediate",
+        "imageUrl": "assets/images/bench.jpg"
+    },
+    {
+        "exerciseId": 22,
+        "exerciseName": "Incline Bench Press",
+        "muscleGroup": "Chest",
+        "description": "The Incline Bench Press is a version of the traditional Bench Press in which the bench is positioned at about a 45-degree angle. The resulting inclined position targets your upper chest and the frontside of your shoulders more the the standard flat bench.",
+        "repRange": "8-12",
+        "difficulty": "Beginner",
+        "imageUrl": "assets/images/inclineBench.jpg"
+    },
+    {
+        "exerciseId": 23,
+        "exerciseName": "Landmine Press",
+        "muscleGroup": "Chest",
+        "description": "Start in a single-arm landmine press position, in a split stance with the opposite leg forwards. At the start of the movement your weight should be over your rear leg. Press up, turn your body and lift your back heel so your weight shifts forwards onto your front foot. Then rotate back down as you lower the weight.",
+        "repRange": "8-12",
+        "difficulty": "Beginner",
+        "imageUrl": "assets/images/landmine.jpg"
+    },
+    {
+        "exerciseId": 24,
+        "exerciseName": "Push Ups",
+        "muscleGroup": "Arms",
+        "description": "Pushups are an exercise in which a person, keeping a prone position, with the hands palms down under the shoulders, the balls of the feet on the ground, and the back straight, pushes the body up and lets it down by an alternate straightening and bending of the arms",
+        "repRange": "8-12",
+        "difficulty": "Beginner",
+        "imageUrl": "assets/images/pushUp.jpg"
+    },
+    {
+        "exerciseId": 25,
+        "exerciseName": "Cable Fly",
+        "muscleGroup": "Arms",
+        "description": "Hold the barbell with both hands facing up so the wrists, elbows, and shoulders are in a straight line about shoulder-width apart. Lift the barbell toward the shoulders while bending the elbows and keeping them next to the middle of the body. Slowly lower the weight to return to the starting position.",
+        "repRange": "8-12",
+        "difficulty": "Beginner",
+        "imageUrl": "assets/images/cableFly.jpg"
+    }
+  ]

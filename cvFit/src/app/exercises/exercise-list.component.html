@@ -1,0 +1,43 @@
+<div class='card'>
+    <div class='card-header'>
+        Exerciese List
+    </div>
+    <div class='card-body'>
+        <div class='row'>
+            <div class='col-md-2'>Filter by:</div>
+            <div class='col-md-4'>
+                <input type='text' [(ngModel)]='listFilter' />
+            </div>
+        </div>
+        <div class='table-responsive'>
+            <table class='table' *ngIf='exercises.length'>
+                <thead>
+                    <tr>
+                        <th>
+                            <button class='btn btn-primary' (click)='toggleImage()'>
+                                {{showImage? 'Hide' : 'Show'}} Image
+                            </button>
+                        </th>
+                        <th>Exercise</th>
+                        <th>Muscle Group</th>
+                        <th>Rep Range</th>
+                        <th>Difficulty</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let exercise of filteredExercises'>
+                        <td>
+                            <img *ngIf='showImage' [src]='exercise.imageUrl' [title]="exercise.exerciseName" >
+                        </td>
+                        <td>
+                            <a [routerLink]="['/exercises', exercise.exerciseId]">
+                            {{exercise.exerciseName}}</a></td>
+                        <td>{{exercise.muscleGroup}}</td>
+                        <td>{{exercise.repRange}}</td>
+                        <td>{{exercise.difficulty}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
