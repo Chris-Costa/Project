@@ -6,12 +6,12 @@ import { Component, OnInit } from "@angular/core";
     templateUrl: './contactUs.component.html'
 })
 export class ContactUsComponent {
-    firstName: any;
-    lastName: any;
-    email: any;
-    notes: any;
+    firstName: string | undefined;
+    lastName: string | undefined;
+    email: string | undefined;
+    notes: string | undefined;
 
-    contact(formValues: any){
+    contact(formValues: string){
         console.log(formValues)
     }
 }

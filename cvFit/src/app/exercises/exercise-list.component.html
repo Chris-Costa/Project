@@ -1,6 +1,6 @@
 <div class='card'>
     <div class='card-header'>
-        {{pageTitle}}
+        Exerciese List
     </div>
     <div class='card-body'>
         <div class='row'>
@@ -27,7 +27,7 @@
                 <tbody>
                     <tr *ngFor='let exercise of filteredExercises'>
                         <td>
-                            <img *ngIf='showImage' [src]='exercise.imageUrl' [title]="exercise.exerciseName" [style.width.px]='imageWidth' [style.marign.px]='imageMargin'>
+                            <img *ngIf='showImage' [src]='exercise.imageUrl' [title]="exercise.exerciseName" >
                         </td>
                         <td>
                             <a [routerLink]="['/exercises', exercise.exerciseId]">

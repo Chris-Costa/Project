@@ -8,13 +8,11 @@ import { ExerciseService } from './exercise.service';
     styleUrls: ['./exercise-list.component.css']
 })
 export class ExerciseListComponent implements OnInit {
-    pageTitle: string = 'Exerciese List';
-    imageWidth: number =50;
-    imageMargin: number= 2;
     showImage: boolean = false;
     
     private _listFilter: string ="";
-    errorMessage: any;
+    errorMessage: string | undefined;
+
     get listFilter(): string{
         return this._listFilter
     }
@@ -25,12 +23,9 @@ export class ExerciseListComponent implements OnInit {
     }
 
     filteredExercises: IExercise[] = [];
-
     exercises: IExercise[] = [];
+    constructor (private exerciseService: ExerciseService){ }
 
-    constructor (private exerciseService: ExerciseService){
-
-    }
     toggleImage(): void{
         this.showImage = !this.showImage;
     }
