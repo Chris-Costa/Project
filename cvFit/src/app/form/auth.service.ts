@@ -6,8 +6,7 @@ import { IUser } from './user.model';
 })
 export class AuthService {
     currentUser!: IUser;
-    loginUser(userName: string, password: string){
-    
+    loginUser(userName: string){
         this.currentUser = {
             id: 1,
             userName: userName,

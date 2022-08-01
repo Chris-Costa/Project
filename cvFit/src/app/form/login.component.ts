@@ -7,13 +7,14 @@ import { Router } from '@angular/router';
 
 })
 export class LoginComponent{
-    userName: any;
-    password: any;
+    userName: string | undefined;
+    password: string | undefined;
 
     constructor(private authService:AuthService, private router:Router){ }
     
-    login(formValues: any){
-        this.authService.loginUser(formValues.userName, formValues.password);
+    login(formValues: string){
+        //this.authService.loginUser(formValues.userName, formValues.password);
+        this.authService.loginUser(formValues);
         this.router.navigate(['welcome']);
     }
     cancel(){

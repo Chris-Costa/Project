@@ -5,3 +5,7 @@ thead{
     position: absolute;
     right: 2px;   
 }
+img{
+    width: 50px;
+    margin: 2px; 
+}
