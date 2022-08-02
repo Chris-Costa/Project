@@ -9,6 +9,7 @@ import { catchError, map, Observable, tap, throwError } from "rxjs";
 
 export class BlogService{
     private blogUrl = 'assets/json/blogs.json';
+    status: string;
     constructor (private http: HttpClient) { }
 
     getBlogPosts(): Observable<IBlogPost[]>{
@@ -22,7 +23,18 @@ export class BlogService{
           .pipe(
             map((products: IBlogPost[]) => products.find(p => p.blogId === id))
           );
-      }
+    }
+    //test delete funtionality 
+    delBlogPosts(): Observable<IBlogPost[]>{
+        return this.http.delete<IBlogPost[]>(this.blogUrl).pipe(
+            tap(data => console.log('All: ', JSON.stringify(data))), 
+            catchError(this.handleError)
+        );
+    }
+    delBlogPost() {
+        this.http.delete('blogUrl/1')
+    }
+
     private handleError(err: HttpErrorResponse){
         let errorMessage = '';
         if (err.error instanceof ErrorEvent){
@@ -35,3 +47,5 @@ export class BlogService{
         return throwError(errorMessage);
     }
 }
+
+

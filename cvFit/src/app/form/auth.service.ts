@@ -6,6 +6,8 @@ import { IUser } from './user.model';
 })
 export class AuthService {
     currentUser!: IUser;
+    show : boolean = false;
+
     loginUser(userName: string){
         this.currentUser = {
             id: 1,
@@ -20,6 +22,5 @@ export class AuthService {
     updateCurrentUser(firstName: string, lastName: string){
         this.currentUser.firstName = firstName;
         this.currentUser.lastName = lastName;
-    }
-    
+    }  
 }

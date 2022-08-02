@@ -11,3 +11,6 @@ body {
     padding-right: .6em;
     background-repeat: no-repeat;
 }
+.tempDis{
+    opacity: 0.5;
+}

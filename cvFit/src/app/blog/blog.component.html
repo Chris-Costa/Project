@@ -1,7 +1,7 @@
 <h1>Discussion Board</h1>
 <hr>
 <div class="post-button">
-    <button mat-raised-button color="warn" (click)='togglePostForm()'>{{showForm? 'Hide' : 'Create'}} Post</button>
+    <button mat-raised-button color="primary" (click)='togglePostForm()'>{{showForm? 'Cancel' : 'Create'}} Post</button>
     <div id="postCreation">
         <form *ngIf='showForm' #blogForm="ngForm" (ngSubmit)="blog(blogForm.value)" autocomplete="off">
             <div class="'form-group">
@@ -16,7 +16,7 @@
                 <label for="post">Post:</label>
                 <input (ngModel)="post" name="post" id="post" type="text" class="form-control" placeholder="Content of blog post" />
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button mat-stroked-button color="primary">Submit</button>
         </form>
     </div>
 </div>
@@ -38,3 +38,5 @@
         </mat-card-actions>
       </mat-card>
     </div>
+
+    <button (click)="delBlogPost()">Delete</button>

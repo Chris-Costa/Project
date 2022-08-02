@@ -1,9 +1,11 @@
 <nav class='navbar navbar-expand navbar-light bg-light'>
   <ul class='nav nav-pills'>
     <li><a class='nav-link' routerLink='/welcome'>Home</a></li>
-    <li><button class="nav-link" [disabled]="!auth.isAuth()" routerLink='/exercises'>Exercise List</button></li>
-    <li><button class='nav-link' [disabled]="!auth.isAuth()" routerLink='/blog'>Discussion Board</button></li>
-
+    <li><button disabled *ngIf="!auth.isAuth()" class="nav-link tempDis">Exercise List</button></li>
+    <li><button *ngIf="auth.isAuth()" class="nav-link"  routerLink='/exercises'>Exercise List</button></li>
+    <li><button disabled *ngIf="!auth.isAuth()" class="nav-link tempDis">Discussion Board</button></li>
+    <li><button *ngIf="auth.isAuth()" class="nav-link"  routerLink='/blog'>Discussion Board</button></li>
+    
     <div id="right">
       <li><a *ngIf="!auth.isAuth()" class='nav-link' routerLink='/login'>Sign In</a></li>
       <li><button mat-button [matMenuTriggerFor]="menu" *ngIf="auth.isAuth()" class='nav-link'> Welcome {{auth.currentUser.firstName}} </button></li>
