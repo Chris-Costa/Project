@@ -1,5 +1,5 @@
 thead{
-    color: blue
+    color: #1565C0;
 }
 .lifts{
     position: absolute;
@@ -9,3 +9,7 @@ img{
     width: 50px;
     margin: 2px; 
 }
+tbody, #exerName{
+    color: lightcoral;
+}
+

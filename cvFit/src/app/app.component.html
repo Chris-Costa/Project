@@ -8,7 +8,7 @@
     
     <div id="right">
       <li><a *ngIf="!auth.isAuth()" class='nav-link' routerLink='/login'>Sign In</a></li>
-      <li><button mat-button [matMenuTriggerFor]="menu" *ngIf="auth.isAuth()" class='nav-link'> Welcome {{auth.currentUser.firstName}} </button></li>
+      <li><button mat-button [matMenuTriggerFor]="menu" *ngIf="auth.isAuth()" class='nav-link' id="signed"> Welcome {{auth.currentUser.firstName}}, <img [src]='auth.currentUser.avatar' /></button></li>
     </div>
   </ul>
   <mat-menu #menu="matMenu">

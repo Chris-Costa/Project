@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { BlogService } from "./blog.service";
 import { IBlogPost } from "./blogPost";
-import { HttpClient } from "@angular/common/http";
 
 @Component({
     templateUrl: './blog.component.html',
@@ -13,13 +12,15 @@ export class BlogComponent implements OnInit {
     title: string;
     author: string;
     post: string;
+    newPost
     
     togglePostForm(): void{
         this.showForm = !this.showForm;
     }
-   blog(formValues: string){
+   blog(formValues){
+       this.blogService.savePost(formValues);
        console.log(formValues);
-   }
+    }
 
     blogPosts: IBlogPost[] = [];
     errorMessage: string;
@@ -34,15 +35,6 @@ export class BlogComponent implements OnInit {
             },
             error: err => this.errorMessage = err
         }); 
-    }
-    
-    //delete functionality
-    delBlogPost(){
-        this.blogService.delBlogPosts().subscribe({
-            next: blogPosts => {
-                this.blogPosts = blogPosts;
-            }, error: err => this.errorMessage = err
-        });
     }
     
     incrementLikes(){

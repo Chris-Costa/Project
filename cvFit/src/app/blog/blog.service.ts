@@ -24,16 +24,12 @@ export class BlogService{
             map((products: IBlogPost[]) => products.find(p => p.blogId === id))
           );
     }
-    //test delete funtionality 
-    delBlogPosts(): Observable<IBlogPost[]>{
-        return this.http.delete<IBlogPost[]>(this.blogUrl).pipe(
-            tap(data => console.log('All: ', JSON.stringify(data))), 
-            catchError(this.handleError)
-        );
+    
+    savePost(create){
+        //post to json 
+
     }
-    delBlogPost() {
-        this.http.delete('blogUrl/1')
-    }
+
 
     private handleError(err: HttpErrorResponse){
         let errorMessage = '';

@@ -1,6 +1,5 @@
-
-body {
-    background-color: lightblue;
+#text{
+    color: #1565C0;
 }
 #right{
     position: absolute;
@@ -13,4 +12,16 @@ body {
 }
 .tempDis{
     opacity: 0.5;
+}
+.nav-link{
+    color: #1565C0;
+}
+#signed{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+img{
+    width: 50px;
+    margin: 2px; 
 }

@@ -8,6 +8,7 @@ import { MaterialModule } from './shared/material.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatRadioModule} from '@angular/material/radio';
 import { AppComponent } from './app.component';
 import { ExerciseListComponent } from './exercises/exercise-list.component';
 import { ExerciseDetailComponent } from './exercises/exercise-detail.component';
@@ -16,6 +17,7 @@ import { ContactUsComponent } from './form/contactUs.component';
 import { LoginComponent } from './form/login.component';
 import { ProfileComponent } from './form/profile.component';
 import { BlogComponent } from './blog/blog.component';
+import { WorkoutListComponent } from './exercises/workoutList/workoutList.component';
 
 import { AuthService } from './form/auth.service';
 
@@ -28,7 +30,8 @@ import { AuthService } from './form/auth.service';
     WelcomeComponent,
     LoginComponent,
     ProfileComponent,
-    BlogComponent
+    BlogComponent,
+    WorkoutListComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +41,7 @@ import { AuthService } from './form/auth.service';
     MaterialModule,
     MatCardModule,
     MatMenuModule,
+    MatRadioModule,
     RouterModule.forRoot([
       {path: 'exercises', component: ExerciseListComponent},
       {path: 'exercises/:id', component: ExerciseDetailComponent},
@@ -46,6 +50,7 @@ import { AuthService } from './form/auth.service';
       {path: 'contact-us', component: ContactUsComponent},
       {path: 'blog', component: BlogComponent},
       {path: 'profile', component: ProfileComponent},
+      {path: 'workoutlist', component: WorkoutListComponent},
       {path: '', redirectTo: 'welcome', pathMatch: 'full'},
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'}
     ]),

@@ -1,0 +1,6 @@
+.radio-group {
+    display: flex;
+    flex-direction: row;
+    padding: 40px 0;
+    align-items: flex-start;
+  }

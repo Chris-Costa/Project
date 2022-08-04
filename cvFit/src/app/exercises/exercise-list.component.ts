@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IExercise } from './exercise';
 import { ExerciseService } from './exercise.service';
 
+
 @Component({
     selector: 'app-exercises',
     templateUrl: './exercise-list.component.html',
@@ -9,9 +10,20 @@ import { ExerciseService } from './exercise.service';
 })
 export class ExerciseListComponent implements OnInit {
     showImage: boolean = false;
-    
     private _listFilter: string ="";
     errorMessage: string;
+
+    createNew: boolean = false;
+    private _title: string ="";
+
+    get title(): string{
+        return this._title
+    }
+    set title(val: string){
+        this._title = val;
+        //write this to exercise list
+    }
+
     get listFilter(): string{
         return this._listFilter
     }
@@ -45,5 +57,9 @@ export class ExerciseListComponent implements OnInit {
         filterBy = filterBy.toLocaleLowerCase();
         return this.exercises.filter((exercise: IExercise) =>
             exercise.exerciseName.toLocaleLowerCase().includes(filterBy))
+    }
+
+    createWorkout(): void{
+        this.createNew = !this.createNew;
     }
 }

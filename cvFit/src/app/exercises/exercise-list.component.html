@@ -9,8 +9,8 @@
                 <input type='text' [(ngModel)]='listFilter' />
                 <button class="lifts" mat-button [matMenuTriggerFor]="menu">My Workouts</button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item>View Existing Workouts</button>
-                        <button mat-menu-item>Create New Workout</button>
+                        <button mat-menu-item (click)="createWorkout()">Create New Workout</button>
+                        <button mat-menu-item routerLink='/workoutlist'>View Existing Workouts</button>
                     </mat-menu>
             </div>
         </div>
@@ -19,7 +19,7 @@
                 <thead>
                     <tr>
                         <th>
-                            <button class='btn btn-primary' (click)='toggleImage()'>
+                            <button mat-raised-button color="primary" (click)='toggleImage()'>
                                 {{showImage? 'Hide' : 'Show'}} Image
                             </button>
                         </th>
@@ -35,14 +35,20 @@
                             <img *ngIf='showImage' [src]='exercise.imageUrl' [title]="exercise.exerciseName" >
                         </td>
                         <td>
-                            <a [routerLink]="['/exercises', exercise.exerciseId]">
+                            <a id="exerName" [routerLink]="['/exercises', exercise.exerciseId]">
                             {{exercise.exerciseName}}</a></td>
                         <td>{{exercise.muscleGroup}}</td>
                         <td>{{exercise.repRange}}</td>
                         <td>{{exercise.difficulty}}</td>
+                        <td *ngIf="createNew"> CheckBox</td>
                     </tr>
                 </tbody>
             </table>
+            <div *ngIf="createNew" class="row">
+                <p>Title:</p>
+                <input type='text' [(ngModel)]='title' />
+                <button mat-raised-button color="primary">Submit Workout</button>
+            </div>
         </div>
     </div>
 </div>

@@ -13,14 +13,16 @@ export class AuthService {
             id: 1,
             userName: userName,
             firstName: 'Tommy',
-            lastName: 'Johnson'
+            lastName: 'Johnson',
+            avatar: './assets/images/head2.png'
         }
     }
     isAuth(){
         return !!this.currentUser;
     }
-    updateCurrentUser(firstName: string, lastName: string){
+    updateCurrentUser(firstName: string, lastName: string, avatar: string){
         this.currentUser.firstName = firstName;
         this.currentUser.lastName = lastName;
+        this.currentUser.avatar = avatar;
     }  
 }

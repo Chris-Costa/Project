@@ -3,18 +3,18 @@
 <div class="post-button">
     <button mat-raised-button color="primary" (click)='togglePostForm()'>{{showForm? 'Cancel' : 'Create'}} Post</button>
     <div id="postCreation">
-        <form *ngIf='showForm' #blogForm="ngForm" (ngSubmit)="blog(blogForm.value)" autocomplete="off">
+        <form *ngIf='showForm' #blogForm="ngForm" (ngSubmit)="blog(blogForm.value)" autocomplete="off" novalidate>
             <div class="'form-group">
                 <label for="title">Title:</label>
-                <input (ngModel)="title" name="title" id="title" type="text" class="form-control" placeholder="Name your blog post" />
+                <input (ngModel)="newPost.title" name="title" id="title" type="text" class="form-control" placeholder="Name your blog post" />
             </div>
             <div class="form-group">
                 <label for="author">Author:</label>
-                <input (ngModel)="author" name="author" id="author" type="text" class="form-control" placeholder="Enter your name" />
+                <input (ngModel)="newPost.author" name="author" id="author" type="text" class="form-control" placeholder="Enter your name" />
             </div>
             <div class="form-group">
                 <label for="post">Post:</label>
-                <input (ngModel)="post" name="post" id="post" type="text" class="form-control" placeholder="Content of blog post" />
+                <input (ngModel)="newPost.post" name="post" id="post" type="text" class="form-control" placeholder="Content of blog post" />
             </div>
             <button mat-stroked-button color="primary">Submit</button>
         </form>
@@ -39,4 +39,5 @@
       </mat-card>
     </div>
 
-    <button (click)="delBlogPost()">Delete</button>
+    
+   
