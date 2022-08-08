@@ -20,6 +20,7 @@ import { BlogComponent } from './blog/blog.component';
 import { WorkoutListComponent } from './exercises/workoutList/workoutList.component';
 
 import { AuthService } from './form/auth.service';
+import { TransferService } from './exercises/workoutList/dataTransfer.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { AuthService } from './form/auth.service';
     BrowserAnimationsModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    TransferService
   ],
   bootstrap: [AppComponent]
 })

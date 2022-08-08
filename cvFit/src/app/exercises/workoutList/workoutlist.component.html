@@ -1,6 +1,11 @@
 <div>
     <button mat-raised-button color="primary" routerLink='/exercises'>Back</button> 
 
+    <!--
+      Temp Button to check the data
+    -->
+    <button (click)="check()">Check</button>
+
     <div class="flex-container">
         <mat-card class="workout-card" *ngFor='let workout of workouts'>
           <mat-card-title-group>

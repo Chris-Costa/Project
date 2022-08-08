@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { IExercise } from './exercise';
 import { ExerciseService } from './exercise.service';
 import { FormControl, FormGroup } from "@angular/forms";
+import { TransferService } from './workoutList/dataTransfer.service';
 
 
 @Component({
@@ -45,7 +46,7 @@ export class ExerciseListComponent implements OnInit {
 
     exercises: IExercise[] = [];
 
-    constructor (private exerciseService: ExerciseService){ }
+    constructor (private exerciseService: ExerciseService, private transferService: TransferService){ }
     /*
     toggleImage(): void{
         this.showImage = !this.showImage;
@@ -87,6 +88,10 @@ export class ExerciseListComponent implements OnInit {
         for (let i = 0; i<this.tempArray.length; i++){
             console.log(`${this.tempArray[i]}`)
         }
+        //new to test
+        this.transferService.setData(this.workoutTitle);
+        //end new to test
+
         this.createNew = false;
     }
     remove(){
@@ -108,3 +113,18 @@ export class ExerciseListComponent implements OnInit {
       
     }
  }
+ /*
+import { Router } from '@angular/router';
+import { TransfereService } from './services/transfer.service';
+
+export class SenderComponent implements OnInit {         
+  constructor(
+    private transfereService:TransfereService,
+    private router:Router) {}
+
+  somefunction(data){
+   this.transfereService.setData(data);
+   this.router.navigateByUrl('/reciever');//as per router
+ }
+}
+ */
