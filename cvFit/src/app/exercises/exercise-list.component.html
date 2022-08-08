@@ -9,7 +9,7 @@
                 <input type='text' [(ngModel)]='listFilter' />
                 <button class="lifts" mat-button [matMenuTriggerFor]="menu">My Workouts</button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item (click)="createWorkout()">Create New Workout</button>
+                        <button mat-menu-item (click)="create()" (click)="clearDisplay()">Create New Workout</button>
                         <button mat-menu-item routerLink='/workoutlist'>View Existing Workouts</button>
                     </mat-menu>
             </div>
@@ -18,11 +18,7 @@
             <table class='table' *ngIf='exercises.length'>
                 <thead>
                     <tr>
-                        <th>
-                            <button mat-raised-button color="primary" (click)='toggleImage()'>
-                                {{showImage? 'Hide' : 'Show'}} Image
-                            </button>
-                        </th>
+                        <th></th>
                         <th>Exercise</th>
                         <th>Muscle Group</th>
                         <th>Rep Range</th>
@@ -32,7 +28,7 @@
                 <tbody>
                     <tr *ngFor='let exercise of filteredExercises'>
                         <td>
-                            <img *ngIf='showImage' [src]='exercise.imageUrl' [title]="exercise.exerciseName" >
+                            <img  [src]='exercise.imageUrl' [title]="exercise.exerciseName" >
                         </td>
                         <td>
                             <a id="exerName" [routerLink]="['/exercises', exercise.exerciseId]">
@@ -40,14 +36,33 @@
                         <td>{{exercise.muscleGroup}}</td>
                         <td>{{exercise.repRange}}</td>
                         <td>{{exercise.difficulty}}</td>
-                        <td *ngIf="createNew"> CheckBox</td>
+                        <td *ngIf="createNew">
+                            <button mat-raised-button color="primary" (click)="add(exercise.exerciseId, exercise.exerciseName)" >ADD</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
-            <div *ngIf="createNew" class="row">
-                <p>Title:</p>
-                <input type='text' [(ngModel)]='title' />
-                <button mat-raised-button color="primary">Submit Workout</button>
+            <div class="container">
+                <div class="row">
+                    <div *ngIf="createNew" class="flex-container">
+                        <div class="item-1">
+                            <form #titleForm="ngForm" (ngSubmit)="saveTitle(titleForm.value)" autocomplete="off">
+                                <div class="'form-group">
+                                    <label for="workoutTitle">Title:</label>
+                                    <input [(ngModel)]="workoutTitle" name="workoutTitle" id="workoutTitle" type="text" class="form-control" placeholder="Name your workout..." required />
+                                </div>
+                                <button type="submit" [disabled]="titleForm.invalid" id="create" mat-raised-button color="primary" (click)="msgToSib()">Submit Workout</button>
+                            </form>
+                        </div>
+                        <div class="item-2">
+                            <label>Selcted Exercises:</label>
+                            <div *ngFor="let arr of tempArray">
+                                <li>{{arr}}</li>
+                            </div>
+                            <button *ngIf="show" (click)="remove()">Undo</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

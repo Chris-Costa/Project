@@ -1,4 +1,3 @@
-import { style } from '@angular/animations';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from './form/auth.service';
@@ -17,5 +16,4 @@ export class AppComponent {
       width: '500px',
     });
   }
-
 }

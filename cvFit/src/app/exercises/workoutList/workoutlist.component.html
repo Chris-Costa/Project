@@ -1,4 +1,16 @@
 <div>
     <button mat-raised-button color="primary" routerLink='/exercises'>Back</button> 
-    <p>is the workoutlist</p>
+
+    <div class="flex-container">
+        <mat-card class="workout-card" *ngFor='let workout of workouts'>
+          <mat-card-title-group>
+            <mat-card-title>{{workout.title}}</mat-card-title>
+          </mat-card-title-group>
+          <mat-card-content>
+            <ol>
+            <li>{{workout.lifts}}</li>
+            </ol>
+          </mat-card-content>
+        </mat-card>
+    </div>
 </div>

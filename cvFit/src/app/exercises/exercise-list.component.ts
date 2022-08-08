@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { IExercise } from './exercise';
 import { ExerciseService } from './exercise.service';
+import { FormControl, FormGroup } from "@angular/forms";
 
 
 @Component({
@@ -9,9 +10,16 @@ import { ExerciseService } from './exercise.service';
     styleUrls: ['./exercise-list.component.css']
 })
 export class ExerciseListComponent implements OnInit {
-    showImage: boolean = false;
+    workoutTitle: string = '';
+    
+    @Output() saveNewWorkout = new EventEmitter();
+    
+    msgToSib() { 
+        this.saveNewWorkout.emit(this.saveNewWorkout)
+    }
+    
     private _listFilter: string ="";
-    errorMessage: string;
+    errorMessage: string;   
 
     createNew: boolean = false;
     private _title: string ="";
@@ -37,12 +45,12 @@ export class ExerciseListComponent implements OnInit {
 
     exercises: IExercise[] = [];
 
-    constructor (private exerciseService: ExerciseService){
-
-    }
+    constructor (private exerciseService: ExerciseService){ }
+    /*
     toggleImage(): void{
         this.showImage = !this.showImage;
     }
+    */
     ngOnInit(): void{
         this.exerciseService.getExercises().subscribe({
             next: exercises => {
@@ -51,15 +59,52 @@ export class ExerciseListComponent implements OnInit {
             },
             error: err => this.errorMessage = err
         });
-        
     }
     performFilter(filterBy: string): IExercise[]{
         filterBy = filterBy.toLocaleLowerCase();
         return this.exercises.filter((exercise: IExercise) =>
             exercise.exerciseName.toLocaleLowerCase().includes(filterBy))
     }
-
-    createWorkout(): void{
+    create(): void{
         this.createNew = !this.createNew;
     }
-}
+
+    tempArray: string[] = [];
+    arrayToSend: number[] = [];
+    show: boolean = false;
+    
+
+    //add name and id 
+    add(id: number, name: string){
+        console.log(`You clicked the button for exercise ${name} + ${id}`)
+        this.tempArray.push(name);
+        this.arrayToSend.push(id);
+        this.show = true;
+    }
+    saveTitle(formValues){
+        this.workoutTitle = formValues.workoutTitle
+        console.log(`The title is ${this.workoutTitle}, and the selected exercises are...`)
+        for (let i = 0; i<this.tempArray.length; i++){
+            console.log(`${this.tempArray[i]}`)
+        }
+        this.createNew = false;
+    }
+    remove(){
+        this.tempArray.pop();
+        this.arrayToSend.pop();
+        if (this.tempArray.length == 0){
+            this.show = false;
+        }
+    }
+    clearDisplay(){
+        //empty previous workout display
+        this.tempArray.splice(0);
+        //remove undo button
+        this.show = false;
+        //clear the real array too becasue that data should have already been sent
+        this.arrayToSend.splice(0);
+        //clear input field
+        this.workoutTitle = '';
+      
+    }
+ }
