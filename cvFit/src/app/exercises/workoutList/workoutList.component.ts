@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { ExerciseService } from "../exercise.service";
+import { Component } from "@angular/core";
 import { IWorkout } from "./workout";
 import { TransferService } from "./dataTransfer.service";
 @Component({
@@ -7,13 +6,13 @@ import { TransferService } from "./dataTransfer.service";
     templateUrl: './workoutList.component.html'
 })
 export class WorkoutListComponent{
-    constructor (public exerciseService: ExerciseService, private transferService: TransferService){ }
-    errorMessage: string;  
-    @Input() msgFromParent1: string;
-    data = this.transferService.getData(); 
+    constructor (private transferService: TransferService){ }
+    
+    title = this.transferService.getTitleData(); 
+    lifts = this.transferService.getLiftsData();
     
     check(){
-        console.log(`Current title is ${this.data} and the array of workouts is...`)
+        console.log(`Current title is ${this.title} and the array of workouts is... ${this.lifts[0]}, ${this.lifts[1]}, ${this.lifts[2]} `)
     }
 
     workouts: IWorkout[] = [

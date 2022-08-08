@@ -5,20 +5,35 @@ export class TransferService {
 
   constructor( ) { }
 
-  private data;
+  private titleData : string;
+  private liftsData : number[];
 
-  setData(data){
-    this.data = data;
+  setTitle(titleData){
+    this.titleData = titleData;
   }
 
-  getData(){
-    let temp = this.data;
-    this.clearData();
+  getTitleData(){
+    let temp = this.titleData;
+    this.clearTitleData();
     return temp;
   }
 
-  clearData(){
-    this.data = undefined;
+  clearTitleData(){
+    this.titleData = undefined;
+  }
+
+  setLifts(liftsData){
+    this.liftsData = liftsData;
+  }
+
+  getLiftsData(){
+    let temp = this.liftsData;
+    this.clearLiftsData();
+    return temp;
+  }
+
+  clearLiftsData(){
+    this.liftsData = undefined;
   }
 
 }

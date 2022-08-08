@@ -1,7 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { IExercise } from './exercise';
 import { ExerciseService } from './exercise.service';
-import { FormControl, FormGroup } from "@angular/forms";
 import { TransferService } from './workoutList/dataTransfer.service';
 
 
@@ -12,13 +11,7 @@ import { TransferService } from './workoutList/dataTransfer.service';
 })
 export class ExerciseListComponent implements OnInit {
     workoutTitle: string = '';
-    
-    @Output() saveNewWorkout = new EventEmitter();
-    
-    msgToSib() { 
-        this.saveNewWorkout.emit(this.saveNewWorkout)
-    }
-    
+
     private _listFilter: string ="";
     errorMessage: string;   
 
@@ -47,11 +40,7 @@ export class ExerciseListComponent implements OnInit {
     exercises: IExercise[] = [];
 
     constructor (private exerciseService: ExerciseService, private transferService: TransferService){ }
-    /*
-    toggleImage(): void{
-        this.showImage = !this.showImage;
-    }
-    */
+    
     ngOnInit(): void{
         this.exerciseService.getExercises().subscribe({
             next: exercises => {
@@ -74,7 +63,6 @@ export class ExerciseListComponent implements OnInit {
     arrayToSend: number[] = [];
     show: boolean = false;
     
-
     //add name and id 
     add(id: number, name: string){
         console.log(`You clicked the button for exercise ${name} + ${id}`)
@@ -88,10 +76,11 @@ export class ExerciseListComponent implements OnInit {
         for (let i = 0; i<this.tempArray.length; i++){
             console.log(`${this.tempArray[i]}`)
         }
-        //new to test
-        this.transferService.setData(this.workoutTitle);
-        //end new to test
-
+        //send workout title
+        this.transferService.setTitle(this.workoutTitle);
+        //send id of exercises
+        this.transferService.setLifts(this.arrayToSend);
+        
         this.createNew = false;
     }
     remove(){
@@ -109,22 +98,6 @@ export class ExerciseListComponent implements OnInit {
         //clear the real array too becasue that data should have already been sent
         this.arrayToSend.splice(0);
         //clear input field
-        this.workoutTitle = '';
-      
+        this.workoutTitle = ''; 
     }
  }
- /*
-import { Router } from '@angular/router';
-import { TransfereService } from './services/transfer.service';
-
-export class SenderComponent implements OnInit {         
-  constructor(
-    private transfereService:TransfereService,
-    private router:Router) {}
-
-  somefunction(data){
-   this.transfereService.setData(data);
-   this.router.navigateByUrl('/reciever');//as per router
- }
-}
- */
