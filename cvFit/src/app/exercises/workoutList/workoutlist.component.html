@@ -1,6 +1,6 @@
 <div>
   <button mat-raised-button color="primary" routerLink='/exercises'>Back</button>
-  
+  <button (click)="checkInputs()">check</button>
   <div class="flex-container" >
       <mat-card class="workout-card" *ngFor="let arr of array">
         <mat-card-title-group>
@@ -17,13 +17,12 @@
                   <th>Reps</th>
                 </tr>
               </thead>
-              <tbody> 
-                <!--Loop over each name in lifts.name-->
+              <tbody>
                 <tr *ngFor="let x of arr.lift">
                   <td>{{x.name}}</td>
-                  <td><input name="weight" id="weight" type="text" class="form-control" /></td>
-                  <td><input name="sets" id="sets" type="text" class="form-control" /></td>
-                  <td><input name="reps" id="reps" type="text" class="form-control" /></td>
+                  <td><input [(ngModel)]="x.weight" name="weight" id="weight" type="text" class="form-control" /></td>
+                  <td><input [(ngModel)]="x.sets" name="sets" id="sets" type="text" class="form-control" /></td>
+                  <td><input [(ngModel)]="x.reps" name="reps" id="reps" type="text" class="form-control" /></td>
                 </tr>
               </tbody>
             </table>

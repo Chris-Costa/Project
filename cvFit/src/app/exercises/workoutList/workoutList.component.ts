@@ -35,11 +35,19 @@ export class WorkoutListComponent implements OnInit{
         */
         if (this.newWorkout){
             for (let i = 0; i < this.lifts.length; i++){
-                this.newArr.push({name: this.lifts[i], weight: 0, sets: 0, reps: 0})
+                this.newArr.push({name: this.lifts[i], weight: undefined, sets: undefined, reps: undefined})
             }
             this.array.push({title: this.title, lift: this.newArr})
         }
     }
+
+    //test inputs for weight, set, reps.  currently logging to console for bench press and rdls
+    //dummy button created
+    checkInputs(){
+        console.log(`Current values for chest day bench press...${this.array[0].lift[0].weight}, ${this.array[0].lift[0].sets}, ${this.array[0].lift[0].reps} `);
+        console.log(`Current values for chest day bench press...${this.array[3].lift[1].weight}, ${this.array[3].lift[1].sets}, ${this.array[3].lift[1].reps} `)
+    }
+
     //temp array 
     array: IWorkout[] = [
         {
@@ -53,9 +61,9 @@ export class WorkoutListComponent implements OnInit{
                 },
                 {
                     name: "Push Ups",
-                    weight: 0,
-                    sets: 0,
-                    reps: 0
+                    weight: undefined,
+                    sets: undefined,
+                    reps: undefined
                 },
                 {
                     name: "Landmine Press",
@@ -70,15 +78,15 @@ export class WorkoutListComponent implements OnInit{
             lift: [
                 {
                     name: "Lat Pulldowns",
-                    weight: 0,
-                    sets: 0,
-                    reps: 0
+                    weight: undefined,
+                    sets: undefined,
+                    reps: undefined
                 },
                 {
                     name: "Deadlifts",
-                    weight: 0,
-                    sets: 0,
-                    reps: 0
+                    weight: undefined,
+                    sets: undefined,
+                    reps: undefined
                 }
             ]
         },
@@ -87,15 +95,15 @@ export class WorkoutListComponent implements OnInit{
             lift: [
                 {
                     name: "Arnold Press",
-                    weight: 0,
-                    sets: 0,
-                    reps: 0
+                    weight: undefined,
+                    sets: undefined,
+                    reps: undefined
                 },
                 {
                     name: "Lateral Raises",
-                    weight: 0,
-                    sets: 0,
-                    reps: 0
+                    weight: undefined,
+                    sets: undefined,
+                    reps: undefined
                 }
             ]
         },
@@ -104,9 +112,9 @@ export class WorkoutListComponent implements OnInit{
             lift: [
                 {
                     name: "Squat (Back)",
-                    weight: 0,
-                    sets: 0,
-                    reps: 0
+                    weight: undefined,
+                    sets: undefined,
+                    reps: undefined
                 },
                 {
                     name: "RDL",
