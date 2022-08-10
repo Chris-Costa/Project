@@ -5,8 +5,10 @@ import { IUser } from './user.model';
     providedIn: 'root'
 })
 export class AuthService {
+
     currentUser!: IUser;
     show : boolean = false;
+
 
     loginUser(userName: string){
         this.currentUser = {

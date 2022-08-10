@@ -11,6 +11,7 @@ import { TransferService } from './workoutList/dataTransfer.service';
     styleUrls: ['./exercise-list.component.css']
 })
 export class ExerciseListComponent implements OnInit {
+
     workoutTitle: string = '';
 
     private _listFilter: string ="";
@@ -27,6 +28,7 @@ export class ExerciseListComponent implements OnInit {
         //write this to exercise list
     }
 
+
     get listFilter(): string{
         return this._listFilter
     }
@@ -37,11 +39,13 @@ export class ExerciseListComponent implements OnInit {
     }
 
     filteredExercises: IExercise[] = [];
-
     exercises: IExercise[] = [];
+    constructor (private exerciseService: ExerciseService){ }
+
 
     constructor (private exerciseService: ExerciseService, private transferService: TransferService, private router: Router){ }
     
+
     ngOnInit(): void{
         this.exerciseService.getExercises().subscribe({
             next: exercises => {
