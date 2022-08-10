@@ -1,36 +1,120 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { IWorkout } from "./workout";
 import { TransferService } from "./dataTransfer.service";
+import { ExerciseService } from "../exercise.service";
+import { ILifts } from "./lifts";
+
 @Component({
     selector: 'workouts',
-    templateUrl: './workoutList.component.html'
+    templateUrl: './workoutList.component.html',
+    styleUrls: ['./workoutList.componet.css']
 })
-export class WorkoutListComponent{
-    constructor (private transferService: TransferService){ }
-    
-    title = this.transferService.getTitleData(); 
-    lifts = this.transferService.getLiftsData();
-    
-    check(){
-        console.log(`Current title is ${this.title} and the array of workouts is... ${this.lifts[0]}, ${this.lifts[1]}, ${this.lifts[2]} `)
-    }
+export class WorkoutListComponent implements OnInit{
+    constructor (private transferService: TransferService, private exerciseService: ExerciseService){ }
+   
+    title: string = this.transferService.getTitleData(); 
+    lifts: string[] = this.transferService.getLiftsData();
+    newWorkout: boolean = this.transferService.getBool();
 
-    workouts: IWorkout[] = [
+    /*For the json http
+    exercises: IWorkout[] = [];
+    errorMessage: string = '';
+    */
+   //create array to push
+    newArr: ILifts[] = [];
+
+    ngOnInit(): void {
+        
+        /*json http
+        this.exerciseService.getWL().subscribe({
+            next: exercises => {
+                this.exercises = exercises;
+            },
+            error: err => this.errorMessage = err
+        }); 
+        */
+        if (this.newWorkout){
+            for (let i = 0; i < this.lifts.length; i++){
+                this.newArr.push({name: this.lifts[i], weight: 0, sets: 0, reps: 0})
+            }
+            this.array.push({title: this.title, lift: this.newArr})
+        }
+    }
+    //temp array 
+    array: IWorkout[] = [
         {
             title: "Chest Day",
-            lifts: ['Bench Press', 'Dumbell Incline Press', 'PushUps']
+            lift: [
+                {
+                    name: "Bench Press",
+                    weight: 0,
+                    sets: 0,
+                    reps: 0
+                },
+                {
+                    name: "Push Ups",
+                    weight: 0,
+                    sets: 0,
+                    reps: 0
+                },
+                {
+                    name: "Landmine Press",
+                    weight: undefined,
+                    sets: undefined,
+                    reps: undefined
+                }
+            ]
         },
         {
-            title: "Leg Day (Quad Dominant)",
-            lifts: ['Bench Press', 'Dumbell Incline Press', 'PushUps']
-        },
-        {
-            title: "Back and Biceps",
-            lifts: ['Bench Press', 'Dumbell Incline Press', 'PushUps']
+            title: "Back & Biceps",
+            lift: [
+                {
+                    name: "Lat Pulldowns",
+                    weight: 0,
+                    sets: 0,
+                    reps: 0
+                },
+                {
+                    name: "Deadlifts",
+                    weight: 0,
+                    sets: 0,
+                    reps: 0
+                }
+            ]
         },
         {
             title: "Sholders",
-            lifts: ['Arnold Press', 'Dumbell Incline Press', 'PushUps']
+            lift: [
+                {
+                    name: "Arnold Press",
+                    weight: 0,
+                    sets: 0,
+                    reps: 0
+                },
+                {
+                    name: "Lateral Raises",
+                    weight: 0,
+                    sets: 0,
+                    reps: 0
+                }
+            ]
+        },
+        {
+            title: "Legs",
+            lift: [
+                {
+                    name: "Squat (Back)",
+                    weight: 0,
+                    sets: 0,
+                    reps: 0
+                },
+                {
+                    name: "RDL",
+                    weight: 0,
+                    sets: 0,
+                    reps: 0
+                }
+            ]
         }
     ]
 }

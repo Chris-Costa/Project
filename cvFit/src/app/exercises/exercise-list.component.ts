@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { IExercise } from './exercise';
 import { ExerciseService } from './exercise.service';
 import { TransferService } from './workoutList/dataTransfer.service';
@@ -39,7 +40,7 @@ export class ExerciseListComponent implements OnInit {
 
     exercises: IExercise[] = [];
 
-    constructor (private exerciseService: ExerciseService, private transferService: TransferService){ }
+    constructor (private exerciseService: ExerciseService, private transferService: TransferService, private router: Router){ }
     
     ngOnInit(): void{
         this.exerciseService.getExercises().subscribe({
@@ -62,6 +63,7 @@ export class ExerciseListComponent implements OnInit {
     tempArray: string[] = [];
     arrayToSend: number[] = [];
     show: boolean = false;
+    bool: boolean = true;
     
     //add name and id 
     add(id: number, name: string){
@@ -79,9 +81,12 @@ export class ExerciseListComponent implements OnInit {
         //send workout title
         this.transferService.setTitle(this.workoutTitle);
         //send id of exercises
-        this.transferService.setLifts(this.arrayToSend);
-        
+        this.transferService.setLifts(this.tempArray);
+        //send bool
+        this.transferService.setBool(this.bool);
+
         this.createNew = false;
+        this.router.navigate(['/workoutlist'])
     }
     remove(){
         this.tempArray.pop();

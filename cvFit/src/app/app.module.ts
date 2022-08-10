@@ -9,6 +9,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
+
 import { AppComponent } from './app.component';
 import { ExerciseListComponent } from './exercises/exercise-list.component';
 import { ExerciseDetailComponent } from './exercises/exercise-detail.component';
@@ -43,6 +46,7 @@ import { TransferService } from './exercises/workoutList/dataTransfer.service';
     MatCardModule,
     MatMenuModule,
     MatRadioModule,
+    MatCheckboxModule,
     RouterModule.forRoot([
       {path: 'exercises', component: ExerciseListComponent},
       {path: 'exercises/:id', component: ExerciseDetailComponent},

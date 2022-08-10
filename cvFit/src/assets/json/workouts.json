@@ -1,0 +1,165 @@
+[
+    {
+        "title": "Chest Day",
+        "lift": 
+        [
+        {
+            "name": "Bench Press",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        },
+        {
+            "name": "Push Ups",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        },
+        {
+            "name": "Cable Fly",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        },
+        {
+            "name": "Landmine Press",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        },
+        {
+            "name": "Incline DB Bench Press",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        }
+        ]
+    },
+    {
+        "title": "Back & Biceps",
+        "lift": 
+        [
+        {
+            "name": "Deadlift",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        },
+        {
+            "name": "Pull Ups",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        },
+        {
+            "name": "Lat Pulldowns",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        },
+        {
+            "name": "Cable Rows",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        },
+        {
+            "name": "Bicep Curls",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        },
+        {
+            "name": "Hammer Curls",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        }
+        ]
+    },
+    {
+        "title": "Sholders",
+        "lift": 
+        [
+        {
+            "name": "Arnold Press",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        },
+        {
+            "name": "Lateral Raises",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        },
+        {
+            "name": "Shrugs",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        },
+        {
+            "name": "Face Pulls",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        },
+        {
+            "name": "Reverse Fly",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        },
+        {
+            "name": "Front Raise",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        }
+        ]
+    },
+    {
+        "title": "Legs",
+        "lift": 
+        [
+        {
+            "name": "Hamstring Curls",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        },
+        {
+            "name": "Leg Extensions",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        },
+        {
+            "name": "RDL",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        },
+        {
+            "name": "Squats (Back)",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        },
+        {
+            "name": "Calf Raises",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        },
+        {
+            "name": "Bulgarian Split Squats",
+            "weight": 0,
+            "sets": 0,
+            "reps": 0
+        }
+        ]
+    }
+
+]
