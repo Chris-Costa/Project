@@ -1,31 +1,16 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-.testimonial-card{
-    margin: 7px;;
-}
-.post-button{
-    text-align: center;
-    padding: 5px;
-    
-}
-.btn-primary{
-    background-color: lightcoral;
-}
-#postCreation{
-    text-align: center;
-    border: 1px solid black;
-    margin: 4px;
-}
 .blog-card{
     border: 1px solid black;
     margin-bottom: 8px;
     margin: 5px;
     width: 95%;
     height: 25%;
-    
+}
+.comments{
+    border: 1px solid black;
+    margin-bottom: 8px;
+    margin: 5px;
+    width: 90%;
+    height: 25%;
 }
 .flex-container{
     display: flex;
@@ -37,9 +22,13 @@
     background-color: #3F51B5;
     width: 12%;
 }
-.b{
-    color: white;
-    text-align: center;
+.backB {
+    margin: 5px;
+    justify-content: center;
+    align-items: center;
+}
+#commentCreation{
+    width: 85%;
 }
 img{
     width: 50px;
