@@ -41,88 +41,170 @@ export class WorkoutListComponent implements OnInit{
         }
     }
 
-    //test inputs for weight, set, reps.  currently logging to console for bench press and rdls
-    //dummy button created
-    checkInputs(){
-        console.log(`Current values for chest day bench press...${this.array[0].lift[0].weight}, ${this.array[0].lift[0].sets}, ${this.array[0].lift[0].reps} `);
-        console.log(`Current values for chest day bench press...${this.array[3].lift[1].weight}, ${this.array[3].lift[1].sets}, ${this.array[3].lift[1].reps} `)
-    }
-
     //temp array 
     array: IWorkout[] = [
         {
             title: "Chest Day",
-            lift: [
-                {
-                    name: "Bench Press",
-                    weight: 0,
-                    sets: 0,
-                    reps: 0
-                },
-                {
-                    name: "Push Ups",
-                    weight: undefined,
-                    sets: undefined,
-                    reps: undefined
-                },
-                {
-                    name: "Landmine Press",
-                    weight: undefined,
-                    sets: undefined,
-                    reps: undefined
-                }
+            lift: 
+            [
+            {
+                name: "Bench Press",
+                weight: 225,
+                sets: 5,
+                reps: 8
+            },
+            {
+                name: "Push Ups",
+                weight: "BW",
+                sets: 4,
+                reps: 20
+            },
+            {
+                name: "Cable Fly",
+                weight: 40,
+                sets: 5,
+                reps: 15
+            },
+            {
+                name: "Landmine Press",
+                weight: 90,
+                sets: 4,
+                reps: 12
+            },
+            {
+                name: "Incline DB Bench Press",
+                weight: 75,
+                sets: 5,
+                reps: 12
+            }
             ]
         },
         {
             title: "Back & Biceps",
-            lift: [
-                {
-                    name: "Lat Pulldowns",
-                    weight: undefined,
-                    sets: undefined,
-                    reps: undefined
-                },
-                {
-                    name: "Deadlifts",
-                    weight: undefined,
-                    sets: undefined,
-                    reps: undefined
-                }
+            lift: 
+            [
+            {
+                name: "Deadlift",
+                weight: 355,
+                sets: 3,
+                reps: 2
+            },
+            {
+                name: "Pull Ups",
+                weight: "BW",
+                sets: 2,
+                reps: 20
+            },
+            {
+                name: "Lat Pulldowns",
+                weight: 155,
+                sets: 5,
+                reps: 12
+            },
+            {
+                name: "Cable Rows",
+                weight: 115,
+                sets: 4,
+                reps: 15
+            },
+            {
+                name: "Bicep Curls",
+                weight: 30,
+                sets: 3,
+                reps: 12
+            },
+            {
+                name: "Hammer Curls",
+                weight: 30,
+                sets: 3,
+                reps: 12
+            }
             ]
         },
         {
             title: "Sholders",
-            lift: [
-                {
-                    name: "Arnold Press",
-                    weight: undefined,
-                    sets: undefined,
-                    reps: undefined
-                },
-                {
-                    name: "Lateral Raises",
-                    weight: undefined,
-                    sets: undefined,
-                    reps: undefined
-                }
+            lift: 
+            [
+            {
+                name: "Arnold Press",
+                weight: 55,
+                sets: 4,
+                reps: 12
+            },
+            {
+                name: "Lateral Raises",
+                weight: 15,
+                sets: 3,
+                reps: 15
+            },
+            {
+                name: "Shrugs",
+                weight: 95,
+                sets: 3,
+                reps: 10
+            },
+            {
+                name: "Face Pulls",
+                weight: 35,
+                sets: 4,
+                reps: 12
+            },
+            {
+                name: "Reverse Fly",
+                weight: 55,
+                sets: 4,
+                reps: 12
+            },
+            {
+                name: "Front Raise",
+                weight: 10,
+                sets: 3,
+                reps: 12
+            }
             ]
         },
         {
             title: "Legs",
-            lift: [
-                {
-                    name: "Squat (Back)",
-                    weight: undefined,
-                    sets: undefined,
-                    reps: undefined
-                },
-                {
-                    name: "RDL",
-                    weight: 0,
-                    sets: 0,
-                    reps: 0
-                }
+            lift: 
+            [
+            {
+                name: "Hamstring Curls",
+                weight: 75,
+                sets: 4,
+                reps: 15
+            },
+            {
+                name: "Leg Extensions",
+                weight: 125,
+                sets: 5,
+                reps: 15
+            },
+            {
+                name: "RDL",
+                weight: 95,
+                sets: 4,
+                reps: 12
+            },
+            {
+                name: "Squats (Back)",
+                weight: 315,
+                sets: 4,
+                reps: 4
+            },
+            {
+                name: "Calf Raises",
+                weight: 95,
+                sets: 3,
+                reps: 20
+            },
+            {
+                name: "Bulgarian Split Squats",
+                weight: 45,
+                sets: 3,
+                reps: 12
+            }
             ]
         }
+    
     ]
 }

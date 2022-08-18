@@ -68,13 +68,18 @@ export class BlogComponent implements OnInit {
         this.allFlag = false;
     }
     liked(title: string, author: string, content: string, num: number, ava: string){
-        this.filteredList.push({blogId: 4, blogTitle: title, blogAuthor: author, blogContent: content, authorAvatar: ava, likes: undefined, comments: num});
+        this.filteredList.push({blogId: (this.filteredList.length)+1, blogTitle: title, blogAuthor: author, blogContent: content, authorAvatar: ava, likes: undefined, comments: num});
         console.log(`Ids of liked discussions ${this.arr}`)
         this.disableLikedPostsButton = false;
     }
     
-    trash(){
-        this.filteredList.pop();
+    trash(id: number){
+        //this.filteredList.pop();
+        for (let x = 0; x < this.filteredList.length; x++){
+            if (this.filteredList[x].blogId == id){
+                this.filteredList.splice(x, 1);
+            }
+        }
         if (this.filteredList.length == 0){
             console.log("empty");
             this.allPosts();

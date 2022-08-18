@@ -95,6 +95,14 @@ export class ExerciseListComponent implements OnInit {
             this.show = false;
         }
     }
+    remove1(id : string){
+        for (let x = 0; x < this.tempArray.length; x++){
+            if (this.tempArray[x] == id){
+                this.tempArray.splice(x, 1);;
+            }
+        }
+
+    }
     clearDisplay(){
         //empty previous workout display
         this.tempArray.splice(0);

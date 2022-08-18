@@ -40,7 +40,7 @@
         </mat-card-title-group>
         <mat-card-content>{{fill.blogContent}}</mat-card-content>
         <mat-card-actions>
-          <button (click)="trash()">Remove from Likes</button>
+          <button (click)="trash(fill.blogId)">Remove from Likes</button>
           <button mat-button>COMMENT {{fill.comments}}</button>
         </mat-card-actions>
       </mat-card>
