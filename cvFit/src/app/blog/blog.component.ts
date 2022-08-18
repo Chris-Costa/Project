@@ -3,6 +3,7 @@ import { BlogService } from "./blog.service";
 import { IBlogPost } from "./blogPost";
 import { MatDialog } from '@angular/material/dialog';
 import { PostComponent } from "./post/post.component";
+import { AuthService } from "../form/auth.service";
 
 
 @Component({
@@ -11,7 +12,7 @@ import { PostComponent } from "./post/post.component";
 })
 
 export class BlogComponent implements OnInit {
-  constructor (private blogService: BlogService, private dialog: MatDialog){ }
+  constructor (private blogService: BlogService, private dialog: MatDialog, private auth: AuthService){ }
 
     showForm: boolean = false;
     title: string;

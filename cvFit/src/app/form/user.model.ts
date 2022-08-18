@@ -7,5 +7,5 @@ export interface IUser{
     lastName: string;
     userName: string;
     avatar: string;
-    
+    goal: number;
 }
