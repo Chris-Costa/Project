@@ -1,25 +1,14 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-.testimonial-card{
-    margin: 7px;;
-}
 .post-button{
     text-align: center;
     padding: 5px;
     
-}
-.btn-primary{
-    background-color: lightcoral;
 }
 #postCreation{
     text-align: center;
     border: 1px solid black;
     margin: 4px;
 }
-.blog-card{
+.blog-card1{
     border: 1px solid black;
     margin-bottom: 8px;
     margin: 5px;
@@ -27,7 +16,7 @@
     height: 25%;
     
 }
-.flex-container{
+.flex-container1{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;

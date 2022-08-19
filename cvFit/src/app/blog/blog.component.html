@@ -2,7 +2,6 @@
 <hr>
 
 <mat-sidenav-container class="example-container">
-  <div class="col-md-2">
   <mat-sidenav class="sideNav" mode="side" opened>
     <div class="post-button">
     <mat-list role="list">
@@ -13,12 +12,11 @@
   </div>
 
   </mat-sidenav>
-  </div>
-  <div class="col-md-10">
+ 
   <!--HTML for all posts-->
   <mat-sidenav-content *ngIf="allFlag">
-    <div class="flex-container">
-      <mat-card class="blog-card" *ngFor='let blogPost of blogPosts'>
+    <div class="flex-container1">
+      <mat-card class="blog-card1" *ngFor='let blogPost of blogPosts'>
         <mat-card-title-group>
           <mat-card-title><a id="exerName" [routerLink]="['/discussion', blogPost.blogId]">
             {{blogPost.blogTitle}}</a></mat-card-title>
@@ -35,8 +33,8 @@
   </mat-sidenav-content>
   <!--HTML for liked posts only-->
   <mat-sidenav-content *ngIf="!allFlag">
-    <div class="flex-container">
-      <mat-card class="blog-card" *ngFor='let fill of filteredList'>
+    <div class="flex-container1">
+      <mat-card class="blog-card1" *ngFor='let fill of filteredList'>
         <mat-card-title-group>
           <mat-card-title><a id="exerName" [routerLink]="['/discussion', fill.blogId]">
             {{fill.blogTitle}}</a></mat-card-title>
@@ -50,7 +48,7 @@
       </mat-card>
     </div>
   </mat-sidenav-content>
-</div>
+
 </mat-sidenav-container>
 
 
