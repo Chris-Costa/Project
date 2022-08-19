@@ -11,26 +11,30 @@ import { IUser } from "./user.model";
 })
 export class ProfileComponent implements OnInit {
     profileForm: FormGroup;
+   
 
     constructor(private router: Router, private authService: AuthService){
 
     }
 
+    
     ngOnInit(): void {
         let firstName = new FormControl(this.authService.currentUser.firstName);
         let lastName = new FormControl(this.authService.currentUser.lastName);
         let avatar = new FormControl(this.authService.currentUser.avatar);
+        let goal = new FormControl(this.authService.currentUser.goal);
         this.profileForm = new FormGroup({
             firstName: firstName,
             lastName: lastName,
-            avatar: avatar
+            avatar: avatar,
+            goal: goal
         })
     }
     cancel(){
         this.router.navigate(['welcome']);
     }
     saveProfile(formValue){
-        this.authService.updateCurrentUser(formValue.firstName, formValue.lastName, formValue.avatar);
+        this.authService.updateCurrentUser(formValue.firstName, formValue.lastName, formValue.avatar, formValue.goal);
         console.log(formValue)
     
     }

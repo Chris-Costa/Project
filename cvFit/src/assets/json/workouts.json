@@ -5,33 +5,33 @@
         [
         {
             "name": "Bench Press",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 225,
+            "sets": 5,
+            "reps": 8
         },
         {
             "name": "Push Ups",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": "BW",
+            "sets": 4,
+            "reps": 20
         },
         {
             "name": "Cable Fly",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 40,
+            "sets": 5,
+            "reps": 15
         },
         {
             "name": "Landmine Press",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 90,
+            "sets": 4,
+            "reps": 12
         },
         {
             "name": "Incline DB Bench Press",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 75,
+            "sets": 5,
+            "reps": 12
         }
         ]
     },
@@ -41,39 +41,39 @@
         [
         {
             "name": "Deadlift",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 355,
+            "sets": 3,
+            "reps": 2
         },
         {
             "name": "Pull Ups",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": "BW",
+            "sets": 2,
+            "reps": 20
         },
         {
             "name": "Lat Pulldowns",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 155,
+            "sets": 5,
+            "reps": 12
         },
         {
             "name": "Cable Rows",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 115,
+            "sets": 4,
+            "reps": 15
         },
         {
             "name": "Bicep Curls",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 30,
+            "sets": 3,
+            "reps": 12
         },
         {
             "name": "Hammer Curls",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 30,
+            "sets": 3,
+            "reps": 12
         }
         ]
     },
@@ -83,39 +83,39 @@
         [
         {
             "name": "Arnold Press",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 55,
+            "sets": 4,
+            "reps": 12
         },
         {
             "name": "Lateral Raises",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 15,
+            "sets": 3,
+            "reps": 15
         },
         {
             "name": "Shrugs",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 95,
+            "sets": 3,
+            "reps": 10
         },
         {
             "name": "Face Pulls",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 35,
+            "sets": 4,
+            "reps": 12
         },
         {
             "name": "Reverse Fly",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 55,
+            "sets": 4,
+            "reps": 12
         },
         {
             "name": "Front Raise",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 10,
+            "sets": 3,
+            "reps": 12
         }
         ]
     },
@@ -125,39 +125,39 @@
         [
         {
             "name": "Hamstring Curls",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 75,
+            "sets": 4,
+            "reps": 15
         },
         {
             "name": "Leg Extensions",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 125,
+            "sets": 5,
+            "reps": 15
         },
         {
             "name": "RDL",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 95,
+            "sets": 4,
+            "reps": 12
         },
         {
             "name": "Squats (Back)",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 315,
+            "sets": 4,
+            "reps": 4
         },
         {
             "name": "Calf Raises",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 95,
+            "sets": 3,
+            "reps": 20
         },
         {
             "name": "Bulgarian Split Squats",
-            "weight": 0,
-            "sets": 0,
-            "reps": 0
+            "weight": 45,
+            "sets": 3,
+            "reps": 12
         }
         ]
     }

@@ -10,6 +10,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatListIconCssMatStyler, MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
 
 
 import { AppComponent } from './app.component';
@@ -21,6 +23,8 @@ import { LoginComponent } from './form/login.component';
 import { ProfileComponent } from './form/profile.component';
 import { BlogComponent } from './blog/blog.component';
 import { WorkoutListComponent } from './exercises/workoutList/workoutList.component';
+import { PostComponent } from './blog/post/post.component';
+import { DiscussionComponent } from './blog/discussion/discussion.component';
 
 import { AuthService } from './form/auth.service';
 import { TransferService } from './exercises/workoutList/dataTransfer.service';
@@ -35,7 +39,9 @@ import { TransferService } from './exercises/workoutList/dataTransfer.service';
     LoginComponent,
     ProfileComponent,
     BlogComponent,
-    WorkoutListComponent
+    WorkoutListComponent,
+    PostComponent,
+    DiscussionComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +53,8 @@ import { TransferService } from './exercises/workoutList/dataTransfer.service';
     MatMenuModule,
     MatRadioModule,
     MatCheckboxModule,
+    MatListModule,
+    MatIconModule,
     RouterModule.forRoot([
       {path: 'exercises', component: ExerciseListComponent},
       {path: 'exercises/:id', component: ExerciseDetailComponent},
@@ -56,6 +64,7 @@ import { TransferService } from './exercises/workoutList/dataTransfer.service';
       {path: 'blog', component: BlogComponent},
       {path: 'profile', component: ProfileComponent},
       {path: 'workoutlist', component: WorkoutListComponent},
+      {path: 'discussion/:id', component: DiscussionComponent},
       {path: '', redirectTo: 'welcome', pathMatch: 'full'},
       {path: '**', redirectTo: 'welcome', pathMatch: 'full'}
     ]),

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Call } from '@angular/compiler';
+import { Component, Input, OnInit } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { IExercise } from './exercise';
@@ -12,10 +14,10 @@ import { ExerciseService } from './exercise.service';
 export class ExerciseDetailComponent implements OnInit {
   errorMessage=' ';
   exercise: IExercise | undefined;
-
+  
   constructor(private route: ActivatedRoute, 
     private router: Router,
-    private exerciseService: ExerciseService) { }
+    private exerciseService: ExerciseService, public sanitizer: DomSanitizer){}
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));

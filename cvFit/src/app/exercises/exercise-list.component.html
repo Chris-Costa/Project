@@ -9,7 +9,8 @@
                 <input type='text' [(ngModel)]='listFilter' />
                 <button class="lifts" mat-button [matMenuTriggerFor]="menu">My Workouts</button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item (click)="create()" (click)="clearDisplay()">Create New Workout</button>
+                        <button mat-menu-item *ngIf="!createNew" (click)="create()" (click)="clearDisplay()">Create New Workout</button>
+                        <button mat-menu-item *ngIf="createNew" (click)="create()">Cancel New Workout</button>
                         <button mat-menu-item routerLink='/workoutlist'>View Existing Workouts</button>
                     </mat-menu>
             </div>
@@ -53,15 +54,15 @@
                                     <label for="workoutTitle">Title:</label>
                                     <input [(ngModel)]="workoutTitle" name="workoutTitle" id="workoutTitle" type="text" class="form-control" placeholder="Name your workout..." required />
                                 </div>
-                                <button type="submit" [disabled]="titleForm.invalid" id="create" mat-raised-button color="primary">Submit Workout</button>
+                                <button type="submit" [disabled]="titleForm.invalid || tempArray.length == 0" id="create" mat-raised-button color="primary">Submit Workout</button>
                             </form>
                         </div>
                         <div class="item-2">
                             <label>Selcted Exercises:</label>
-                            <div *ngFor="let arr of tempArray">
-                                <li>{{arr}}</li>
+                            <div class="flex-container1" *ngFor="let arr of tempArray">
+                                <li class="list">{{arr}}</li>
+                                <button class="can" *ngIf="show" (click)="remove1(arr)"><mat-icon>delete_outline</mat-icon></button>
                             </div>
-                            <button *ngIf="show" (click)="remove()">Undo</button>
                         </div>
                     </div>
                 </div>

@@ -42,6 +42,21 @@ export class BlogService{
         console.error(errorMessage);
         return throwError(errorMessage);
     }
+    /*
+    //incrment comment counter
+    private reply: number;
+    setNum(reply){
+        this.reply = reply
+    }
+    getReplyData(){
+        let temp = this.reply;
+        this.clearReplyData();
+        return temp;
+    }
+    clearReplyData(){
+        this.reply = undefined
+    }
+    */
 }
 
 

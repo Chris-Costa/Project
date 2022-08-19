@@ -42,3 +42,14 @@ tbody, #exerName{
     align-items: center;
 }
 
+.flex-container1{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.list{
+    margin-left: 4px;
+}
+.can{
+    margin-right: 4px;
+}

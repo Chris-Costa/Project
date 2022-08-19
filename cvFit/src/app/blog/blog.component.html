@@ -1,43 +1,54 @@
 <h1>Discussion Board</h1>
 <hr>
-<div class="post-button">
-    <button mat-raised-button color="primary" (click)='togglePostForm()'>{{showForm? 'Cancel' : 'Create'}} Post</button>
-    <div id="postCreation">
-        <form *ngIf='showForm' #blogForm="ngForm" (ngSubmit)="blog(blogForm.value)" autocomplete="off" novalidate>
-            <div class="'form-group">
-                <label for="title">Title:</label>
-                <input (ngModel)="newPost.title" name="title" id="title" type="text" class="form-control" placeholder="Name your blog post" />
-            </div>
-            <div class="form-group">
-                <label for="author">Author:</label>
-                <input (ngModel)="newPost.author" name="author" id="author" type="text" class="form-control" placeholder="Enter your name" />
-            </div>
-            <div class="form-group">
-                <label for="post">Post:</label>
-                <input (ngModel)="newPost.post" name="post" id="post" type="text" class="form-control" placeholder="Content of blog post" />
-            </div>
-            <button mat-stroked-button color="primary">Submit</button>
-        </form>
-    </div>
-</div>
 
+<mat-sidenav-container class="example-container">
+  <mat-sidenav class="sideNav" mode="side" opened>
+    <div class="post-button">
+    <mat-list role="list">
+      <mat-list-item role="listitem"><button mat-raised-button (click)="openDialog()">New Post</button></mat-list-item>
+      <mat-list-item class="b" role="listitem"><button mat-button (click)="allPosts()">All Posts</button></mat-list-item>
+      <mat-list-item class="b" role="listitem"><button mat-button [disabled]="disableLikedPostsButton" (click)="likedPosts()">Liked Posts</button></mat-list-item>
+    </mat-list>
+  </div>
 
-    <div class="flex-container">
-      <mat-card class="blog-card" *ngFor='let blogPost of blogPosts'>
+  </mat-sidenav>
+ 
+  <!--HTML for all posts-->
+  <mat-sidenav-content *ngIf="allFlag">
+    <div class="flex-container1">
+      <mat-card class="blog-card1" *ngFor='let blogPost of blogPosts'>
         <mat-card-title-group>
-          <mat-card-title>{{blogPost.blogTitle}}</mat-card-title>
-          <mat-card-subtitle>{{blogPost.blogAuthor}}</mat-card-subtitle>
-            <!--Avatar
-            <img mat-card-sm-image src="./assets/images/test1.png" >
-            -->
+          <mat-card-title><a id="exerName" [routerLink]="['/discussion', blogPost.blogId]">
+            {{blogPost.blogTitle}}</a></mat-card-title>
+          
+          <mat-card-subtitle>{{blogPost.blogAuthor}} <img [src]='blogPost.authorAvatar' /></mat-card-subtitle>
         </mat-card-title-group>
         <mat-card-content>{{blogPost.blogContent}}</mat-card-content>
         <mat-card-actions>
-          <button mat-button (click)="incrementLikes()">LIKE {{blogPost.likes}}</button>
-          <button mat-button (click)="incrementComments()">COMMENT {{blogPost.comments}}</button>
+          <button mat-button (click)="liked(blogPost.blogTitle, blogPost.blogAuthor, blogPost.blogContent, blogPost.likes, blogPost.authorAvatar)">LIKE {{blogPost.likes}}</button>
+          <button mat-button>COMMENT {{blogPost.comments}}</button>
         </mat-card-actions>
       </mat-card>
     </div>
+  </mat-sidenav-content>
+  <!--HTML for liked posts only-->
+  <mat-sidenav-content *ngIf="!allFlag">
+    <div class="flex-container1">
+      <mat-card class="blog-card1" *ngFor='let fill of filteredList'>
+        <mat-card-title-group>
+          <mat-card-title><a id="exerName" [routerLink]="['/discussion', fill.blogId]">
+            {{fill.blogTitle}}</a></mat-card-title>
+          <mat-card-subtitle>{{fill.blogAuthor}} <img [src]='fill.authorAvatar' /></mat-card-subtitle>
+        </mat-card-title-group>
+        <mat-card-content>{{fill.blogContent}}</mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button (click)="trash(fill.blogId)">Remove from Likes</button>
+          <button mat-button>COMMENT {{fill.comments}}</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-sidenav-content>
 
-    
-   
+</mat-sidenav-container>
+
+

@@ -3,6 +3,7 @@ export interface IBlogPost{
     blogTitle: string; 
     blogAuthor: string;
     blogContent: string;
+    authorAvatar: string;
     likes: number;
     comments: number;
 }

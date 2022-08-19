@@ -1,7 +1,7 @@
 <div>
     <h1>Edit Profile</h1>
     <hr>
-    <div class="col-md-4">
+    <div>
         <form [formGroup]="profileForm" (ngSubmit)="saveProfile(profileForm.value)" autocomplete="off" novalidate>
             <div class="form-group">
                 <label for="firstName">First Name:</label>
@@ -12,15 +12,30 @@
                 <input formControlName="lastName" id="lasttName" type="text" class="form-control" placeholder="Last Name..." />
             </div>
             <div class="form-group">
-                <div class="form-check form-check-inline">
-                    <input formControlName="avatar" id="avatar" class="form-check-input" type="radio" name="inlineRadioOptions" value="./assets/images/head2.png">
-                    <label class="form-check-label" for="inlineRadio1">Male</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input formControlName="avatar" class="form-check-input" type="radio" name="inlineRadioOptions" id="avatar" value="./assets/images/trainer1.jpg">
-                    <label class="form-check-label" for="inlineRadio2">Female</label>
-                  </div>
+                <label for="goal">Weight Goal:</label>
+                <input formControlName="goal" id="goal" type="text" class="form-control" placeholder="" />
             </div>
+            <div class="form-group">
+                <div class="flex-container">
+                    <div class="form-check">
+                        <input formControlName="avatar" id="avatar" class="form-check-input" type="radio" name="avatar" value="./assets/images/ava1-modified.png">
+                        <label class="form-check-label" for="inlineRadio1"><img class="ava1" src="./assets/images/ava1-modified.png"></label>
+                    </div>
+                    <div class="form-check">
+                        <input formControlName="avatar" class="form-check-input" type="radio" name="avatar" id="avatar" value="./assets/images/ava2-modified.png">
+                        <label class="form-check-label" for="inlineRadio2"><img class="ava2" src="./assets/images/ava2-modified.png"></label>
+                    </div>
+                    <div class="form-check">
+                        <input formControlName="avatar" class="form-check-input" type="radio" name="avatar" id="avatar" value="./assets/images/ava3-modified.png">
+                        <label class="form-check-label" for="inlineRadio3"><img class="ava3" src="./assets/images/ava3-modified.png"></label>
+                    </div>
+                    <div class="form-check">
+                        <input formControlName="avatar" class="form-check-input" type="radio" name="avatar" id="avatar" value="./assets/images/ava4-modified.png">
+                        <label class="form-check-label" for="inlineRadio4"><img class="ava4" src="./assets/images/ava4-modified.png"></label>
+                    </div>
+                </div>
+            </div>
+        
 
             <button mat-raised-button color="primary" type="submit" mat-dialog-close >Save</button>
             <button mat-button mat-dialog-close>Cancel</button>
