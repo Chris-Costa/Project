@@ -35,13 +35,14 @@
 .sideNav{
     /*This is the angular material button primary*/
     background-color: #3F51B5;
-    width: 12%;
+    width: 140px;
 }
 .b{
     color: white;
     text-align: center;
 }
 img{
+    height: 50px;
     width: 50px;
     margin: 2px; 
 }

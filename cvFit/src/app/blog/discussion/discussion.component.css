@@ -20,12 +20,16 @@
 .sideNav{
     /*This is the angular material button primary*/
     background-color: #3F51B5;
-    width: 12%;
+    width: 140px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 .backB {
     margin: 5px;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 #commentCreation{
     width: 85%;

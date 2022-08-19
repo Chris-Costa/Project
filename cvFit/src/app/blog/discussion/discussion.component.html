@@ -2,10 +2,11 @@
 <hr>
 <mat-sidenav-container class="example-container">
 
-  <mat-sidenav class="sideNav" mode="side" opened></mat-sidenav>
+  <mat-sidenav class="sideNav" mode="side" opened>
+    <button class='backB' mat-raised-button (click)="onBack()">Back</button>
+  </mat-sidenav>
 
   <mat-sidenav-content>
-    <button class='backB' mat-raised-button color="primary" (click)="onBack()">Back</button>
     
     <div class="flex-container">
       <mat-card class="blog-card">

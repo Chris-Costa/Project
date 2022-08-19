@@ -1,6 +1,8 @@
 <h1>Discussion Board</h1>
 <hr>
+
 <mat-sidenav-container class="example-container">
+  <div class="col-md-2">
   <mat-sidenav class="sideNav" mode="side" opened>
     <div class="post-button">
     <mat-list role="list">
@@ -9,8 +11,10 @@
       <mat-list-item class="b" role="listitem"><button mat-button [disabled]="disableLikedPostsButton" (click)="likedPosts()">Liked Posts</button></mat-list-item>
     </mat-list>
   </div>
-    
+
   </mat-sidenav>
+  </div>
+  <div class="col-md-10">
   <!--HTML for all posts-->
   <mat-sidenav-content *ngIf="allFlag">
     <div class="flex-container">
@@ -40,11 +44,13 @@
         </mat-card-title-group>
         <mat-card-content>{{fill.blogContent}}</mat-card-content>
         <mat-card-actions>
-          <button (click)="trash(fill.blogId)">Remove from Likes</button>
+          <button mat-raised-button (click)="trash(fill.blogId)">Remove from Likes</button>
           <button mat-button>COMMENT {{fill.comments}}</button>
         </mat-card-actions>
       </mat-card>
     </div>
   </mat-sidenav-content>
+</div>
 </mat-sidenav-container>
+
 

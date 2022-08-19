@@ -55,7 +55,7 @@ export class BlogComponent implements OnInit {
             blogTitle: "Best form of cardio?",
             blogAuthor: "Mike Glennon",
             blogContent: "What type of cardio do people prefer.  Looking to lose weight fast and have a good sweat.",
-            authorAvatar: "./assets/images/head2.png",
+            authorAvatar: "./assets/images/ava3-modified.png",
             likes: 16,
             comments: 3
         }
