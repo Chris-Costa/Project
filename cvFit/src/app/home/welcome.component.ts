@@ -8,6 +8,7 @@ import { ContactUsComponent } from '../form/contactUs.component';
   styleUrls: ['./welcome.component.css']
 })
 export class WelcomeComponent {
+
   constructor(public dialog: MatDialog) {}
 
   openDialog() {
@@ -17,3 +18,4 @@ export class WelcomeComponent {
   }
 }
  
+

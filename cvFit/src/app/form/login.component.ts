@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
+import { ConnectableObservable } from 'rxjs';
 
 @Component({
     templateUrl: 'login.component.html'
 
 })
 export class LoginComponent{
+
     userName: string | undefined;
     password: string | undefined;
+
 
     constructor(private authService:AuthService, private router:Router){ }
     
@@ -17,7 +20,9 @@ export class LoginComponent{
         this.authService.loginUser(formValues);
         this.router.navigate(['welcome']);
     }
+
     cancel(){
         this.router.navigate(['welcome']);
+
     }
 }

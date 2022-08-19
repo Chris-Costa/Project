@@ -6,8 +6,10 @@ import { IUser } from './user.model';
     providedIn: 'root'
 })
 export class AuthService {
+
     currentUser!: IUser;
     show : boolean = false;
+
     constructor(private http: HttpClient){}
     
     loginUser(userName: string){

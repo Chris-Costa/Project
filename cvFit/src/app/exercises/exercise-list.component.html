@@ -29,7 +29,9 @@
                 <tbody>
                     <tr *ngFor='let exercise of filteredExercises'>
                         <td>
+
                             <img  [src]='exercise.imageUrl' [title]="exercise.exerciseName" >
+
                         </td>
                         <td>
                             <a id="exerName" [routerLink]="['/exercises', exercise.exerciseId]">
