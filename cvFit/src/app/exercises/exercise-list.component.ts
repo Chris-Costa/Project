@@ -12,22 +12,29 @@ import { TransferService } from './workoutList/dataTransfer.service';
 })
 export class ExerciseListComponent implements OnInit {
 
+    constructor (private exerciseService: ExerciseService, private transferService: TransferService, private router: Router){ }
+    
+    filteredExercises: IExercise[] = [];
+    exercises: IExercise[] = [];
+    //names of exercises being added to new workout.  Sent to another component via transfer service
+    exerciseNamesForWorkout: string[] = [];
+    //flag used on button click to show add feature next to each exercise and form for title entry + array of current selctions with remove buttons
+    showWorkoutCreator: boolean = false;
+    //bool sent to other component (used there in if statement) when create workout button is clicked
+    createIsTrue: boolean = true;
     workoutTitle: string = '';
-
     private _listFilter: string ="";
     errorMessage: string;   
-
     createNew: boolean = false;
     private _title: string ="";
+
 
     get title(): string{
         return this._title
     }
     set title(val: string){
         this._title = val;
-        //write this to exercise list
     }
-
 
     get listFilter(): string{
         return this._listFilter
@@ -37,15 +44,7 @@ export class ExerciseListComponent implements OnInit {
         console.log('In setter', value);
         this.filteredExercises = this.performFilter(value);
     }
-
-    filteredExercises: IExercise[] = [];
-    exercises: IExercise[] = [];
-    constructor (private exerciseService: ExerciseService){ }
-
-
-    constructor (private exerciseService: ExerciseService, private transferService: TransferService, private router: Router){ }
     
-
     ngOnInit(): void{
         this.exerciseService.getExercises().subscribe({
             next: exercises => {
@@ -62,58 +61,46 @@ export class ExerciseListComponent implements OnInit {
     }
     create(): void{
         this.createNew = !this.createNew;
-    }
+    }    
 
-    tempArray: string[] = [];
-    arrayToSend: number[] = [];
-    show: boolean = false;
-    bool: boolean = true;
-    
-    //add name and id 
-    add(id: number, name: string){
-        console.log(`You clicked the button for exercise ${name} + ${id}`)
-        this.tempArray.push(name);
-        this.arrayToSend.push(id);
-        this.show = true;
+    add(name: string){
+        this.exerciseNamesForWorkout.push(name);
+        this.showWorkoutCreator = true;
     }
     saveTitle(formValues){
         this.workoutTitle = formValues.workoutTitle
         console.log(`The title is ${this.workoutTitle}, and the selected exercises are...`)
-        for (let i = 0; i<this.tempArray.length; i++){
-            console.log(`${this.tempArray[i]}`)
+        for (let i = 0; i<this.exerciseNamesForWorkout.length; i++){
+            console.log(`${this.exerciseNamesForWorkout[i]}`)
         }
         //send workout title
         this.transferService.setTitle(this.workoutTitle);
-        //send id of exercises
-        this.transferService.setLifts(this.tempArray);
+        //send names of exercises
+        this.transferService.setLifts(this.exerciseNamesForWorkout);
         //send bool
-        this.transferService.setBool(this.bool);
+        this.transferService.setBool(this.createIsTrue);
 
         this.createNew = false;
         this.router.navigate(['/workoutlist'])
     }
     remove(){
-        this.tempArray.pop();
-        this.arrayToSend.pop();
-        if (this.tempArray.length == 0){
-            this.show = false;
+        this.exerciseNamesForWorkout.pop();
+        if (this.exerciseNamesForWorkout.length == 0){
+            this.showWorkoutCreator = false;
         }
     }
     remove1(id : string){
-        for (let x = 0; x < this.tempArray.length; x++){
-            if (this.tempArray[x] == id){
-                this.tempArray.splice(x, 1);;
+        for (let x = 0; x < this.exerciseNamesForWorkout.length; x++){
+            if (this.exerciseNamesForWorkout[x] == id){
+                this.exerciseNamesForWorkout.splice(x, 1);;
             }
         }
-
     }
     clearDisplay(){
         //empty previous workout display
-        this.tempArray.splice(0);
+        this.exerciseNamesForWorkout.splice(0);
         //remove undo button
-        this.show = false;
-        //clear the real array too becasue that data should have already been sent
-        this.arrayToSend.splice(0);
+        this.showWorkoutCreator = false;
         //clear input field
         this.workoutTitle = ''; 
     }

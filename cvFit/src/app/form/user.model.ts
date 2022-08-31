@@ -1,6 +1,3 @@
-import { IBlogPost } from "../blog/blogPost";
-import { IWorkout } from "../exercises/workoutList/workout";
-
 export interface IUser{
     id: number;
     firstName: string;
@@ -8,4 +5,7 @@ export interface IUser{
     userName: string;
     avatar: string;
     goal: number;
+    likedPosts: number[];
+    //workout list
+    //liked blogPosts
 }

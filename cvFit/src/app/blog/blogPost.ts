@@ -5,5 +5,13 @@ export interface IBlogPost{
     blogContent: string;
     authorAvatar: string;
     likes: number;
-    comments: number;
+    comments: IComment[];
+}
+export interface IComment{
+    user: string;
+    reply: string;
+}
+export interface ILikedPosts{
+    userId: number;
+    postIds: number[];
 }

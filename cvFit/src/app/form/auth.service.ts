@@ -1,4 +1,4 @@
-import { HttpClient, HttpHandler, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable} from "@angular/core";
 import { IUser } from './user.model';
 
@@ -19,7 +19,8 @@ export class AuthService {
             firstName: 'Tommy',
             lastName: 'Johnson',
             avatar: './assets/images/ava1-modified.png',
-            goal: 185
+            goal: 185,
+            likedPosts: [1, 3]
         }
     }
     isAuth(){

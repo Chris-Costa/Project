@@ -8,8 +8,8 @@
 
   <mat-sidenav-content>
     
-    <div class="flex-container">
-      <mat-card class="blog-card">
+    <div class="flex-container" *ngIf="selectedPost$ | async as blogPost">
+      <mat-card class="blog-card" >
         <mat-card-title-group>
           <mat-card-title>{{blogPost.blogTitle}}</mat-card-title>
           <mat-card-subtitle>{{blogPost.blogAuthor}} <img [src]='blogPost.authorAvatar' /></mat-card-subtitle>
@@ -27,15 +27,15 @@
             <button mat-stroked-button color="primary" (click)="createReply()">Submit</button>
         </form>
       </div>
+      <mat-card class="comments" *ngFor="let x of blogPost.comments">
+        <mat-card-title-group>
+          <mat-card-title>{{x.user}} </mat-card-title>
+        </mat-card-title-group>
+        <mat-card-content>{{x.reply}}</mat-card-content>
+      </mat-card> 
     </div>
 
-      <div class="flex-container" *ngFor="let temp of tempData">
-        <mat-card class="comments" *ngIf="holdId == temp.id">
-          <mat-card-title-group>
-            <mat-card-title>{{temp.user}} </mat-card-title>
-          </mat-card-title-group>
-          <mat-card-content>{{temp.comments}}</mat-card-content>
-        </mat-card> 
+      <div class="flex-container" >
       </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

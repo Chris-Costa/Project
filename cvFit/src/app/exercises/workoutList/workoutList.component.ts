@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { IWorkout } from "./workout";
 import { TransferService } from "./dataTransfer.service";
-import { ExerciseService } from "../exercise.service";
 import { ILifts } from "./lifts";
 
 @Component({
@@ -10,21 +9,18 @@ import { ILifts } from "./lifts";
     styleUrls: ['./workoutList.componet.css']
 })
 export class WorkoutListComponent implements OnInit{
-    constructor (private transferService: TransferService, private exerciseService: ExerciseService){ }
+    constructor (private transferService: TransferService){ }
    
+    //new workouts title 
     title: string = this.transferService.getTitleData(); 
+    //name of exercises to be added to the new workout
     lifts: string[] = this.transferService.getLiftsData();
     newWorkout: boolean = this.transferService.getBool();
-
-    /*For the json http
-    exercises: IWorkout[] = [];
-    errorMessage: string = '';
-    */
-   //create array to push
+    
+    //temp arrray to create 
     newArr: ILifts[] = [];
 
     ngOnInit(): void {
-        
         /*json http
         this.exerciseService.getWL().subscribe({
             next: exercises => {

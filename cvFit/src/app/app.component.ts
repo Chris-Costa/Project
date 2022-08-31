@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { take } from 'rxjs';
 import { AuthService } from './form/auth.service';
 import { ProfileComponent } from './form/profile.component';
 
@@ -19,7 +20,7 @@ export class AppComponent {
   }
   logout(){
     this.router.navigate(['welcome']);
-    this.auth.logout().subscribe(() => {
+    this.auth.logout().pipe(take(1)).subscribe(() => {
       this.router.navigate(['welcome']);
     })
   }
