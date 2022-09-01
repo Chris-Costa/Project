@@ -2,8 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
-import { IUser } from "./user.model";
-
 
 @Component({
     templateUrl: './profile.component.html',
@@ -12,12 +10,8 @@ import { IUser } from "./user.model";
 export class ProfileComponent implements OnInit {
     profileForm: FormGroup;
    
+    constructor(private router: Router, private authService: AuthService){ }
 
-    constructor(private router: Router, private authService: AuthService){
-
-    }
-
-    
     ngOnInit(): void {
         let firstName = new FormControl(this.authService.currentUser.firstName);
         let lastName = new FormControl(this.authService.currentUser.lastName);
@@ -36,7 +30,5 @@ export class ProfileComponent implements OnInit {
     saveProfile(formValue){
         this.authService.updateCurrentUser(formValue.firstName, formValue.lastName, formValue.avatar, formValue.goal);
         console.log(formValue)
-    
     }
-    
 }

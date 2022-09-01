@@ -1,9 +1,8 @@
-import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IExercise } from './exercise';
 import { ExerciseService } from './exercise.service';
 import { TransferService } from './workoutList/dataTransfer.service';
-
 
 @Component({
     selector: 'app-exercises',
@@ -16,7 +15,7 @@ export class ExerciseListComponent implements OnInit {
     
     filteredExercises: IExercise[] = [];
     exercises: IExercise[] = [];
-    //names of exercises being added to new workout.  Sent to another component via transfer service
+    //names of exerises beig added to new workout.  Sent to another component via transfer service
     exerciseNamesForWorkout: string[] = [];
     //flag used on button click to show add feature next to each exercise and form for title entry + array of current selctions with remove buttons
     showWorkoutCreator: boolean = false;
