@@ -1,0 +1,59 @@
+[
+    {
+        "blogId": 1,
+        "blogTitle": "Good apps for tracking macros??",
+        "blogAuthor": "Tommy Hamilton",
+        "blogContent": "Does anyone have suggestions for apps to track my macro intakes.  Why do you recommend?",
+        "authorAvatar": "./assets/images/ava1-modified.png",
+        "likes": 10,
+        "comments": 
+        [
+            {
+                "user": "Jimmy",
+                "reply": "This is a great question Tom, Im wondering the same thing as I struggle to track my daily intakes with just pencil and paper"
+            },
+            {
+                "user": "Linda",
+                "reply": "There is an app called MyFitnessPal that is free on the app store.  It has a decent UI and gives you everything you'll need to get started."
+            }
+        ]
+    },
+    {
+        "blogId": 2,
+        "blogTitle": "Mind Muscle Connection Help",
+        "blogAuthor": "Gina Smith",
+        "blogContent": "When chest pressing I can only feel tension in my biceps and sholders.  Any tips to engage chest and triceps?",
+        "authorAvatar": "./assets/images/ava2-modified.png",
+        "likes": 4,
+        "comments": 
+        [
+            {
+                "user": "Kim",
+                "reply": "You should focus and bending the bar towards your toes.  And engage you lat muscles, while keeping your sholders back"
+            }
+        ]
+    },
+    {
+        "blogId": 3,
+        "blogTitle": "Best form of cardio?",
+        "blogAuthor": "Mike Glennon",
+        "blogContent": "What type of cardio do people prefer.  Looking to lose weight fast and have a good sweat.",
+        "authorAvatar": "./assets/images/ava3-modified.png",
+        "likes": 16,
+        "comments": 
+        [
+            {
+                "user": "Jake",
+                "reply": "For me personally the best type of cardio is stairmaster.  Good sweat and works the calfs and quads"
+            },
+            {
+                "user": "Shannon",
+                "reply": "I love the stationary bike.  Its easy to adjust the tension and there are plenty of places to find spin classes if you prefer the motivation of a group setting."
+            },
+            {
+                "user": "Matt",
+                "reply": "I'd say walking on the treadmill can be best for calorie burning.  A slight incline and a constant speed for 10 to 15 minutes gives the same benefits as any other method"
+            }
+        ]
+    }
+]

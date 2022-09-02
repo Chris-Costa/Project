@@ -1,0 +1,40 @@
+.blog-card{
+    border: 1px solid black;
+    margin-bottom: 8px;
+    margin: 5px;
+    width: 95%;
+    height: 25%;
+}
+.comments{
+    border: 1px solid black;
+    margin-bottom: 8px;
+    margin: 5px;
+    width: 90%;
+    height: 25%;
+}
+.flex-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.sideNav{
+    /*This is the angular material button primary*/
+    background-color: #3F51B5;
+    width: 140px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.backB {
+    margin: 5px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+#commentCreation{
+    width: 85%;
+}
+img{
+    width: 50px;
+    margin: 2px; 
+}

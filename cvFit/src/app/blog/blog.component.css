@@ -1,0 +1,37 @@
+.post-button{
+    text-align: center;
+    padding: 5px;
+    
+}
+#postCreation{
+    text-align: center;
+    border: 1px solid black;
+    margin: 4px;
+}
+.blog-card1{
+    border: 1px solid black;
+    margin-bottom: 8px;
+    margin: 5px;
+    width: 95%;
+    height: 25%;
+    
+}
+.flex-container1{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.sideNav{
+    /*This is the angular material button primary*/
+    background-color: #3F51B5;
+    width: 140px;
+}
+.b{
+    color: white;
+    text-align: center;
+}
+img{
+    height: 50px;
+    width: 50px;
+    margin: 2px; 
+}

@@ -1,15 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-
+import { Component } from "@angular/core";
 
 @Component({
     selector: 'app-contactUs',
     templateUrl: './contactUs.component.html'
 })
 export class ContactUsComponent {
-    firstName: string | undefined;
-    lastName: string | undefined;
-    email: string | undefined;
-    notes: string | undefined;
+    firstName: string;
+    lastName: string;
+    email: string;
+    notes: string;
 
     contact(formValues: string){
         console.log(formValues)
