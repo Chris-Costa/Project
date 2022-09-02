@@ -60,3 +60,6 @@ input[type=number], select, textarea {
     padding: 5px;
 
 }
+.results{
+    text-align: center;
+}

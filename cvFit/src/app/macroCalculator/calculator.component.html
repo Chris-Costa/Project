@@ -2,19 +2,20 @@
 <hr>
 <div class="results" *ngIf="showResult">
     <h2>Showing Result</h2>
-    <p *ngIf="goal == 2">For an individual with a reccomended daily calorie intake of {{dailyCals}}</p>
+    <p *ngIf="goal == 1">An individual with the goal of losing weight, should consume 40% of calories from carbohydrates, 30% calories from fat, and 30% calories from protiens</p>
+    <p *ngIf="goal == 2">An individual with the goal of maintaining weight, should consume 50% of calories from carbohydrates, 30% calories from fat, and 20% calories from protiens</p>
+    <p *ngIf="goal == 3">An individual with the goal of gaining weight, should consume 40% of calories from carbohydrates, 30% calories from fat, and 30% calories from protiens</p>
+    <p>Based on the values entered into the calculator its reccomended that daily calorie intake is {{dailyCals}}</p>
+    <h2><b>In grams this equates to:</b></h2>
     <div class="flex-container">
         <div class="item">
-            <h2>Protein:</h2>
-            <h4>{{protein}}g</h4>
+            <h2>Protein: {{protein}}g</h2>
         </div>
         <div class="item">
-            <h2>Carbohydrate:</h2>
-            <h4>{{carbs}}g</h4>
+            <h2>Carbohydrate: {{carbs}}g</h2>
         </div>
         <div class="item">
-            <h2>Fat:</h2>
-            <h4>{{fat}}g</h4>
+            <h2>Fat: {{fat}}g</h2>
         </div>
     </div>
 </div>
