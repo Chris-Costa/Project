@@ -1,6 +1,7 @@
 <nav class='navbar navbar-expand navbar-light bg-light'>
   <ul class='nav nav-pills'>
     <li><a class='nav-link' routerLink='/welcome'>Home</a></li>
+    <li><a class='nav-link' routerLink='/calc'>Macro Calculator</a></li>
     <li><button disabled *ngIf="!auth.isAuth()" class="nav-link tempDis">Exercise List</button></li>
     <li><button *ngIf="auth.isAuth()" class="nav-link"  routerLink='/exercises'>Exercise List</button></li>
     <li><button disabled *ngIf="!auth.isAuth()" class="nav-link tempDis">Discussion Board</button></li>

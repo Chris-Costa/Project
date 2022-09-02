@@ -1,0 +1,62 @@
+.calculator{
+    width: 50%;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+.subHeading{
+    background-color: lightblue;
+}
+.table{
+    border: 2px solid black;
+}
+h2, h4{
+    text-align: center;
+}
+.table-responsive{
+    padding: 20px;
+    margin: 10px;
+}
+.flex-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+img{
+    height: 175px;
+    width: 100%;
+}
+.info{
+    width: 45%;
+    text-align: center;
+}
+button{
+    text-align: center;
+}
+/* Style inputs with type="text", select elements and textareas */
+input[type=number], select, textarea {
+    width: 70%; 
+    padding: 12px; /* Some padding */ 
+    border: 1px solid #ccc; /* Gray border */
+    border-radius: 4px; /* Rounded borders */
+    box-sizing: border-box; /* Make sure that padding and width stays in place */
+    margin-top: 6px; /* Add a top margin */
+    margin-bottom: 16px; /* Bottom margin */
+    resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+.radio-button{
+    margin: 5px;
+}
+.item{
+    width: 30%;
+    height: 50px;
+    margin: 10px;
+    color: white;
+    background: #1565C0;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+.centerButton{
+    text-align: center;
+    padding: 5px;
+
+}

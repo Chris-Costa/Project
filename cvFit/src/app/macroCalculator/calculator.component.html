@@ -1,0 +1,309 @@
+<h1>Welcome to the Marco Calculator</h1>
+<hr>
+<div class="results" *ngIf="showResult">
+    <h2>Showing Result</h2>
+    <p *ngIf="goal == 2">For an individual with a reccomended daily calorie intake of {{dailyCals}}</p>
+    <div class="flex-container">
+        <div class="item">
+            <h2>Protein:</h2>
+            <h4>{{protein}}g</h4>
+        </div>
+        <div class="item">
+            <h2>Carbohydrate:</h2>
+            <h4>{{carbs}}g</h4>
+        </div>
+        <div class="item">
+            <h2>Fat:</h2>
+            <h4>{{fat}}g</h4>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="flex-container">
+<div class="calculator">
+    <form #macroForm="ngForm" (ngSubmit)="submit(macroForm.value)" autocomplete="off">
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input (ngModel)="age" name="age" required id="age" type="number" class="form-control" placeholder="25" />
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <mat-radio-group aria-labelledby="example-radio-group-label" class="radio-group" name="gender" [(ngModel)]="gender">
+                <mat-radio-button class="radio-button" *ngFor="let gen of genders" [value]="gen">{{gen}}</mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div class="form-group" id="hei">
+            <label for="height">Height:</label>
+            <input (ngModel)="heightF" name="heightF" required id="heightF" type="number" class="form-control" placeholder="5 foot" />
+            <input (ngModel)="heightI" name="heightI" required id="heightI" type="number" class="form-control" placeholder="10 inches" />
+        </div>
+        <div class="form-group">
+            <label for="weight">Weight:</label>
+            <input (ngModel)="weight" name="weight" required id="weight" type="number" class="form-control" placeholder="165" />
+        </div>
+        <div class="form-group">
+            <label for="activityLevel">Activity Level:</label>
+            <mat-form-field appearance="fill">
+                <mat-label>Activity Level</mat-label>
+                <mat-select [(ngModel)]="activity" name="activityLevel">
+                  <mat-option *ngFor="let activity of activityL" [value]="activity.value">
+                    {{activity.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <div class="form-group">
+            <label for="goal">Weight Goal:</label>
+            <mat-form-field appearance="fill">
+                <mat-label>Weight Goal</mat-label>
+                <mat-select [(ngModel)]="goal" name="weightGoal">
+                  <mat-option *ngFor="let goal of goalW" [value]="goal.value">
+                    {{goal.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+    
+        <div class="centerButton">
+            <button mat-raised-button color="primary" type="submit" [disabled]="macroForm.invalid">Calculate</button>
+            <button mat-stroked-button>Clear</button>
+        </div>
+        
+        
+    </form>
+</div> 
+<div class="info">
+    <h2>What are Macronutrients?</h2>
+    <p>In the context of health and fitness, macronutrients are most often defined to be the chemical compounds that humans consume in large quantities that provide bulk energy. 
+        Specifically, they refer to carbohydrates, proteins, and fats. Some definitions also include water, air, calcium, sodium, chloride ions, and some other substances, along 
+        with more typical macronutrients, since they are needed in large quantities by the human body. In this calculator, we only calculate daily carbohydrate, protein, and fat needs.</p>
+    <img src="./assets/images/info.jpg">
+
+    <h4><b>Review the chart below to find the macronutrient information you need to get started</b></h4>
+</div>  
+</div>    
+<div class='table-responsive'>
+    
+    <h2>Macronutrients in Common Foods</h2>
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>Food</th>
+                <th>Serving Size</th>
+                <th>Protein</th>
+                <th>Carbs</th>
+                <th>Fat</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th class="subHeading">Fruit</th>
+            </tr>
+            <tr>
+              <td>Apple</td>
+              <td>1 (~ 4 oz.)</td>
+              <td>0.27g</td>
+              <td>14.36g</td>
+              <td>0.18g</td>
+            </tr>
+            <tr>
+                <td>Banana</td>
+                <td>1 (~ 6 oz.)</td>
+                <td>1.85g</td>
+                <td>38.85g</td>
+                <td>0.56g</td>
+            </tr>
+            <tr>
+                <td>Grapes</td>
+                <td>1 cup</td>
+                <td>1.15g</td>
+                <td>28.96g</td>
+                <td>0.26g</td>
+            </tr>
+            <tr>
+                <td>Orange</td>
+                <td>1 (~ 4 oz.)</td>
+                <td>0.79g</td>
+                <td>11.79g</td>
+                <td>0.23g</td>
+            </tr>
+            <tr>
+                <td>Pinapple</td>
+                <td>1 cup</td>
+                <td>0.84g</td>
+                <td>19.58g</td>
+                <td>0.19g</td>
+            </tr>
+            <tr>
+                <td>Strawberry</td>
+                <td>1 cup</td>
+                <td>1.11g</td>
+                <td>12.75g</td>
+                <td>0.5g</td>
+            </tr>
+            <tr>
+                <td>Watermelon</td>
+                <td>1 cup</td>
+                <td>0.93g</td>
+                <td>11.48g</td>
+                <td>0.23g</td>
+            </tr>
+            <tr>
+                <th class="subHeading">Vegetables</th>
+            </tr>
+            <tr>
+                <td>Asparagus</td>
+                <td>1 cup</td>
+                <td>2.95g</td>
+                <td>5.2g</td>
+                <td>0.16g</td>
+            </tr>
+            <tr>
+                <td>Broccoli</td>
+                <td>1 cup</td>
+                <td>2.57g</td>
+                <td>6.04g</td>
+                <td>0.34g</td>
+            </tr>
+            <tr>
+                <td>Carrots</td>
+                <td>1 cup</td>
+                <td>1.19g</td>
+                <td>12.26g</td>
+                <td>0.31g</td>
+            </tr>
+            <tr>
+                <td>Cucumber</td>
+                <td>4 oz.</td>
+                <td>0.67g</td>
+                <td>2.45g</td>
+                <td>0.18g</td>
+            </tr>
+            <tr>
+                <td>Eggplant</td>
+                <td>1 cup</td>
+                <td>0.98g</td>
+                <td>5.88g</td>
+                <td>0.18g</td>
+            </tr>
+            <tr>
+                <td>Lettuce</td>
+                <td>1 cup</td>
+                <td>0.5g</td>
+                <td>1.63g</td>
+                <td>0.08g</td>
+            </tr>
+            <tr>
+                <td>Tomato</td>
+                <td>1 cup</td>
+                <td>1.58g</td>
+                <td>7.06g</td>
+                <td>0.36g</td>
+            </tr>
+            <tr>
+                <td>Corn</td>
+                <td>1 cup</td>
+                <td>4.3g</td>
+                <td>30.49g</td>
+                <td>1.64g</td>
+            </tr>
+            <tr>
+                <td>Potato</td>
+                <td>6 oz.</td>
+                <td>4.47g</td>
+                <td>36.47g</td>
+                <td>0.22g</td>
+            </tr>
+            <tr>
+                <td>Rice</td>
+                <td>1 cup</td>
+                <td>4.2g</td>
+                <td>44.08g</td>
+                <td>0.44g</td>
+            </tr>
+            <tr>
+                <th class="subHeading">Proteins</th>
+            </tr>
+            <tr>
+                <td>Beef</td>
+                <td>2 oz.</td>
+                <td>14.2g</td>
+                <td>0g</td>
+                <td>10.4g</td>
+            </tr>
+            <tr>
+                <td>Chicken</td>
+                <td>2 oz.</td>
+                <td>16g</td>
+                <td>0g</td>
+                <td>1.84g</td>
+            </tr>
+            <tr>
+                <td>Tofu</td>
+                <td>4 oz.</td>
+                <td>7.82g</td>
+                <td>2.72g</td>
+                <td>3.06g</td>
+            </tr>
+            <tr>
+                <td>Eggs</td>
+                <td>1 large</td>
+                <td>6.29g</td>
+                <td>0.38g</td>
+                <td>4.97g</td>
+            </tr>
+            <tr>
+                <td>Fish</td>
+                <td>2 oz.</td>
+                <td>9.96g</td>
+                <td>4.84g</td>
+                <td>8.24g</td>
+            </tr>
+            <tr>
+                <td>Pork</td>
+                <td>2 oz.</td>
+                <td>15.82g</td>
+                <td>0g</td>
+                <td>8.26g</td>
+            </tr>
+            <tr>
+                <td>Shrimp</td>
+                <td>2 oz.</td>
+                <td>15.45g</td>
+                <td>0.69g</td>
+                <td>1.32g</td>
+            </tr>
+            <tr>
+                <th class="subHeading">Beverages/Dairy</th>
+            </tr>
+            <tr>
+                <td>Milk (1%)</td>
+                <td>1 cup</td>
+                <td>8.22g</td>
+                <td>12.18g</td>
+                <td>2.37g</td>
+            </tr>
+            <tr>
+                <td>Orange Juice</td>
+                <td>1 cup</td>
+                <td>1.74g</td>
+                <td>25.779g</td>
+                <td>0.5g</td>
+            </tr>
+            <tr>
+                <td>Yogurt</td>
+                <td>1 cup</td>
+                <td>12.86g</td>
+                <td>17.25</td>
+                <td>3.8g</td>
+            </tr>
+            <tr>
+                <td>Beer</td>
+                <td>1 can</td>
+                <td>1.64</td>
+                <td>12.64</td>
+                <td>0g</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
