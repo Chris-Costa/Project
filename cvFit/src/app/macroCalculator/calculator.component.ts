@@ -1,4 +1,7 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
+import { FormControl, FormGroup } from "@angular/forms";
+import { CalcService } from "./calculator.service";
+
 interface activityLevel{
     value: number;
     viewValue: string;
@@ -12,110 +15,62 @@ interface weightGoal{
     templateUrl: './calculator.component.html',
     styleUrls: ['./calculator.component.css']
 })
-export class CalculatorComponent{
-    //variables for calculations
-    age: number | undefined;
-    gender: string | undefined; 
-    genders: string[] = ["Male", "Female"];
-    heightF: number | undefined;
-    heightI: number | undefined;
-    weight: number | undefined;
-    activity: number = 1; //part of dropdown
-    activityL: activityLevel[] = [{value: 1, viewValue: "No exercise"}, {value: 2, viewValue: "Exercise 1-3 times a week"}, {value: 3, viewValue: "Exercise 4-5 times a week"}, {value: 4, viewValue: "Exercise 6-7 times a week"}]
-    goal: number = 1; //part of dropdown
-    goalW: weightGoal[] = [{value: 1, viewValue: "Weight loss"}, {value: 2, viewValue: "Maintain weight"}, {value: 3, viewValue: "Gain weight"}]
-
-    //variables for results 
-    protein: number =0;
-    carbs: number =0;
-    fat: number =0;
-    dailyCals: number | undefined;
-    
+export class CalculatorComponent implements OnInit{
+    constructor(private calcService: CalcService) { }
+    macroForm: FormGroup;
     showResult: boolean = false;
+    activityL: activityLevel[] = [{value: 1, viewValue: "No exercise"}, {value: 2, viewValue: "Exercise 1-3 times a week"}, {value: 3, viewValue: "Exercise 4-5 times a week"}, {value: 4, viewValue: "Exercise 6-7 times a week"}]
+    goalW: weightGoal[] = [{value: 1, viewValue: "Weight loss"}, {value: 2, viewValue: "Maintain weight"}, {value: 3, viewValue: "Gain weight"}]
+    goal: number | undefined;
+    //variables for results 
     bmr: number | undefined;
+    dailyCals: number | undefined;
+    goalResults: number[] | undefined;
+    carbs: number = 0;
+    fat: number = 0;
+    protein: number = 0;
+
+    ngOnInit(): void {
+        let age = new FormControl();
+        let gender = new FormControl();
+        let heightF = new FormControl();
+        let heightI = new FormControl();
+        let weight = new FormControl();
+        let activityLevel = new FormControl();
+        let weightGoal = new FormControl();
+        this.macroForm = new FormGroup({
+            age: age,
+            gender: gender,
+            heightF: heightF,
+            heightI: heightI,
+            weight: weight,
+            activityLevel: activityLevel,
+            weightGoal: weightGoal
+        })
+    }
     
-    submit(formValues: { age: number; gender: string; heightF: number; heightI: number; weight: number; activity: number; goal: number; }){
-        
+    submit(){;
+        this.goal = this.macroForm.get('weightGoal').value //used in html (not sure how to access the form value in the html)
         this.showResult = true;
-        this.age = formValues.age;
-        this.gender = formValues.gender;
-        this.heightF = formValues.heightF;
-        this.heightI = formValues.heightI;
-        this.weight = formValues.weight;
-        
-        if (this.gender == 'Male'){
-            this.bmr = (((this.heightF * 12) + this.heightI) * 12.7) + (6.23 * this.weight) - (6.8 * this.age) + 66
-            if (this.activity == 1){
-                this.dailyCals = this.bmr * 1.2;
-            }
-            else if (this.activity == 2){
-                this.dailyCals = this.bmr * 1.375;
-            }
-            else if (this.activity == 3){
-                this.dailyCals = this.bmr * 1.55;
-            }
-            else if (this.activity == 4){
-                this.dailyCals = this.bmr * 1.725;
-            }
-            else 
-                console.log('Error with activity');
 
-
-            if(this.goal == 1){
-                this.dailyCals = Math.round(this.dailyCals) - 500;
-                this.carbs = Math.round((this.dailyCals * 0.4) / 4);
-                this.fat = Math.round((this.dailyCals * 0.3) / 9);
-                this.protein = Math.round((this.dailyCals * 0.3) / 4);
-            }
-            else if(this.goal == 2){
-                this.dailyCals = Math.round(this.dailyCals);
-                this.carbs = Math.round((this.dailyCals * 0.5) / 4);
-                this.fat = Math.round((this.dailyCals * 0.3) / 9);
-                this.protein = Math.round((this.dailyCals * 0.2) / 4);
-            }
-            else if(this.goal == 3){
-                this.dailyCals = Math.round(this.dailyCals) + 500;
-                this.carbs = Math.round((this.dailyCals * 0.4) / 4);
-                this.fat = Math.round((this.dailyCals * 0.3) / 9);
-                this.protein = Math.round((this.dailyCals * 0.3) / 4);
-            }
-            
+        if (this.macroForm.get('gender').value == 'Male'){
+            this.bmr = this.calcService.calculateBMR_male(this.macroForm)
+            this.dailyCals = this.calcService.calculateDailyCalories(this.macroForm.get('activityLevel').value, this.bmr)
+            this.goalResults = this.calcService.goalFactor(this.macroForm.get('weightGoal').value, this.dailyCals)
+            this.dailyCals = this.goalResults[0];
+            this.carbs = this.goalResults[1];
+            this.fat = this.goalResults[2];
+            this.protein = this.goalResults[3];
         }
-        else{
-            this.bmr = (((this.heightF * 12) + this.heightI) * 4.7) + (4.35 * this.weight) - (4.7 * this.age) + 655
-            if (this.activity == 1){
-                this.dailyCals = this.bmr * 1.2;
-            }
-            else if (this.activity == 2){
-                this.dailyCals = this.bmr * 1.375;
-            }
-            else if (this.activity == 3){
-                this.dailyCals = this.bmr * 1.55;
-            }
-            else if (this.activity == 4){
-                this.dailyCals = this.bmr * 1.725;
-            }
-            else 
-                console.log('error with activity')
-
-            if(this.goal == 1){
-                this.dailyCals = Math.round(this.dailyCals) - 500;
-                this.carbs = Math.round((this.dailyCals * 0.4) / 4);
-                this.fat = Math.round((this.dailyCals * 0.3) / 9);
-                this.protein = Math.round((this.dailyCals * 0.3) / 4);
-            }
-            else if(this.goal == 2){
-                this.dailyCals = Math.round(this.dailyCals);
-                this.carbs = Math.round((this.dailyCals * 0.5) / 4);
-                this.fat = Math.round((this.dailyCals * 0.3) / 9);
-                this.protein = Math.round((this.dailyCals * 0.2) / 4);
-            }
-            else if(this.goal == 3){
-                this.dailyCals = Math.round(this.dailyCals) + 500;
-                this.carbs = Math.round((this.dailyCals * 0.4) / 4);
-                this.fat = Math.round((this.dailyCals * 0.3) / 9);
-                this.protein = Math.round((this.dailyCals * 0.3) / 4);
-            }
+        else if (this.macroForm.get('gender').value == 'Female'){
+            this.dailyCals = this.calcService.calculateDailyCalories(this.macroForm.get('activityLevel').value, this.bmr);
+            this.goalResults = this.calcService.goalFactor(this.macroForm.get('weightGoal').value, this.dailyCals);
+            this.dailyCals = this.goalResults[0];
+            this.carbs = this.goalResults[1];
+            this.fat = this.goalResults[2];
+            this.protein = this.goalResults[3];
         }
+        else
+            console.log('error with gender')
     }
 }

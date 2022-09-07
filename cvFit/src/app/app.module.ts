@@ -29,6 +29,8 @@ import { DiscussionComponent } from './blog/discussion/discussion.component';
 import { AuthService } from './form/auth.service';
 import { TransferService } from './exercises/workoutList/dataTransfer.service';
 import { CalculatorComponent } from './macroCalculator/calculator.component';
+import { MacroTableComponent } from './macroCalculator/macro-table.component';
+import { CalcService } from './macroCalculator/calculator.service';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { CalculatorComponent } from './macroCalculator/calculator.component';
     WorkoutListComponent,
     PostComponent,
     DiscussionComponent,
-    CalculatorComponent
+    CalculatorComponent,
+    MacroTableComponent
   ],
   imports: [
     BrowserModule,
@@ -76,7 +79,8 @@ import { CalculatorComponent } from './macroCalculator/calculator.component';
   ],
   providers: [
     AuthService,
-    TransferService
+    TransferService,
+    CalcService
   ],
   bootstrap: [AppComponent]
 })

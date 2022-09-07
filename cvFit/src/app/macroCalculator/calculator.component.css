@@ -1,20 +1,11 @@
 .calculator{
     width: 50%;
-    border: 2px solid black;
-    border-radius: 5px;
-}
-.subHeading{
-    background-color: lightblue;
-}
-.table{
-    border: 2px solid black;
+    padding-left: 25px;
+    /*border: 2px solid black;*/
+    /*border-radius: 5px;*/
 }
 h2, h4{
     text-align: center;
-}
-.table-responsive{
-    padding: 20px;
-    margin: 10px;
 }
 .flex-container{
     display: flex;
@@ -58,8 +49,12 @@ input[type=number], select, textarea {
 .centerButton{
     text-align: center;
     padding: 5px;
-
 }
 .results{
     text-align: center;
+}
+.i{
+    text-align: left;
+    padding: 5px;
+    
 }
