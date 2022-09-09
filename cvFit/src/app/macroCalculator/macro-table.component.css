@@ -1,0 +1,13 @@
+.table-responsive{
+    padding: 20px;
+    margin: 10px;
+}
+.table{
+    border: 2px solid black;
+}
+h2{
+    text-align: center;
+}
+.subHeading{
+    background-color: lightblue;
+}
