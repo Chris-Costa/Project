@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class='table-responsive'>
-            <table class='table' *ngIf='exercises.length'>
+            <table class='table' *ngIf='exercisesFilter$ | async as exercises'>
                 <thead>
                     <tr>
                         <th></th>
@@ -27,7 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor='let exercise of filteredExercises'>
+                    <tr *ngFor='let exercise of exercises'>
                         <td>
 
                             <img  [src]='exercise.imageUrl' [title]="exercise.exerciseName" >

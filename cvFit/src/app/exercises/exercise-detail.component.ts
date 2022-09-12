@@ -10,29 +10,32 @@ import { ExerciseService } from './exercise.service';
   templateUrl: './exercise-detail.component.html',
   styleUrls: ['./exercise-detail.component.css']
 })
-export class ExerciseDetailComponent implements OnInit {
+export class ExerciseDetailComponent {
   errorMessage=' ';
   exercise: IExercise | undefined;
   
   constructor(private route: ActivatedRoute, 
     private router: Router,
     private exerciseService: ExerciseService, public sanitizer: DomSanitizer){}
-
+/*
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if (id){
       this.getExercise(id);
     }
   }
+  */
   //routing with code
   //go from detail expansion page back to exercise list
   onBack(): void{
     this.router.navigate(['/exercises']);
   }
+  /*
   getExercise(id: number): void {
     this.exerciseService.getExercise(id).subscribe({
       next: exercise => this.exercise = exercise,
       error: err => this.errorMessage = err
     });
   }
+  */
 }

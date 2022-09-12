@@ -1,20 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { IExercise } from './exercise';
+import { catchError, EMPTY, map } from 'rxjs';
 import { ExerciseService } from './exercise.service';
 import { TransferService } from './workoutList/dataTransfer.service';
 
 @Component({
     selector: 'app-exercises',
     templateUrl: './exercise-list.component.html',
-    styleUrls: ['./exercise-list.component.css']
+    styleUrls: ['./exercise-list.component.css'],
+    changeDetection: ChangeDetectionStrategy.Default
 })
-export class ExerciseListComponent implements OnInit {
+export class ExerciseListComponent {
 
     constructor (private exerciseService: ExerciseService, private transferService: TransferService, private router: Router){ }
     
-    filteredExercises: IExercise[] = [];
-    exercises: IExercise[] = [];
+    exercises$ = this.exerciseService.exercises$
+        .pipe(
+            catchError(err => {
+                this.errorMessage = err;
+                return EMPTY;
+            })
+        );
+    
+    exercisesFilter$ = this.exerciseService.exercises$
+        .pipe(
+            map(exercises => 
+                exercises.filter(exercise => 
+                    exercise.exerciseName.toLocaleLowerCase().includes('')
+                    ))
+            
+        );
+    
     //names of exerises beig added to new workout.  Sent to another component via transfer service
     exerciseNamesForWorkout: string[] = [];
     //flag used on button click to show add feature next to each exercise and form for title entry + array of current selctions with remove buttons
@@ -27,36 +43,28 @@ export class ExerciseListComponent implements OnInit {
     createNew: boolean = false;
     private _title: string ="";
 
-
+    
     get title(): string{
         return this._title
     }
     set title(val: string){
         this._title = val;
     }
-
+    
     get listFilter(): string{
         return this._listFilter
     }
     set listFilter(value: string){
         this._listFilter = value;
         console.log('In setter', value);
-        this.filteredExercises = this.performFilter(value);
-    }
-    
-    ngOnInit(): void{
-        this.exerciseService.getExercises().subscribe({
-            next: exercises => {
-                this.exercises = exercises;
-                this.filteredExercises = this.exercises;
-            },
-            error: err => this.errorMessage = err
-        });
-    }
-    performFilter(filterBy: string): IExercise[]{
-        filterBy = filterBy.toLocaleLowerCase();
-        return this.exercises.filter((exercise: IExercise) =>
-            exercise.exerciseName.toLocaleLowerCase().includes(filterBy))
+        this.exercisesFilter$ = this.exerciseService.exercises$
+        .pipe(
+            map(exercises => 
+                exercises.filter(exercise => 
+                    exercise.exerciseName.toLocaleLowerCase().includes(value)
+                    ))
+            
+        );
     }
     create(): void{
         this.createNew = !this.createNew;
