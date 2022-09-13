@@ -33,9 +33,7 @@
                             <img  [src]='exercise.imageUrl' [title]="exercise.exerciseName" >
 
                         </td>
-                        <td>
-                            <a id="exerName" [routerLink]="['/exercises', exercise.exerciseId]">
-                            {{exercise.exerciseName}}</a></td>
+                        <td><button [routerLink]="['/exercises', exercise.exerciseId]" [ngClass]="{active: exercise?.exerciseId === (selectedExercise$ | async)?.exerciseId }" (click)="onSelected(exercise.exerciseId)">{{exercise.exerciseName}}</button></td>
                         <td>{{exercise.muscleGroup}}</td>
                         <td>{{exercise.repRange}}</td>
                         <td>{{exercise.difficulty}}</td>

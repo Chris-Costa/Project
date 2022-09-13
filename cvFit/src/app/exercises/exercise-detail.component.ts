@@ -1,41 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
-import { IExercise } from './exercise';
+import { catchError, EMPTY } from 'rxjs';
 import { ExerciseService } from './exercise.service';
 
 @Component({
   selector: 'app-exercise-detail',
   templateUrl: './exercise-detail.component.html',
-  styleUrls: ['./exercise-detail.component.css']
+  styleUrls: ['./exercise-detail.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExerciseDetailComponent {
   errorMessage=' ';
-  exercise: IExercise | undefined;
-  
-  constructor(private route: ActivatedRoute, 
-    private router: Router,
-    private exerciseService: ExerciseService, public sanitizer: DomSanitizer){}
-/*
-  ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    if (id){
-      this.getExercise(id);
-    }
-  }
-  */
-  //routing with code
-  //go from detail expansion page back to exercise list
-  onBack(): void{
+  constructor(private router: Router, private exerciseService: ExerciseService, public sanitizer: DomSanitizer) { }
+
+  exercise$ = this.exerciseService.selectedExercise$
+    .pipe(
+      catchError(err => {
+        this.errorMessage = err;
+        return EMPTY;
+      })
+    );
+
+  onBack(): void {
     this.router.navigate(['/exercises']);
   }
-  /*
-  getExercise(id: number): void {
-    this.exerciseService.getExercise(id).subscribe({
-      next: exercise => this.exercise = exercise,
-      error: err => this.errorMessage = err
-    });
-  }
-  */
 }

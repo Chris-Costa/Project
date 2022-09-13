@@ -8,5 +8,4 @@ export interface IExercise{
     difficulty: string;
     imageUrl: string;
     video: string;
-
 }

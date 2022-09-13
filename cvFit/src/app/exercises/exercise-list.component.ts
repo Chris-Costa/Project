@@ -8,49 +8,29 @@ import { TransferService } from './workoutList/dataTransfer.service';
     selector: 'app-exercises',
     templateUrl: './exercise-list.component.html',
     styleUrls: ['./exercise-list.component.css'],
-    changeDetection: ChangeDetectionStrategy.Default
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExerciseListComponent {
 
     constructor (private exerciseService: ExerciseService, private transferService: TransferService, private router: Router){ }
-    
-    exercises$ = this.exerciseService.exercises$
-        .pipe(
-            catchError(err => {
-                this.errorMessage = err;
-                return EMPTY;
-            })
-        );
-    
-    exercisesFilter$ = this.exerciseService.exercises$
-        .pipe(
-            map(exercises => 
-                exercises.filter(exercise => 
-                    exercise.exerciseName.toLocaleLowerCase().includes('')
-                    ))
-            
-        );
-    
     //names of exerises beig added to new workout.  Sent to another component via transfer service
     exerciseNamesForWorkout: string[] = [];
     //flag used on button click to show add feature next to each exercise and form for title entry + array of current selctions with remove buttons
     showWorkoutCreator: boolean = false;
     //bool sent to other component (used there in if statement) when create workout button is clicked
     createIsTrue: boolean = true;
-    workoutTitle: string = '';
-    private _listFilter: string ="";
-    errorMessage: string;   
     createNew: boolean = false;
-    private _title: string ="";
-
+    workoutTitle: string = '';
+    errorMessage: string;   
     
+    private _title: string ="";
     get title(): string{
         return this._title
     }
     set title(val: string){
         this._title = val;
     }
-    
+    private _listFilter: string ="";
     get listFilter(): string{
         return this._listFilter
     }
@@ -66,10 +46,34 @@ export class ExerciseListComponent {
             
         );
     }
+    //new async observables
+    exercises$ = this.exerciseService.exercises$
+        .pipe(
+            catchError(err => {
+                this.errorMessage = err;
+                return EMPTY;
+            })
+        );
+    exercisesFilter$ = this.exerciseService.exercises$
+        .pipe(
+            map(exercises => 
+                exercises.filter(exercise => 
+                    exercise.exerciseName.toLocaleLowerCase().includes('')
+                    ))
+            
+        );
+    
+    //change selected id
+    onSelected(exerciseId: number): void {
+        this.exerciseService.selectedExerciseChanged(exerciseId);
+    }
+
+    selectedExercise$ = this.exerciseService.selectedExercise$;
+    
+    //functions for creating a workout list most likely need to be replaced with observables
     create(): void{
         this.createNew = !this.createNew;
     }    
-
     add(name: string){
         this.exerciseNamesForWorkout.push(name);
         this.showWorkoutCreator = true;
