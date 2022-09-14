@@ -10,7 +10,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatListIconCssMatStyler, MatListModule} from '@angular/material/list';
+import { MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
 
 
@@ -27,7 +27,7 @@ import { PostComponent } from './blog/post/post.component';
 import { DiscussionComponent } from './blog/discussion/discussion.component';
 
 import { AuthService } from './form/auth.service';
-import { TransferService } from './exercises/workoutList/dataTransfer.service';
+
 
 @NgModule({
   declarations: [
@@ -71,8 +71,7 @@ import { TransferService } from './exercises/workoutList/dataTransfer.service';
     BrowserAnimationsModule
   ],
   providers: [
-    AuthService,
-    TransferService
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

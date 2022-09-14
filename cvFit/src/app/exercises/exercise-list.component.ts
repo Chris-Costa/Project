@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { catchError, EMPTY, map } from 'rxjs';
 import { ExerciseService } from './exercise.service';
-import { TransferService } from './workoutList/dataTransfer.service';
 
 @Component({
     selector: 'app-exercises',
@@ -12,7 +10,7 @@ import { TransferService } from './workoutList/dataTransfer.service';
 })
 export class ExerciseListComponent {
 
-    constructor (private exerciseService: ExerciseService, private transferService: TransferService, private router: Router){ }
+    constructor (private exerciseService: ExerciseService){ }
     //names of exerises beig added to new workout.  Sent to another component via transfer service
     exerciseNamesForWorkout: string[] = [];
     //flag used on button click to show add feature next to each exercise and form for title entry + array of current selctions with remove buttons
@@ -79,6 +77,8 @@ export class ExerciseListComponent {
         this.showWorkoutCreator = true;
     }
     saveTitle(formValues){
+        this.exerciseService.addExercise();
+        /*
         this.workoutTitle = formValues.workoutTitle
         console.log(`The title is ${this.workoutTitle}, and the selected exercises are...`)
         for (let i = 0; i<this.exerciseNamesForWorkout.length; i++){
@@ -93,6 +93,7 @@ export class ExerciseListComponent {
 
         this.createNew = false;
         this.router.navigate(['/workoutlist'])
+        */
     }
     remove(){
         this.exerciseNamesForWorkout.pop();

@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, catchError, combineLatest, map, Observable, tap, throwError } from "rxjs";
+import { BehaviorSubject, catchError, combineLatest, map, merge, Observable, scan, Subject, tap, throwError } from "rxjs";
 import { IUser } from "../form/user.model";
 import { IExercise } from "./exercise";
 import { IWorkout } from "./workoutList/workout";
@@ -44,6 +44,40 @@ export class ExerciseService{
         catchError(this.handleError)
     );
 
+    //add new workout to list
+    private workoutInsertedSubject = new Subject<IWorkout>();
+    workoutInsertedAction$ = this.workoutInsertedSubject.asObservable();
+
+    //combine exisitng stream with new workout
+    workoutsWithAdd$ = merge(
+        this.workouts$,
+        this.workoutInsertedAction$
+    ).pipe(
+        scan((acc, value) =>
+        (value instanceof Array) ? [...value] : [...acc, value], [] as IWorkout[])
+    )
+
+    addExercise(newExercise?: IWorkout) {
+        newExercise = newExercise || this.fakeWorkout();
+        this.workoutInsertedSubject.next(newExercise)
+    }
+
+    //hardcoded workout temp
+    private fakeWorkout(): IWorkout {
+        return {
+            "title": "Rest Day",
+            "lift": [
+            {
+                "name": "Steady State Cardio",
+            },
+            {
+                "name": "Crunches",
+                "sets": 3,
+                "reps": 15
+            }
+        ]
+        }
+    }
     private handleError(err: HttpErrorResponse){
         let errorMessage = '';
         if (err.error instanceof ErrorEvent){
