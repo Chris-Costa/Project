@@ -1,11 +1,12 @@
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { ExerciseService } from "../exercise.service";
-import { catchError, EMPTY } from "rxjs";
+import { catchError, combineLatest, EMPTY } from "rxjs";
 
 @Component({
     selector: 'workouts',
     templateUrl: './workoutList.component.html',
-    styleUrls: ['./workoutList.componet.css']
+    styleUrls: ['./workoutList.componet.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkoutListComponent {
     constructor (private exerciseService: ExerciseService){ }

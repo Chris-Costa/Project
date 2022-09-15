@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { catchError, EMPTY, map } from 'rxjs';
 import { ExerciseService } from './exercise.service';
+import { IWorkout } from './workoutList/workout';
 
 @Component({
     selector: 'app-exercises',
@@ -11,16 +12,31 @@ import { ExerciseService } from './exercise.service';
 export class ExerciseListComponent {
 
     constructor (private exerciseService: ExerciseService){ }
+    newWorkout: IWorkout = {
+        title: "",
+        lift: [
+        {
+            name: ""
+        },
+        {
+            name: ""
+        }
+    ]
+    };
+    workoutTitle: string = '';
     //names of exerises beig added to new workout.  Sent to another component via transfer service
     exerciseNamesForWorkout: string[] = [];
     //flag used on button click to show add feature next to each exercise and form for title entry + array of current selctions with remove buttons
     showWorkoutCreator: boolean = false;
+
+   
     //bool sent to other component (used there in if statement) when create workout button is clicked
     createIsTrue: boolean = true;
     createNew: boolean = false;
-    workoutTitle: string = '';
+    
     errorMessage: string;   
     
+    /*
     private _title: string ="";
     get title(): string{
         return this._title
@@ -28,6 +44,7 @@ export class ExerciseListComponent {
     set title(val: string){
         this._title = val;
     }
+    */
     private _listFilter: string ="";
     get listFilter(): string{
         return this._listFilter
@@ -76,24 +93,13 @@ export class ExerciseListComponent {
         this.exerciseNamesForWorkout.push(name);
         this.showWorkoutCreator = true;
     }
-    saveTitle(formValues){
-        this.exerciseService.addExercise();
-        /*
-        this.workoutTitle = formValues.workoutTitle
-        console.log(`The title is ${this.workoutTitle}, and the selected exercises are...`)
-        for (let i = 0; i<this.exerciseNamesForWorkout.length; i++){
-            console.log(`${this.exerciseNamesForWorkout[i]}`)
+    addNewWorkout(): void {
+        this.newWorkout.title = this.workoutTitle;
+        for (let i = 0; i < this.exerciseNamesForWorkout.length; i++){
+            this.newWorkout.lift[i].name = this.exerciseNamesForWorkout[i]
         }
-        //send workout title
-        this.transferService.setTitle(this.workoutTitle);
-        //send names of exercises
-        this.transferService.setLifts(this.exerciseNamesForWorkout);
-        //send bool
-        this.transferService.setBool(this.createIsTrue);
-
-        this.createNew = false;
-        this.router.navigate(['/workoutlist'])
-        */
+        console.log('newWorkout', this.newWorkout);
+        this.exerciseService.addExercise(this.newWorkout);
     }
     remove(){
         this.exerciseNamesForWorkout.pop();

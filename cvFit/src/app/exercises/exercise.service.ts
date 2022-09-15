@@ -58,7 +58,7 @@ export class ExerciseService{
     )
 
     addExercise(newExercise?: IWorkout) {
-        newExercise = newExercise || this.fakeWorkout();
+        //newExercise = newExercise || this.fakeWorkout();
         this.workoutInsertedSubject.next(newExercise)
     }
 
@@ -90,3 +90,19 @@ export class ExerciseService{
         return throwError(errorMessage);
     }
 }
+
+/*
+example for http post adding workout
+merge(
+    this.product$,
+    this.insertAction$
+        .pipe(
+            concatMap(newProd => {
+                return this.http.post<Product>(this.url, newProd)
+            }),
+        ))
+    .pipe(
+        scan((acc, value) =>
+        (value instanceof Array) ? [...value] ; [...acc, value], [] as Product[])
+    );
+*/

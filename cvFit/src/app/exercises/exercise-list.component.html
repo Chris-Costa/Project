@@ -28,11 +28,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor='let exercise of exercises'>
-                        <td>
-
-                            <img  [src]='exercise.imageUrl' [title]="exercise.exerciseName" >
-
-                        </td>
+                        <td><img [src]='exercise.imageUrl' [title]="exercise.exerciseName"></td>
                         <td><button [routerLink]="['/exercises', exercise.exerciseId]" [ngClass]="{active: exercise?.exerciseId === (selectedExercise$ | async)?.exerciseId }" (click)="onSelected(exercise.exerciseId)">{{exercise.exerciseName}}</button></td>
                         <td>{{exercise.muscleGroup}}</td>
                         <td>{{exercise.repRange}}</td>
@@ -47,13 +43,8 @@
                 <div class="row">
                     <div *ngIf="createNew" class="flex-container">
                         <div class="item-1">
-                            <form #titleForm="ngForm" (ngSubmit)="saveTitle(titleForm.value)" autocomplete="off">
-                                <div class="'form-group">
-                                    <label for="workoutTitle">Title:</label>
-                                    <input [(ngModel)]="workoutTitle" name="workoutTitle" id="workoutTitle" type="text" class="form-control" placeholder="Name your workout..." required />
-                                </div>
-                                <button type="submit" [disabled]="titleForm.invalid || exerciseNamesForWorkout.length == 0" id="create" mat-raised-button color="primary">Submit Workout</button>
-                            </form>
+                            <input [(ngModel)]="workoutTitle" name="workoutTitle" id="workoutTitle" type="text" class="form-control" placeholder="Name your workout..." required />
+                            <button [disabled]="exerciseNamesForWorkout.length == 0" mat-raised-button color="primary" (click)="addNewWorkout()" (click)="clearDisplay()">Submit Workout</button>
                         </div>
                         <div class="item-2">
                             <label>Selcted Exercises:</label>
