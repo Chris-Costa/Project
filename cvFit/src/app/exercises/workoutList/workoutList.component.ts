@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { ExerciseService } from "../exercise.service";
-import { catchError, combineLatest, EMPTY } from "rxjs";
+import { catchError, EMPTY } from "rxjs";
 
 @Component({
     selector: 'workouts',
@@ -16,5 +16,6 @@ export class WorkoutListComponent {
         .pipe(catchError(err => {
             this.errorMessage = err;
             return EMPTY;
-        }));
+            })
+        );
 }

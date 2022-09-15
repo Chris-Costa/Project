@@ -1,5 +1,5 @@
 export interface ILifts{
-    name: string,
+    name?: string,
     weight?: number|string;
     sets?: number;
     reps?: number;    

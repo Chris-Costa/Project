@@ -1,7 +1,6 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, catchError, combineLatest, map, merge, Observable, scan, Subject, tap, throwError } from "rxjs";
-import { IUser } from "../form/user.model";
+import { BehaviorSubject, catchError, combineLatest, map, merge, scan, Subject, tap, throwError } from "rxjs";
 import { IExercise } from "./exercise";
 import { IWorkout } from "./workoutList/workout";
 
@@ -11,7 +10,6 @@ import { IWorkout } from "./workoutList/workout";
 export class ExerciseService{
     private exerciseUrl = 'assets/json/exercises.json';
     private workoutListUrl = 'assets/json/workouts.json';
-    //private workoutsUrl = 'assets/json/user.json';
 
     constructor (private http: HttpClient) { }
     //observable to get all exercises
@@ -19,11 +17,9 @@ export class ExerciseService{
         tap(data => console.log('All: ', JSON.stringify(data))), 
         catchError(this.handleError)
     );
-
     //behavior subject to react to user selection getting the id of selected exercise
     private exerciseSelectionSubject = new BehaviorSubject<number>(0);
     exerciseSelected$ = this.exerciseSelectionSubject.asObservable();
-
     //observable to get selected exercise
     selectedExercise$ = combineLatest([
         this.exercises$,
@@ -43,11 +39,9 @@ export class ExerciseService{
         tap(data => console.log('All: ', JSON.stringify(data))), 
         catchError(this.handleError)
     );
-
     //add new workout to list
     private workoutInsertedSubject = new Subject<IWorkout>();
     workoutInsertedAction$ = this.workoutInsertedSubject.asObservable();
-
     //combine exisitng stream with new workout
     workoutsWithAdd$ = merge(
         this.workouts$,
@@ -56,27 +50,9 @@ export class ExerciseService{
         scan((acc, value) =>
         (value instanceof Array) ? [...value] : [...acc, value], [] as IWorkout[])
     )
-
-    addExercise(newExercise?: IWorkout) {
-        //newExercise = newExercise || this.fakeWorkout();
+    //function to add new workout
+    addExercise(newExercise: IWorkout) {
         this.workoutInsertedSubject.next(newExercise)
-    }
-
-    //hardcoded workout temp
-    private fakeWorkout(): IWorkout {
-        return {
-            "title": "Rest Day",
-            "lift": [
-            {
-                "name": "Steady State Cardio",
-            },
-            {
-                "name": "Crunches",
-                "sets": 3,
-                "reps": 15
-            }
-        ]
-        }
     }
     private handleError(err: HttpErrorResponse){
         let errorMessage = '';
@@ -90,9 +66,8 @@ export class ExerciseService{
         return throwError(errorMessage);
     }
 }
-
+//backend example for http post adding workout 
 /*
-example for http post adding workout
 merge(
     this.product$,
     this.insertAction$

@@ -12,39 +12,14 @@ import { IWorkout } from './workoutList/workout';
 export class ExerciseListComponent {
 
     constructor (private exerciseService: ExerciseService){ }
-    newWorkout: IWorkout = {
-        title: "",
-        lift: [
-        {
-            name: ""
-        },
-        {
-            name: ""
-        }
-    ]
-    };
-    workoutTitle: string = '';
-    //names of exerises beig added to new workout.  Sent to another component via transfer service
-    exerciseNamesForWorkout: string[] = [];
-    //flag used on button click to show add feature next to each exercise and form for title entry + array of current selctions with remove buttons
-    showWorkoutCreator: boolean = false;
-
-   
-    //bool sent to other component (used there in if statement) when create workout button is clicked
-    createIsTrue: boolean = true;
-    createNew: boolean = false;
     
+    newWorkout: IWorkout = {title: "", lift: [{name: ""},{name: ""}]};   //type issues with undefined  current implementation only allows for two exercises per workout created
+    workoutTitle: string = '';
+    showWorkoutCreator: boolean = false; //bool to show array and submit field
+    exerciseNamesForWorkout: string[] = [];  //hold selected workouts
+    createNew: boolean = false; //bool for dispaly create workout || cancel workout
     errorMessage: string;   
     
-    /*
-    private _title: string ="";
-    get title(): string{
-        return this._title
-    }
-    set title(val: string){
-        this._title = val;
-    }
-    */
     private _listFilter: string ="";
     get listFilter(): string{
         return this._listFilter
@@ -57,8 +32,8 @@ export class ExerciseListComponent {
             map(exercises => 
                 exercises.filter(exercise => 
                     exercise.exerciseName.toLocaleLowerCase().includes(value)
-                    ))
-            
+                )
+            )
         );
     }
     //new async observables
@@ -75,37 +50,27 @@ export class ExerciseListComponent {
                 exercises.filter(exercise => 
                     exercise.exerciseName.toLocaleLowerCase().includes('')
                     ))
-            
         );
+    selectedExercise$ = this.exerciseService.selectedExercise$;
     
-    //change selected id
     onSelected(exerciseId: number): void {
         this.exerciseService.selectedExerciseChanged(exerciseId);
     }
-
-    selectedExercise$ = this.exerciseService.selectedExercise$;
-    
-    //functions for creating a workout list most likely need to be replaced with observables
-    create(): void{
-        this.createNew = !this.createNew;
-    }    
-    add(name: string){
-        this.exerciseNamesForWorkout.push(name);
-        this.showWorkoutCreator = true;
-    }
-    addNewWorkout(): void {
+    addNewWorkout(): void {  
         this.newWorkout.title = this.workoutTitle;
         for (let i = 0; i < this.exerciseNamesForWorkout.length; i++){
             this.newWorkout.lift[i].name = this.exerciseNamesForWorkout[i]
         }
         console.log('newWorkout', this.newWorkout);
         this.exerciseService.addExercise(this.newWorkout);
+        this.newWorkout = {title: "", lift: [{name: ""},{name: ""}]};   
     }
-    remove(){
-        this.exerciseNamesForWorkout.pop();
-        if (this.exerciseNamesForWorkout.length == 0){
-            this.showWorkoutCreator = false;
-        }
+    create(): void{
+        this.createNew = !this.createNew;
+    }    
+    add(name: string){
+        this.exerciseNamesForWorkout.push(name);
+        this.showWorkoutCreator = true;
     }
     remove1(id : string){
         for (let x = 0; x < this.exerciseNamesForWorkout.length; x++){
@@ -115,11 +80,8 @@ export class ExerciseListComponent {
         }
     }
     clearDisplay(){
-        //empty previous workout display
-        this.exerciseNamesForWorkout.splice(0);
-        //remove undo button
-        this.showWorkoutCreator = false;
-        //clear input field
-        this.workoutTitle = ''; 
+        this.exerciseNamesForWorkout.splice(0);  //empty previous workout display
+        this.showWorkoutCreator = false;  //remove undo button
+        this.workoutTitle = '';  //clear input field
     }
  }
