@@ -13,7 +13,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 
-
 import { AppComponent } from './app.component';
 import { ExerciseListComponent } from './exercises/exercise-list.component';
 import { ExerciseDetailComponent } from './exercises/exercise-detail.component';
@@ -27,7 +26,9 @@ import { PostComponent } from './blog/post/post.component';
 import { DiscussionComponent } from './blog/discussion/discussion.component';
 
 import { AuthService } from './form/auth.service';
-
+import { CalculatorComponent } from './macroCalculator/calculator.component';
+import { MacroTableComponent } from './macroCalculator/macro-table.component';
+import { CalcService } from './macroCalculator/calculator.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,9 @@ import { AuthService } from './form/auth.service';
     BlogComponent,
     WorkoutListComponent,
     PostComponent,
-    DiscussionComponent
+    DiscussionComponent,
+    CalculatorComponent,
+    MacroTableComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +58,7 @@ import { AuthService } from './form/auth.service';
     MatCheckboxModule,
     MatListModule,
     MatIconModule,
+    MatSelectModule,
     RouterModule.forRoot([
       {path: 'exercises', component: ExerciseListComponent},
       {path: 'exercises/:id', component: ExerciseDetailComponent},
@@ -63,6 +67,7 @@ import { AuthService } from './form/auth.service';
       {path: 'contact-us', component: ContactUsComponent},
       {path: 'blog', component: BlogComponent},
       {path: 'profile', component: ProfileComponent},
+      {path: 'calc', component: CalculatorComponent},
       {path: 'workoutlist', component: WorkoutListComponent},
       {path: 'discussion/:id', component: DiscussionComponent},
       {path: '', redirectTo: 'welcome', pathMatch: 'full'},
@@ -71,7 +76,8 @@ import { AuthService } from './form/auth.service';
     BrowserAnimationsModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    CalcService
   ],
   bootstrap: [AppComponent]
 })

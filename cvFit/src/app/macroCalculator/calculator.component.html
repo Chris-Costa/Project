@@ -1,0 +1,88 @@
+<h1>Welcome to the Marco Calculator</h1>
+<hr>
+<div class="results" *ngIf="showResult">
+    <h2>Showing Result</h2>
+    <p *ngIf="goal == 1">An individual with the goal of losing weight, should consume 40% of calories from carbohydrates, 30% calories from fat, and 30% calories from protiens</p>
+    <p *ngIf="goal == 2">An individual with the goal of maintaining weight, should consume 50% of calories from carbohydrates, 30% calories from fat, and 20% calories from protiens</p>
+    <p *ngIf="goal == 3">An individual with the goal of gaining weight, should consume 40% of calories from carbohydrates, 30% calories from fat, and 30% calories from protiens</p>
+    <p>Based on the values entered into the calculator its reccomended that daily calorie intake is {{dailyCals}}</p>
+    <h2><b>In grams this equates to:</b></h2>
+    <div class="flex-container">
+        <div class="item">
+            <h2>Protein: {{protein}}g</h2>
+        </div>
+        <div class="item">
+            <h2>Carbohydrate: {{carbs}}g</h2>
+        </div>
+        <div class="item">
+            <h2>Fat: {{fat}}g</h2>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="flex-container">
+<div class="calculator">
+    <form [formGroup]="macroForm" (ngSubmit)="submit()" autocomplete="off">
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input formControlName="age" name="age" required id="age" type="number" class="form-control" placeholder="25" />
+        </div>
+        <div class="form-group">
+                <label for="gen">Gender:</label>
+                <div class="form-check">
+                    <input formControlName="gender" class="form-check-input" type="radio" name="gender" value="Male">
+                    <label class="form-check-label" for="inlineRadio1">Male</label>
+                </div>
+                <div class="form-check">
+                    <input formControlName="gender" class="form-check-input" type="radio" name="gender" value="Female">
+                    <label class="form-check-label" for="inlineRadio2">Female</label>
+                </div>
+        </div>
+        <div class="form-group" id="hei">
+            <label for="height">Height:</label>
+            <input formControlName="heightF" name="heightF" required id="heightF" type="number" class="form-control" placeholder="5 foot" />
+            <input formControlName="heightI" name="heightI" required id="heightI" type="number" class="form-control" placeholder="10 inches" />
+        </div>
+        <div class="form-group">
+            <label for="weight">Weight:</label>
+            <input formControlName="weight" name="weight" required id="weight" type="number" class="form-control" placeholder="165" />
+        </div>
+        <div class="form-group">
+            <label for="activityLevel">Activity Level:</label>
+            <mat-form-field appearance="fill">
+                <mat-label>Activity Level</mat-label>
+                <mat-select formControlName="activityLevel" name="activityLevel">
+                  <mat-option *ngFor="let activity of activityL" [value]="activity.value">
+                    {{activity.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <div class="form-group">
+            <label for="goal">Weight Goal:</label>
+            <mat-form-field appearance="fill">
+                <mat-label>Weight Goal</mat-label>
+                <mat-select formControlName="weightGoal" name="weightGoal">
+                  <mat-option *ngFor="let goal of goalW" [value]="goal.value">
+                    {{goal.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+        </div>
+        <div class="form-group">
+            <button mat-raised-button color="primary" type="submit" [disabled]="macroForm.invalid">Calculate</button>
+            <button mat-stroked-button>Clear</button>
+        </div>   
+    </form>
+</div> 
+<div class="info">
+    <h2>What are Macronutrients?</h2>
+    <p>In the context of health and fitness, macronutrients are most often defined to be the chemical compounds that humans consume in large quantities that provide bulk energy. 
+        Specifically, they refer to carbohydrates, proteins, and fats. Some definitions also include water, air, calcium, sodium, chloride ions, and some other substances, along 
+        with more typical macronutrients, since they are needed in large quantities by the human body. In this calculator, we only calculate daily carbohydrate, protein, and fat needs.</p>
+    <img src="./assets/images/info.jpg">
+
+    <h4><b>Review the chart below to find the macronutrient information you need to get started</b></h4>
+</div>  
+</div> 
+<mTable></mTable>   
