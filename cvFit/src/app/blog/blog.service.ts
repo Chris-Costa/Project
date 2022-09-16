@@ -1,48 +1,76 @@
 import { Injectable } from "@angular/core";
 import { IBlogPost, ILikedPosts } from "./blogPost";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { BehaviorSubject, catchError, combineLatest, map, Observable, tap, throwError } from "rxjs";
+import { BehaviorSubject, catchError, combineLatest, map, merge, scan, Subject, tap, throwError } from "rxjs";
 import { AuthService } from "../form/auth.service";
+import { PostComponent } from "./post/post.component";
+import { MatDialog } from '@angular/material/dialog';
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class BlogService{
-    constructor (private http: HttpClient, private auth: AuthService) { }
+    constructor (private http: HttpClient, private auth: AuthService, private dialog: MatDialog) { }
 
     private blogUrl = 'assets/json/blogs.json';
-    status: string;
-    
-    //if liked posts array is empty disable button
-    disableLikedPostsButton: boolean = false
+    disableLikedPostsButton: boolean = false //if liked posts array is empty disable button
+    private blogPostInsertedSubject = new Subject<IBlogPost>();   //used to add new blogPost to list
+    private postSelctionSubject = new BehaviorSubject<number>(0); //get a single selected blog post used in discussion component
 
-    blogPosts$ = this.http.get<IBlogPost[]>(this.blogUrl)
+    blogPosts$ = this.http.get<IBlogPost[]>(this.blogUrl) //all blog posts
         .pipe(
-            map(posts => 
-                posts.map(post => ({
-                    ...post
-                } as IBlogPost))),
-            tap(data => console.log('All: ', JSON.stringify(data))), 
+            tap(data => console.log('Blog Posts', JSON.stringify(data))),
             catchError(this.handleError)
-        );
+    );
+    
+    blogPostInsertedAction$ = this.blogPostInsertedSubject.asObservable();
+    
+    blogPostsWithAdd$ = merge(this.blogPosts$, this.blogPostInsertedAction$)  //combine exisitng stream with new workout
+        .pipe(
+            scan((acc, value) =>
+            (value instanceof Array) ? [...value] : [...acc, value], [] as IBlogPost[])
+    );
+    
+    postSelectionAction$ = this.postSelctionSubject.asObservable();
 
-    private productSelctionSubject = new BehaviorSubject<number>(0);
-    postSelectionAction$ = this.productSelctionSubject.asObservable();
-    //code to get a single selected blog post used in discussion component
-    selectedBlogPost$ = combineLatest([
-        this.blogPosts$, this.postSelectionAction$
-        ]).pipe(
+    selectedBlogPost$ = combineLatest([this.blogPosts$, this.postSelectionAction$])
+        .pipe(
             map(([posts, selectedPostId]) => 
-            posts.find(post => post.blogId === selectedPostId)),
+                posts.find(post => post.blogId === selectedPostId)),
             tap(post => console.log('selected post', post))
-        );
-    
-    //take in value that user selects
-    selectedPostChange(selectedPostId: number): void{
-        this.productSelctionSubject.next(selectedPostId);
+    );
+
+    addBlogPost(newPost: IBlogPost) { //function to add new workout in component
+        this.blogPostInsertedSubject.next(newPost)
     }
+    selectedPostChange(selectedPostId: number): void{ //take in value that user selects
+        this.postSelctionSubject.next(selectedPostId);
+    }
+    openPostDialog(){
+        this.dialog.open(PostComponent, {
+            width: '500px',
+          });
+    }
+    /*//for likes
+    blogPostsLikes$ = this.http.get<IBlogPost[]>(this.)
+        .pipe(
+            map(posts =>
+                posts.map(post => ({
+                    ...post,
+                    likes: post.likes + 1} as IBlogPost)
+                )
+            )
+    );*/
+    //get a single selected blog post used in discussion component
     
+    
+    
+
+
+
+
+
     //hold liked blog posts
     likedPostList: ILikedPosts[] = [
         {
@@ -62,10 +90,7 @@ export class BlogService{
         //post to json 
 
     }
-    getBlogPost(id: number): Observable<IBlogPost | undefined> {
-        return this.blogPosts$
-          .pipe(map((products: IBlogPost[]) => products.find(p => p.blogId === id)));
-    }
+  
     //trash function
     remove(id: number){
         this.likedPostList[this.auth.currentUser.id].postIds.splice(id, 1);

@@ -1,8 +1,5 @@
 import { Component } from "@angular/core";
 import { BlogService } from "./blog.service";
-import { IBlogPost } from "./blogPost";
-import { MatDialog } from '@angular/material/dialog';
-import { PostComponent } from "./post/post.component";
 import { AuthService } from "../form/auth.service";
 import { catchError, EMPTY, map } from "rxjs";
 
@@ -11,45 +8,42 @@ import { catchError, EMPTY, map } from "rxjs";
     styleUrls: ['./blog.component.css']
 })
 
-//if current user and id of blog is == to an id of exisiting blog post add it to new filtered array
 export class BlogComponent {
 
-    constructor (public blogService: BlogService, private dialog: MatDialog, public auth: AuthService){ }
+    constructor (public blogService: BlogService, public auth: AuthService){ }
 
     title: string;
     author: string;
     post: string;
-    likedPosts: IBlogPost[] = [];
     errorMessage: string;
     allFlag: boolean = true;
+    
 
-    blogPosts$ = this.blogService.blogPosts$
+    blogPosts$ = this.blogService.blogPostsWithAdd$
         .pipe(
             catchError(err => {
                 this.errorMessage = err;
                 return EMPTY;
             })
-        );
-    //filter if blog id and user id meet the requirments
-    tempHardCodeLike: number = 1;
+    );
+   
+    
+    tempHardCodeLike: number = 1; //filter if blog id and user id meet the requirments
     filteredBlogPosts$ = this.blogService.blogPosts$
         .pipe(
-            map(posts => posts.filter(item => item.blogId === this.blogService.likedPostList[this.auth.currentUser.id].postIds[this.tempHardCodeLike]))
-        );
+            map(posts => posts.filter(post => ({
+                ...post,
+                blogId: post.blogId === this.blogService.likedPostList[this.auth.currentUser.id].postIds[this.tempHardCodeLike]})
+            ))
+    );
 
+
+    
     //for selected id value
     onSelected(postId: number): void{
         this.blogService.selectedPostChange(postId);
     }
-    /*
-    //temp hard coded selector for like posts
-    selectedState = 1;
-    blogPostsFiltered$ = this.blogService.blogPosts$
-    .pipe(
-        map(items => items.filter(item => item.blogId === this.selectedState))
-        
-    );
-   */
+    
     allPosts(){
         this.allFlag = true;
     }
@@ -58,9 +52,7 @@ export class BlogComponent {
     }
     //start of create new post form functions
     openDialog() {
-        this.dialog.open(PostComponent, {
-          width: '500px',
-        });
+        this.blogService.openPostDialog();
     }
     blog(formValues){
        this.blogService.savePost(formValues);
