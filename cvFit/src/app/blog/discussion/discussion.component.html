@@ -1,13 +1,10 @@
 <h1>Discussion Board</h1>
 <hr>
 <mat-sidenav-container class="example-container">
-
   <mat-sidenav class="sideNav" mode="side" opened>
     <button class='backB' mat-raised-button (click)="onBack()">Back</button>
   </mat-sidenav>
-
   <mat-sidenav-content>
-    
     <div class="flex-container" *ngIf="selectedPost$ | async as blogPost">
       <mat-card class="blog-card" >
         <mat-card-title-group>
@@ -20,22 +17,19 @@
         </mat-card-actions>
       </mat-card>
       <div id="commentCreation">
-        <form *ngIf='showForm' #commentForm="ngForm" (ngSubmit)="reply(commentForm.value)" autocomplete="off" novalidate>
-          <div class="'form-group">
+          <div class="'form-group" *ngIf="showForm">
             <input [(ngModel)]="comment" name="comment" id="comment" type="text" class="form-control" placeholder="Type your reply here..." required />
-        </div>
-            <button mat-stroked-button color="primary" (click)="createReply()">Submit</button>
-        </form>
+            <button mat-stroked-button color="primary" (click)="addNewComment()">Submit</button>
+          </div>
       </div>
-      <mat-card class="comments" *ngFor="let x of blogPost.comments">
+    </div>  
+    <div *ngIf="currentComments$ | async as comments" >
+      <mat-card class="comments" *ngFor="let comment of comments">
         <mat-card-title-group>
-          <mat-card-title>{{x.user}} </mat-card-title>
+          <mat-card-title>{{comment.user}} </mat-card-title>
         </mat-card-title-group>
-        <mat-card-content>{{x.reply}}</mat-card-content>
+        <mat-card-content>{{comment.reply}}</mat-card-content>
       </mat-card> 
     </div>
-
-      <div class="flex-container" >
-      </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

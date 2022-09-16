@@ -8,7 +8,7 @@ import { IBlogPost } from "../blogPost";
     templateUrl: './post.component.html'
 })
 export class PostComponent {  //use this componet to add a new post to the exisiting blog posts stream
-    constructor(public auth: AuthService, private blogService: BlogService){}
+    constructor(private auth: AuthService, private blogService: BlogService){}
     title: string = '';
     author: string = this.auth.currentUser.firstName;
     post: string = '';
