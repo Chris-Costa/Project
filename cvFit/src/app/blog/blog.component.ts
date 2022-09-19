@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { BlogService } from "./blog.service";
-import { catchError, EMPTY } from "rxjs";
+import { BehaviorSubject, catchError, combineLatest, EMPTY, map } from "rxjs";
 
 @Component({
     templateUrl: './blog.component.html',
@@ -14,9 +14,16 @@ export class BlogComponent {
     author: string;
     post: string;
     errorMessage: string;
+    private filterSelectedSubject = new BehaviorSubject<number>(0);
     
-    blogPosts$ = this.blogService.blogPostsWithAdd$
+    filterSelectedAction$ = this.filterSelectedSubject.asObservable();
+
+    blogPosts$ = combineLatest([this.blogService.blogPostsWithAdd$, this.filterSelectedAction$])
         .pipe(
+            map(([posts, filterSelected]) =>
+            posts.filter(post =>
+                filterSelected ? post.liked === filterSelected : true)
+            ),
             catchError(err => {
                 this.errorMessage = err;
                 return EMPTY;
@@ -25,6 +32,9 @@ export class BlogComponent {
    
     onSelected(postId: number): void{ //for selected id value
         this.blogService.selectedPostChange(postId);
+    }
+    filterSelection(num: number): void {
+        this.filterSelectedSubject.next(+num);
     }
     openDialog() { //start of create new post form functions
         this.blogService.openPostDialog();
