@@ -8,11 +8,10 @@ import { MaterialModule } from './shared/material.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatRadioModule} from '@angular/material/radio';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatListModule} from '@angular/material/list';
-import {MatIconModule} from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
 
 import { AppComponent } from './app.component';
 import { ExerciseListComponent } from './exercises/exercise-list.component';
@@ -27,7 +26,6 @@ import { PostComponent } from './blog/post/post.component';
 import { DiscussionComponent } from './blog/discussion/discussion.component';
 
 import { AuthService } from './form/auth.service';
-import { TransferService } from './exercises/workoutList/dataTransfer.service';
 import { CalculatorComponent } from './macroCalculator/calculator.component';
 import { MacroTableComponent } from './macroCalculator/macro-table.component';
 import { CalcService } from './macroCalculator/calculator.service';
@@ -79,7 +77,6 @@ import { CalcService } from './macroCalculator/calculator.service';
   ],
   providers: [
     AuthService,
-    TransferService,
     CalcService
   ],
   bootstrap: [AppComponent]
