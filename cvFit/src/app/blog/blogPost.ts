@@ -4,7 +4,7 @@ export interface IBlogPost{
     blogAuthor: string;
     blogContent: string;
     authorAvatar: string;
-    likes: number;
+    liked?: number;
     comments: IComment[];
 }
 export interface IComment{
