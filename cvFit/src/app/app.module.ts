@@ -31,6 +31,12 @@ import { CalculatorComponent } from './macroCalculator/calculator.component';
 import { MacroTableComponent } from './macroCalculator/macro-table.component';
 import { CalcService } from './macroCalculator/calculator.service';
 
+import { MsalModule, MsalRedirectComponent } from '@azure/msal-angular';
+import { PublicClientApplication } from '@azure/msal-browser';
+import { AppRoutingModule } from './app-routing.module';
+
+const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +54,18 @@ import { CalcService } from './macroCalculator/calculator.service';
     MacroTableComponent
   ],
   imports: [
+    AppRoutingModule,
+    MsalModule.forRoot( new PublicClientApplication({
+      auth: {
+        clientId: '6063621e-ae81-4c3e-b0ee-6c9486c01725', // Application (client) ID from the app registration
+        authority: 'Enter_the_Cloud_Instance_Id_Here/55e374bf-374e-49de-a716-836ce6f714d1', // The Azure cloud instance and the app's sign-in audience (tenant ID, common, organizations, or consumers)
+        redirectUri: 'http://localhost:4200'// This is your redirect URI
+      },
+      cache: {
+        cacheLocation: 'localStorage',
+        storeAuthStateInCookie: isIE, // Set to true for Internet Explorer 11
+      }
+    }), null, null),
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
@@ -80,6 +98,6 @@ import { CalcService } from './macroCalculator/calculator.service';
     AuthService,
     CalcService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent, MsalRedirectComponent]
 })
 export class AppModule { }

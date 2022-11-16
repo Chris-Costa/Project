@@ -8,8 +8,13 @@
     <li><button *ngIf="auth.isAuth()" class="nav-link"  routerLink='/blog'>Discussion Board</button></li>
     
     <div id="right">
+      <a mat-button [routerLink]="['login']">Log In</a>
+
+      <button mat-raised-button *ngIf="!loginDisplay" (click)="login()">Login</button>
+      <!--
       <li><a *ngIf="!auth.isAuth()" class='nav-link' routerLink='/login'>Sign In</a></li>
       <li><button mat-button [matMenuTriggerFor]="menu" *ngIf="auth.isAuth()" class='nav-link' id="signed"> Welcome {{auth.currentUser.firstName}}, <img [src]='auth.currentUser.avatar' /></button></li>
+      -->
     </div>
   </ul>
   <mat-menu #menu="matMenu">
@@ -19,5 +24,6 @@
 
 </nav>
 <div class='container'>
-  <router-outlet></router-outlet>
+  <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
+  <router-outlet *ngIf="!isIframe"></router-outlet>
 </div>
