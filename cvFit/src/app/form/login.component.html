@@ -3,7 +3,7 @@
 </h1>
 <hr>
 <div class="col-md-4">
-    <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)" autocomplete="off">
+    <form #loginForm="ngForm" (ngSubmit)="login()" autocomplete="off">
         <div class="'form-group">
             <label for="userName">Username:</label>
            
@@ -14,8 +14,12 @@
             
             <input (ngModel)="password" name="password" required id="password" type="password" class="form-control" placeholder="enter a password" />
         </div>
-    
-        <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Sign In</button>
+        <button mat-raised-button *ngIf="!loginDisplay" (click)="login()">Login</button>
+        <!--<button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Sign In</button>-->
         <button mat-button (click)="cancel()">Cancel</button>
     </form>
 </div>
+<div class='container'>
+    <!--This is to avoid reload during acquireTokenSilent() because of hidden iframe -->
+    <router-outlet *ngIf="!isIframe"></router-outlet>
+  </div>
