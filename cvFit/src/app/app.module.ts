@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './shared/material.module';
@@ -31,8 +31,8 @@ import { CalculatorComponent } from './macroCalculator/calculator.component';
 import { MacroTableComponent } from './macroCalculator/macro-table.component';
 import { CalcService } from './macroCalculator/calculator.service';
 
-import { MsalModule, MsalRedirectComponent } from '@azure/msal-angular';
-import { PublicClientApplication } from '@azure/msal-browser';
+import { MsalInterceptor, MsalModule, MsalRedirectComponent } from '@azure/msal-angular';
+import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 import { AppRoutingModule } from './app-routing.module';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
@@ -58,14 +58,25 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     MsalModule.forRoot( new PublicClientApplication({
       auth: {
         clientId: '6063621e-ae81-4c3e-b0ee-6c9486c01725', // Application (client) ID from the app registration
-        authority: 'Enter_the_Cloud_Instance_Id_Here/55e374bf-374e-49de-a716-836ce6f714d1', // The Azure cloud instance and the app's sign-in audience (tenant ID, common, organizations, or consumers)
+        //authority: 'Enter_the_Cloud_Instance_Id_Here/55e374bf-374e-49de-a716-836ce6f714d1', // The Azure cloud instance and the app's sign-in audience (tenant ID, common, organizations, or consumers)
+        authority: '55e374bf-374e-49de-a716-836ce6f714d1',
         redirectUri: 'http://localhost:4200'// This is your redirect URI
       },
       cache: {
         cacheLocation: 'localStorage',
         storeAuthStateInCookie: isIE, // Set to true for Internet Explorer 11
       }
-    }), null, null),
+    }), {
+      interactionType: InteractionType.Redirect,
+      authRequest: {
+        scopes: ['user.read']
+      }
+    }, {
+      interactionType: InteractionType.Redirect,
+      protectedResourceMap: new Map([
+        ['Enter_the_Graph_Endpoint_Here/v1.0/me', ['user.read']]
+      ])
+    }),
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
@@ -95,6 +106,11 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     BrowserAnimationsModule
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MsalInterceptor,
+      multi: true
+    },
     AuthService,
     CalcService
   ],
