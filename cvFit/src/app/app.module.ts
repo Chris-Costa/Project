@@ -34,6 +34,8 @@ import { CalcService } from './macroCalculator/calculator.service';
 import { MsalInterceptor, MsalModule, MsalRedirectComponent } from '@azure/msal-angular';
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 import { AppRoutingModule } from './app-routing.module';
+import { AZUREprofileComponent } from './azureprofile/azureprofile.component';
+import { HomeComponent } from './home/home.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -51,7 +53,9 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     PostComponent,
     DiscussionComponent,
     CalculatorComponent,
-    MacroTableComponent
+    MacroTableComponent,
+    AZUREprofileComponent,
+    HomeComponent
   ],
   imports: [
     AppRoutingModule,
@@ -74,7 +78,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     }, {
       interactionType: InteractionType.Redirect,
       protectedResourceMap: new Map([
-        ['Enter_the_Graph_Endpoint_Here/v1.0/me', ['user.read']]
+        ['https://graph.microsoft.com/v1.0/me', ['user.read']]
       ])
     }),
     BrowserModule,
