@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { IBlogPost, IComment } from "./blogPost";
+import { IBlogPost, IComment } from "../shared/blogPost";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { BehaviorSubject, catchError, combineLatest, map, merge, scan, Subject, tap, throwError } from "rxjs";
 import { PostComponent } from "./post/post.component";

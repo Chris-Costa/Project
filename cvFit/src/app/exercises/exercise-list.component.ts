@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { catchError, EMPTY, map } from 'rxjs';
 import { ExerciseService } from './exercise.service';
-import { IWorkout } from './workoutList/workout';
+import { IWorkout } from '../shared/workout';
 
 @Component({
     selector: 'app-exercises',

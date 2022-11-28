@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { Router } from '@angular/router';
 import { catchError, EMPTY } from "rxjs";
-import { AuthService } from "src/app/form/auth.service";
 import { BlogService } from "../blog.service";
-import { IComment } from "../blogPost";
+import { IComment } from "../../shared/blogPost";
 
 @Component({
     selector: 'app-discussion',
@@ -12,10 +11,11 @@ import { IComment } from "../blogPost";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DiscussionComponent{
-    constructor(private router: Router, private blogService: BlogService, private auth: AuthService) { }
+    constructor(private router: Router, private blogService: BlogService) { }
 
     errorMessage=' ';
     comment: string = "";
+    user: string = ""; //update with azure profile
     showForm: boolean = false;
     newComment: IComment = {user: "", reply: ""}; 
 
@@ -35,7 +35,7 @@ export class DiscussionComponent{
     );
 
     addNewComment(): void {  
-        this.newComment.user = this.auth.currentUser.firstName;
+        this.newComment.user = this.user;
         this.newComment.reply = this.comment;
         console.log('newBlogPost', this.newComment);
         this.blogService.addComment(this.newComment);

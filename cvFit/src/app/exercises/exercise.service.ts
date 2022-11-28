@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, catchError, combineLatest, map, merge, scan, Subject, tap, throwError } from "rxjs";
-import { IExercise } from "./exercise";
-import { IWorkout } from "./workoutList/workout";
+import { IExercise } from "../shared/exercise";
+import { IWorkout } from "../shared/workout";
 
 @Injectable({
     providedIn: 'root'

@@ -19,14 +19,10 @@ import { ExerciseListComponent } from './exercises/exercise-list.component';
 import { ExerciseDetailComponent } from './exercises/exercise-detail.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { ContactUsComponent } from './form/contactUs.component';
-import { LoginComponent } from './form/login.component';
-import { ProfileComponent } from './form/profile.component';
 import { BlogComponent } from './blog/blog.component';
 import { WorkoutListComponent } from './exercises/workoutList/workoutList.component';
 import { PostComponent } from './blog/post/post.component';
 import { DiscussionComponent } from './blog/discussion/discussion.component';
-
-import { AuthService } from './form/auth.service';
 import { CalculatorComponent } from './macroCalculator/calculator.component';
 import { MacroTableComponent } from './macroCalculator/macro-table.component';
 import { CalcService } from './macroCalculator/calculator.service';
@@ -46,8 +42,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     ExerciseDetailComponent,
     ContactUsComponent,
     WelcomeComponent,
-    LoginComponent,
-    ProfileComponent,
     BlogComponent,
     WorkoutListComponent,
     PostComponent,
@@ -97,10 +91,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       {path: 'exercises', component: ExerciseListComponent},
       {path: 'exercises/:id', component: ExerciseDetailComponent},
       {path: 'welcome', component: WelcomeComponent},
-      {path: 'login', component: LoginComponent},
       {path: 'contact-us', component: ContactUsComponent},
       {path: 'blog', component: BlogComponent},
-      {path: 'profile', component: ProfileComponent},
       {path: 'calc', component: CalculatorComponent},
       {path: 'workoutlist', component: WorkoutListComponent},
       {path: 'discussion/:id', component: DiscussionComponent},
@@ -115,7 +107,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       useClass: MsalInterceptor,
       multi: true
     },
-    AuthService,
     CalcService
   ],
   bootstrap: [AppComponent, MsalRedirectComponent]
