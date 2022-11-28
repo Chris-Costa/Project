@@ -27,7 +27,7 @@ import { CalculatorComponent } from './macroCalculator/calculator.component';
 import { MacroTableComponent } from './macroCalculator/macro-table.component';
 import { CalcService } from './macroCalculator/calculator.service';
 
-import { MsalInterceptor, MsalModule, MsalRedirectComponent } from '@azure/msal-angular';
+import { MsalInterceptor, MsalModule, MsalRedirectComponent, MsalGuard } from '@azure/msal-angular';
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AZUREprofileComponent } from './azureprofile/azureprofile.component';
@@ -107,7 +107,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       useClass: MsalInterceptor,
       multi: true
     },
-    CalcService
+    CalcService,
+    MsalGuard
   ],
   bootstrap: [AppComponent, MsalRedirectComponent]
 })

@@ -9,7 +9,9 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  constructor(private authService: MsalService, private msalBroadcastService: MsalBroadcastService) { }
+  loginDisplay = false; 
+
+  constructor(private msalService: MsalService, private msalBroadcastService: MsalBroadcastService) { }
 
   ngOnInit(): void {
     this.msalBroadcastService.msalSubject$
@@ -19,5 +21,17 @@ export class HomeComponent implements OnInit {
       .subscribe((result: EventMessage) => {
         console.log(result);
       });
+
+    this.msalBroadcastService.inProgress$
+      .pipe(
+        filter((status: InteractionStatus) => status === InteractionStatus.None)
+      )
+      .subscribe(() => {
+        this.setLoginDisplay();
+      })
+  }
+
+  setLoginDisplay(){
+    this.loginDisplay = this.msalService.instance.getAllAccounts().length > 0;
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { MsalService, MsalBroadcastService, MSAL_GUARD_CONFIG, MsalGuardConfiguration } from '@azure/msal-angular';
 import { InteractionStatus, RedirectRequest } from '@azure/msal-browser';
-import { Subject, take } from 'rxjs';
+import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 @Component({
   selector: 'app-root',
@@ -43,7 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
   setLoginDisplay(){
     this.loginDisplay = this.msalService.instance.getAllAccounts().length > 0;
   }
-  
+
   ngOnDestroy(): void {
     this._destroying$.next(undefined);
     this._destroying$.complete();
