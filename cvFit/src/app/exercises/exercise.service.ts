@@ -1,6 +1,6 @@
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, catchError, combineLatest, map, merge, scan, Subject, tap, throwError } from "rxjs";
+import { BehaviorSubject, catchError, combineLatest, map, merge, Observable, scan, Subject, tap, throwError } from "rxjs";
 import { IExercise } from "../shared/exercise";
 import { IWorkout } from "../shared/workout";
 
@@ -11,7 +11,9 @@ export class ExerciseService{
     //private exerciseUrl = 'assets/json/exercises.json';
     private exerciseUrl = 'https://localhost:7018/exercise';
     //private workoutListUrl = 'assets/json/workouts.json';
-    private workoutListUrl = 'https://localhost:7018/Workout?userId=1';
+    private workoutListUrl = 'https://localhost:7018/Workout?userId=';
+    //temp current user id
+    tempCurrentUserId: number = 1;
 
     constructor (private http: HttpClient) { }
     //observable to get all exercises
@@ -37,7 +39,7 @@ export class ExerciseService{
         this.exerciseSelectionSubject.next(selectedExerciseId);
     }
     //observable for pre-existing workouts
-    workouts$ = this.http.get<IWorkout[]>(this.workoutListUrl).pipe(
+    workouts$ = this.http.get<IWorkout[]>(this.workoutListUrl + this.tempCurrentUserId).pipe(
         tap(data => console.log('All: ', JSON.stringify(data))), 
         catchError(this.handleError)
     );
@@ -66,6 +68,14 @@ export class ExerciseService{
             
         console.error(errorMessage);
         return throwError(errorMessage);
+    }
+
+    
+    
+    httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    
+    postWorkout(message: IWorkout): Observable<IWorkout | Number> {
+        return this.http.post<IWorkout | Number>(this.workoutListUrl + this.tempCurrentUserId, message, this.httpOptions);
     }
 }
 //backend example for http post adding workout 

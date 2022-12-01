@@ -18,7 +18,7 @@ export class ContactUsComponent {
 
     constructor(private contactUsService: ContactUsService) { }
 
-    contactUsUrl = 'https://localhost:7018/ContactUs/';
+    //contactUsUrl = 'https://localhost:7018/ContactUs/';
 
     contact(firstName: string, lastName: string, email: string, notes: string){
         

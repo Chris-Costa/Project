@@ -19,6 +19,7 @@ export class ExerciseListComponent {
     exerciseNamesForWorkout: string[] = [];  //hold selected workouts
     createNew: boolean = false; //bool for dispaly create workout || cancel workout
     errorMessage: string;   
+    success: boolean;
     
     private _listFilter: string ="";
     get listFilter(): string{
@@ -57,6 +58,23 @@ export class ExerciseListComponent {
         this.exerciseService.selectedExerciseChanged(exerciseId);
     }
     addNewWorkout(): void {  
+
+        let workout: IWorkout = {
+            title: this.workoutTitle,
+            lift: []
+        };
+        this.exerciseService.postWorkout(workout)
+            .pipe(catchError(err => {
+                this.errorMessage = err;
+                return EMPTY;
+            }))
+            .subscribe(res => {
+                if(res) {
+                    this.success = true;
+                }
+        });
+
+        
         this.newWorkout.title = this.workoutTitle;
         for (let i = 0; i < this.exerciseNamesForWorkout.length; i++){
             this.newWorkout.lift[i].name = this.exerciseNamesForWorkout[i]

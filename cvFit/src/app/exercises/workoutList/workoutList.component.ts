@@ -17,5 +17,5 @@ export class WorkoutListComponent {
             this.errorMessage = err;
             return EMPTY;
             })
-        );
+        );    
 }
