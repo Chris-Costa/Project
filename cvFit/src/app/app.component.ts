@@ -3,6 +3,8 @@ import { MsalService, MsalBroadcastService, MSAL_GUARD_CONFIG, MsalGuardConfigur
 import { InteractionStatus, RedirectRequest } from '@azure/msal-browser';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { AZUREprofileComponent } from './azureprofile/azureprofile.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,7 +15,7 @@ export class AppComponent implements OnInit, OnDestroy {
   loginDisplay = false;
   private readonly _destroying$ = new Subject<void>();
 
-  constructor(@Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration, private broadcastService: MsalBroadcastService, private msalService: MsalService) {}
+  constructor(@Inject(MSAL_GUARD_CONFIG) private msalGuardConfig: MsalGuardConfiguration, private broadcastService: MsalBroadcastService, private msalService: MsalService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.isIframe = window !== window.parent && !window.opener;
@@ -47,5 +49,10 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._destroying$.next(undefined);
     this._destroying$.complete();
+  }
+  openDialog() {
+    this.dialog.open(AZUREprofileComponent, {
+      width: '500px',
+    });
   }
 }

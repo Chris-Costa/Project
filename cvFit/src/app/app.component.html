@@ -6,7 +6,8 @@
     <li><a class='nav-link' routerLink='/blog'>Disscussion Board</a></li>
     
     <div id="right">
-      <a mat-button [routerLink]="['AZUREprofile']">AZUREprofile</a>
+      <!--<a mat-button [routerLink]="['AZUREprofile']">AZUREprofile</a>-->
+      <a mat-button (click)="openDialog()">AZUREprofile</a>
       <button mat-raised-button *ngIf="!loginDisplay" (click)="login()">Login</button>
       <button mat-raised-button *ngIf="loginDisplay" (click)="logout()">Logout</button>
     </div>
