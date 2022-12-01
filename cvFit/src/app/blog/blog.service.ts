@@ -1,9 +1,10 @@
 import { Injectable } from "@angular/core";
 import { IBlogPost, IComment } from "../shared/blogPost";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { BehaviorSubject, catchError, combineLatest, map, merge, scan, Subject, tap, throwError } from "rxjs";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { BehaviorSubject, catchError, combineLatest, map, merge, Observable, scan, Subject, tap, throwError } from "rxjs";
 import { PostComponent } from "./post/post.component";
 import { MatDialog } from '@angular/material/dialog';
+import { Blog } from "../shared/blog";
 
 @Injectable({
     providedIn: 'root'
@@ -82,4 +83,10 @@ export class BlogService{
         console.error(errorMessage);
         return throwError(errorMessage);
     }
+
+
+    httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+    postBlog(message: Blog): Observable<Blog | Number> {
+        return this.http.post<Blog | Number>(this.blogUrl, message, this.httpOptions);
+    } 
 }
