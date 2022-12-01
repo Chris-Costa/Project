@@ -5,13 +5,13 @@
     <button class='backB' mat-raised-button (click)="onBack()">Back</button>
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="flex-container" *ngIf="selectedPost$ | async as blogPost">
+    <div *ngIf="selectedPost$ | async as blogPost">
       <mat-card class="blog-card" >
         <mat-card-title-group>
-          <mat-card-title>{{blogPost.blogTitle}}</mat-card-title>
-          <mat-card-subtitle>{{blogPost.blogAuthor}} <img [src]='blogPost.authorAvatar' /></mat-card-subtitle>
+          <mat-card-title>{{blogPost.title}}</mat-card-title>
+          <mat-card-subtitle>{{blogPost.author}} <img [src]='blogPost.avatar' /></mat-card-subtitle>
         </mat-card-title-group>
-        <mat-card-content>{{blogPost.blogContent}}</mat-card-content>
+        <mat-card-content>{{blogPost.content}}</mat-card-content>
         <mat-card-actions>
           <button mat-raised-button color="primary" (click)='togglePostForm()'>{{showForm? 'Cancel' : 'Create'}} Reply</button>
         </mat-card-actions>
@@ -22,14 +22,14 @@
             <button mat-stroked-button color="primary" (click)="addNewComment()">Submit</button>
           </div>
       </div>
+      <div>
+        <mat-card class="comments" *ngFor="let comment of blogPost.comment">
+          <mat-card-title-group>
+            <mat-card-title>{{comment.user}} </mat-card-title>
+          </mat-card-title-group>
+          <mat-card-content>{{comment.reply}}</mat-card-content>
+        </mat-card> 
+      </div>
     </div>  
-    <div *ngIf="currentComments$ | async as comments" >
-      <mat-card class="comments" *ngFor="let comment of comments">
-        <mat-card-title-group>
-          <mat-card-title>{{comment.user}} </mat-card-title>
-        </mat-card-title-group>
-        <mat-card-content>{{comment.reply}}</mat-card-content>
-      </mat-card> 
-    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

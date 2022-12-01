@@ -1,11 +1,11 @@
 export interface IBlogPost{
-    blogId: number;
-    blogTitle: string; 
-    blogAuthor: string;
-    blogContent: string;
-    authorAvatar: string;
-    liked?: number;
-    comments: IComment[];
+    id: number;
+    title: string; 
+    author: string;
+    content: string;
+    avatar: string;
+    likes?: number;
+    comment: IComment[];
 }
 export interface IComment{
     user: string;

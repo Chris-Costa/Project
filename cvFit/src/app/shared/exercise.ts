@@ -1,11 +1,10 @@
 export interface IExercise{
-    exerciseId: number;
-    exerciseName: string;
+    id: number;
+    name: string;
     muscleGroup: string;
     description: string;
     repRange: string;
-    starRating: number;
     difficulty: string;
-    imageUrl: string;
-    video: string;
+    imageURL: string;
+    videoURL: string;
 }

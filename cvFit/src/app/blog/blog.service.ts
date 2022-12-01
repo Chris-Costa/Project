@@ -12,7 +12,8 @@ import { MatDialog } from '@angular/material/dialog';
 export class BlogService{
     constructor (private http: HttpClient, private dialog: MatDialog) { }
 
-    private blogUrl = 'assets/json/blogs.json';
+    //private blogUrl = 'assets/json/blogs.json';
+    private blogUrl = 'https://localhost:7018/blog/';
     disableLikedPostsButton: boolean = false //if liked posts array is empty disable button
     private postSelctionSubject = new BehaviorSubject<number>(0); //get a single selected blog post used in discussion component
     private blogPostInsertedSubject = new Subject<IBlogPost>();   //used to add new blogPost to list
@@ -29,7 +30,7 @@ export class BlogService{
     selectedBlogPost$ = combineLatest([this.blogPosts$, this.postSelectionAction$])
         .pipe(
             map(([posts, selectedPostId]) => 
-                posts.find(post => post.blogId === selectedPostId)),
+                posts.find(post => post.id === selectedPostId)),
             tap(post => console.log('selected post', post))
     );
 
@@ -45,7 +46,8 @@ export class BlogService{
     
     commentsOfCurrentPost$ = this.selectedBlogPost$ //observable of the currently selected posts comments
         .pipe(
-            map(post => post.comments),
+            map(post => post.comment),
+            tap(data => console.log('comments', JSON.stringify(data))),
             catchError(this.handleError)
     );
 

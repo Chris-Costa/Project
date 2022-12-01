@@ -8,8 +8,10 @@ import { IWorkout } from "../shared/workout";
     providedIn: 'root'
 })
 export class ExerciseService{
-    private exerciseUrl = 'assets/json/exercises.json';
-    private workoutListUrl = 'assets/json/workouts.json';
+    //private exerciseUrl = 'assets/json/exercises.json';
+    private exerciseUrl = 'https://localhost:7018/exercise';
+    //private workoutListUrl = 'assets/json/workouts.json';
+    private workoutListUrl = 'https://localhost:7018/Workout?userId=1';
 
     constructor (private http: HttpClient) { }
     //observable to get all exercises
@@ -26,7 +28,7 @@ export class ExerciseService{
         this.exerciseSelected$
     ]).pipe(
         map(([exercises, selectedExerciseId]) =>
-            exercises.find(exercise => exercise.exerciseId === selectedExerciseId)
+            exercises.find(exercise => exercise.id === selectedExerciseId)
         ),
         tap(exercise => console.log('selectedExercise', exercise))
     )

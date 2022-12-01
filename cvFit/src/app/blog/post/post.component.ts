@@ -12,14 +12,14 @@ export class PostComponent {  //use this componet to add a new post to the exisi
     author: string = ''; //was being pulled from auth service needs to be updated for azure profile
     post: string = '';
     id: number = 4;
-    newBlogPost: IBlogPost = {blogId: this.id, blogTitle: "", blogAuthor: "", blogContent: "", authorAvatar: "", liked: 1, comments: []}; 
+    newBlogPost: IBlogPost = {id: this.id, title: "", author: "", content: "", avatar: "", likes: 1, comment: []}; 
     
     addNewBlogPost(): void {  
-        this.newBlogPost.blogTitle = this.title;
-        this.newBlogPost.blogContent = this.post;
+        this.newBlogPost.title = this.title;
+        this.newBlogPost.content = this.post;
         console.log('newBlogPost', this.newBlogPost);
         this.blogService.addBlogPost(this.newBlogPost);
-        this.newBlogPost = {blogId: this.id++, blogTitle: "", blogAuthor: this.author, blogContent: "", authorAvatar: "", liked: 1, comments: []};   
+        this.newBlogPost = {id: this.id++, title: "", author: this.author, content: "", avatar: "", likes: 1, comment: []};   
     }
     blog(formValues: string){
         console.log(formValues)

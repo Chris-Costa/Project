@@ -28,13 +28,13 @@
                 </thead>
                 <tbody>
                     <tr *ngFor='let exercise of exercises'>
-                        <td><img [src]='exercise.imageUrl' [title]="exercise.exerciseName"></td>
-                        <td><button [routerLink]="['/exercises', exercise.exerciseId]" [ngClass]="{active: exercise?.exerciseId === (selectedExercise$ | async)?.exerciseId }" (click)="onSelected(exercise.exerciseId)">{{exercise.exerciseName}}</button></td>
+                        <td><img [src]='exercise.imageURL' [title]="exercise.name"></td>
+                        <td><button [routerLink]="['/exercises', exercise.id]" [ngClass]="{active: exercise?.id === (selectedExercise$ | async)?.id }" (click)="onSelected(exercise.id)">{{exercise.name}}</button></td>
                         <td>{{exercise.muscleGroup}}</td>
                         <td>{{exercise.repRange}}</td>
                         <td>{{exercise.difficulty}}</td>
                         <td *ngIf="createNew">
-                            <button mat-raised-button color="primary" (click)="add(exercise.exerciseName)" >ADD</button>
+                            <button mat-raised-button color="primary" (click)="add(exercise.name)" >ADD</button>
                         </td>
                     </tr>
                 </tbody>

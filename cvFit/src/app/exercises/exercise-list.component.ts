@@ -31,7 +31,7 @@ export class ExerciseListComponent {
         .pipe(
             map(exercises => 
                 exercises.filter(exercise => 
-                    exercise.exerciseName.toLocaleLowerCase().includes(value)
+                    exercise.name.toLocaleLowerCase().includes(value)
                 )
             )
         );
@@ -48,7 +48,7 @@ export class ExerciseListComponent {
         .pipe(
             map(exercises => 
                 exercises.filter(exercise => 
-                    exercise.exerciseName.toLocaleLowerCase().includes('')
+                    exercise.name.toLocaleLowerCase().includes('')
                     ))
         );
     selectedExercise$ = this.exerciseService.selectedExercise$;
