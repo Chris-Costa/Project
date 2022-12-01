@@ -15,6 +15,7 @@ export class BlogService{
 
     //private blogUrl = 'assets/json/blogs.json';
     private blogUrl = 'https://localhost:7018/blog/';
+    private commentUrl = 'https://localhost:7018/Comment?blogId='
     disableLikedPostsButton: boolean = false //if liked posts array is empty disable button
     private postSelctionSubject = new BehaviorSubject<number>(0); //get a single selected blog post used in discussion component
     private blogPostInsertedSubject = new Subject<IBlogPost>();   //used to add new blogPost to list
@@ -60,6 +61,7 @@ export class BlogService{
 
     selectedPostChange(selectedPostId: number): void{ //take in value that user selects
         this.postSelctionSubject.next(selectedPostId);
+        console.log('This is the id', this.postSelctionSubject.value);
     }
     addBlogPost(newPost: IBlogPost) { //function to add new workout in component
         this.blogPostInsertedSubject.next(newPost)
@@ -89,4 +91,8 @@ export class BlogService{
     postBlog(message: Blog): Observable<Blog | Number> {
         return this.http.post<Blog | Number>(this.blogUrl, message, this.httpOptions);
     } 
+    postComment(message: IComment): Observable<IComment | Number> {
+        return this.http.post<IComment | Number>(this.commentUrl + this.postSelctionSubject.value, message, this.httpOptions);
+    } 
+
 }
