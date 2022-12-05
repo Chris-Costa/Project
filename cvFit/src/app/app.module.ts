@@ -18,7 +18,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ExerciseListComponent } from './exercises/exercise-list.component';
 import { ExerciseDetailComponent } from './exercises/exercise-detail.component';
-import { WelcomeComponent } from './home/welcome.component';
 import { ContactUsComponent } from './form/contactUs.component';
 import { BlogComponent } from './blog/blog.component';
 import { WorkoutListComponent } from './exercises/workoutList/workoutList.component';
@@ -42,7 +41,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     ExerciseListComponent,
     ExerciseDetailComponent,
     ContactUsComponent,
-    WelcomeComponent,
     BlogComponent,
     WorkoutListComponent,
     PostComponent,
@@ -91,7 +89,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     RouterModule.forRoot([
       {path: 'exercises', component: ExerciseListComponent},
       {path: 'exercises/:id', component: ExerciseDetailComponent},
-      {path: 'welcome', component: WelcomeComponent},
+      {path: 'welcome', component: HomeComponent},
       {path: 'contact-us', component: ContactUsComponent},
       {path: 'blog', component: BlogComponent},
       {path: 'blog/:id', component: DiscussionComponent},

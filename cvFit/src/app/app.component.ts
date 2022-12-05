@@ -45,7 +45,6 @@ export class AppComponent implements OnInit, OnDestroy {
   setLoginDisplay(){
     this.loginDisplay = this.msalService.instance.getAllAccounts().length > 0;
   }
-
   ngOnDestroy(): void {
     this._destroying$.next(undefined);
     this._destroying$.complete();
