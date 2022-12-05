@@ -2,6 +2,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { catchError, EMPTY, map } from 'rxjs';
 import { ExerciseService } from './exercise.service';
 import { IWorkout } from '../shared/workout';
+import { workoutP } from '../shared/workoutP';
+import { WorkoutTitleComponent } from '../form/workoutTitle.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-exercises',
@@ -11,9 +14,9 @@ import { IWorkout } from '../shared/workout';
 })
 export class ExerciseListComponent {
 
-    constructor (private exerciseService: ExerciseService){ }
+    constructor (private exerciseService: ExerciseService, private dialog: MatDialog){ }
     
-    newWorkout: IWorkout = {title: "", lift: [{name: ""},{name: ""}]};   //type issues with undefined  current implementation only allows for two exercises per workout created
+    //newWorkout: IWorkout = {title: "", lift: [{name: ""},{name: ""}]};   //type issues with undefined  current implementation only allows for two exercises per workout created
     workoutTitle: string = '';
     showWorkoutCreator: boolean = false; //bool to show array and submit field
     exerciseNamesForWorkout: string[] = [];  //hold selected workouts
@@ -58,8 +61,7 @@ export class ExerciseListComponent {
         this.exerciseService.selectedExerciseChanged(exerciseId);
     }
     addNewWorkout(): void {  
-
-        let workout: IWorkout = {
+        let workout: workoutP = {
             title: this.workoutTitle,
             lift: []
         };
@@ -73,15 +75,6 @@ export class ExerciseListComponent {
                     this.success = true;
                 }
         });
-
-        
-        this.newWorkout.title = this.workoutTitle;
-        for (let i = 0; i < this.exerciseNamesForWorkout.length; i++){
-            this.newWorkout.lift[i].name = this.exerciseNamesForWorkout[i]
-        }
-        console.log('newWorkout', this.newWorkout);
-        this.exerciseService.addExercise(this.newWorkout);
-        this.newWorkout = {title: "", lift: [{name: ""},{name: ""}]};   
     }
     create(): void{
         this.createNew = !this.createNew;
@@ -101,5 +94,10 @@ export class ExerciseListComponent {
         this.exerciseNamesForWorkout.splice(0);  //empty previous workout display
         this.showWorkoutCreator = false;  //remove undo button
         this.workoutTitle = '';  //clear input field
+    }
+    newWorkout(){
+        this.dialog.open(WorkoutTitleComponent, {
+            width: '500px',
+          });
     }
  }

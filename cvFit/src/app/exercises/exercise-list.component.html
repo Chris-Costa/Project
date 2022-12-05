@@ -9,7 +9,7 @@
                 <input type='text' [(ngModel)]='listFilter' />
                 <button class="lifts" mat-button [matMenuTriggerFor]="menu">My Workouts</button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item *ngIf="!createNew" (click)="create()" (click)="clearDisplay()">Create New Workout</button>
+                        <button mat-menu-item *ngIf="!createNew" (click)="newWorkout()">Create New Workout</button>
                         <button mat-menu-item *ngIf="createNew" (click)="create()">Cancel New Workout</button>
                         <button mat-menu-item routerLink='/workoutlist'>View Existing Workouts</button>
                     </mat-menu>
@@ -39,12 +39,13 @@
                     </tr>
                 </tbody>
             </table>
+            <!--
             <div class="container">
                 <div class="row">
                     <div *ngIf="createNew" class="flex-container">
                         <div class="item-1">
                             <input [(ngModel)]="workoutTitle" name="workoutTitle" id="workoutTitle" type="text" class="form-control" placeholder="Name your workout..." required />
-                            <button [disabled]="exerciseNamesForWorkout.length == 0" mat-raised-button color="primary" (click)="addNewWorkout()" (click)="clearDisplay()">Submit Workout</button>
+                            <button [disabled]="exerciseNamesForWorkout.length == 0" mat-raised-button color="primary" (click)="addNewWorkout()" (click)="clearDisplay()" routerLink='/workoutlist'>Submit Workout</button>
                         </div>
                         <div class="item-2">
                             <label>Selcted Exercises:</label>
@@ -56,7 +57,7 @@
                     </div>
                 </div>
             </div>
+            -->
         </div>
     </div>
 </div>
-<workouts></workouts>

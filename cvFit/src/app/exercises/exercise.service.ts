@@ -1,19 +1,26 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, catchError, combineLatest, map, merge, Observable, scan, Subject, tap, throwError } from "rxjs";
+import { BehaviorSubject, catchError, combineLatest, map, merge, Observable, of, scan, Subject, tap, throwError } from "rxjs";
 import { IExercise } from "../shared/exercise";
-import { IWorkout } from "../shared/workout";
+import { ILifts, IWorkout } from "../shared/workout";
+import { liftP, workoutP } from "../shared/workoutP";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ExerciseService{
-    //private exerciseUrl = 'assets/json/exercises.json';
     private exerciseUrl = 'https://localhost:7018/exercise';
-    //private workoutListUrl = 'assets/json/workouts.json';
     private workoutListUrl = 'https://localhost:7018/Workout?userId=';
     //temp current user id
     tempCurrentUserId: number = 1;
+
+    private liftUrl = 'https://localhost:7018/Lift?workoutId=';
+    private liftDelete = 'https://localhost:7018/Lift/liftId?workoutId=';
+    private secondLiftDelete = '&liftId=';
+
+    private workoutDelete = 'https://localhost:7018/Workout/workoutId?userId=';
+    private secondWorkoutDelete = '&workoutId=';
+    
 
     constructor (private http: HttpClient) { }
     //observable to get all exercises
@@ -70,12 +77,34 @@ export class ExerciseService{
         return throwError(errorMessage);
     }
 
-    
-    
     httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     
-    postWorkout(message: IWorkout): Observable<IWorkout | Number> {
-        return this.http.post<IWorkout | Number>(this.workoutListUrl + this.tempCurrentUserId, message, this.httpOptions);
+    postWorkout(message: workoutP): Observable<workoutP | Number> {
+        return this.http.post<workoutP | Number>(this.workoutListUrl + this.tempCurrentUserId, message, this.httpOptions);
+    }
+
+    deleteWorkout(id: number): Observable<IWorkout> {
+        const currentUserId = 1
+    
+        return this.http.delete<IWorkout>(this.workoutDelete + currentUserId + this.secondWorkoutDelete + id, this.httpOptions).pipe(
+          tap(_ => console.log(`deleted workout id=${id}`)),
+          catchError(err => {
+            console.log(err);
+            return of();
+          })
+        );
+    }
+    deleteLift(workoutId: number, liftId: number): Observable<ILifts> {
+        return this.http.delete<ILifts>(this.liftDelete + workoutId + this.secondLiftDelete + liftId, this.httpOptions).pipe(
+          tap(_ => console.log(`deleted lift id=${liftId}`)),
+          catchError(err => {
+            console.log(err);
+            return of();
+          })
+        );
+    }
+    postLift(lift: liftP, workoutId: number): Observable<liftP | Number> {
+        return this.http.post<liftP | Number>(this.liftUrl + workoutId, lift, this.httpOptions);
     }
 }
 //backend example for http post adding workout 
