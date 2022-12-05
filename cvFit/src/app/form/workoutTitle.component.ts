@@ -28,6 +28,6 @@ export class WorkoutTitleComponent {
                 if(res) {
                     this.success = true;
                 }
-        });
+            });
     }
 }

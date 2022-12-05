@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { ExerciseService } from "../exercise.service";
 import { catchError, EMPTY } from "rxjs";
+import { liftP } from "src/app/shared/workoutP";
 
 @Component({
     selector: 'workouts',
@@ -48,6 +49,20 @@ export class WorkoutListComponent {
     }
 
     newLift(workoutId: number){
+
         console.log(workoutId);
+        let lift: liftP = {
+            name: 'Test from angular'
+        }
+        this.exerciseService.postLift(lift, workoutId)
+            .pipe(catchError(err => {
+                this.errorMessage = err;
+                return EMPTY;
+            }))
+            .subscribe(res => {
+                if(res) {
+                    this.success = true;
+                }
+            });
     }
 }
