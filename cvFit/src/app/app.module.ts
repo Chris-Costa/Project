@@ -32,6 +32,7 @@ import { WorkoutTitleComponent } from './form/workoutTitle.component';
 
 import { CalcService } from './macroCalculator/calculator.service';
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
+import { LiftComponent } from './form/lift.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -49,7 +50,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     MacroTableComponent,
     AZUREprofileComponent,
     HomeComponent,
-    WorkoutTitleComponent
+    WorkoutTitleComponent,
+    LiftComponent
   ],
   imports: [
     AppRoutingModule,

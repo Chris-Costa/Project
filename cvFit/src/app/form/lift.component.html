@@ -1,0 +1,26 @@
+<div class='card'>
+    <div class='card-header'>
+        Exerciese List
+    </div>
+    <div class='card-body'>
+        <div class='table-responsive'>
+            <table class='table' *ngIf='exercisesFilter$ | async as exercises'>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Exercise</th>
+                        <th>Muscle Group</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let exercise of exercises'>
+                        <td><img [src]='exercise.imageURL' [title]="exercise.name"></td>
+                        <td>{{exercise.name}}</td>
+                        <td>{{exercise.muscleGroup}}</td>
+                        <td><button mat-raised-button color="primary" (click)="add(exercise.name)">ADD</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

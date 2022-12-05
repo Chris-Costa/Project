@@ -9,8 +9,7 @@
                 <input type='text' [(ngModel)]='listFilter' />
                 <button class="lifts" mat-button [matMenuTriggerFor]="menu">My Workouts</button>
                     <mat-menu #menu="matMenu">
-                        <button mat-menu-item *ngIf="!createNew" (click)="newWorkout()">Create New Workout</button>
-                        <button mat-menu-item *ngIf="createNew" (click)="create()">Cancel New Workout</button>
+                        <button mat-menu-item (click)="newWorkout()">Create New Workout</button>
                         <button mat-menu-item routerLink='/workoutlist'>View Existing Workouts</button>
                     </mat-menu>
             </div>
@@ -29,35 +28,13 @@
                 <tbody>
                     <tr *ngFor='let exercise of exercises'>
                         <td><img [src]='exercise.imageURL' [title]="exercise.name"></td>
-                        <td><button [routerLink]="['/exercises', exercise.id]" [ngClass]="{active: exercise?.id === (selectedExercise$ | async)?.id }" (click)="onSelected(exercise.id)">{{exercise.name}}</button></td>
+                        <td><button mat-raised-button [routerLink]="['/exercises', exercise.id]" [ngClass]="{active: exercise?.id === (selectedExercise$ | async)?.id }" (click)="onSelected(exercise.id)">{{exercise.name}}</button></td>
                         <td>{{exercise.muscleGroup}}</td>
                         <td>{{exercise.repRange}}</td>
                         <td>{{exercise.difficulty}}</td>
-                        <td *ngIf="createNew">
-                            <button mat-raised-button color="primary" (click)="add(exercise.name)" >ADD</button>
-                        </td>
                     </tr>
                 </tbody>
             </table>
-            <!--
-            <div class="container">
-                <div class="row">
-                    <div *ngIf="createNew" class="flex-container">
-                        <div class="item-1">
-                            <input [(ngModel)]="workoutTitle" name="workoutTitle" id="workoutTitle" type="text" class="form-control" placeholder="Name your workout..." required />
-                            <button [disabled]="exerciseNamesForWorkout.length == 0" mat-raised-button color="primary" (click)="addNewWorkout()" (click)="clearDisplay()" routerLink='/workoutlist'>Submit Workout</button>
-                        </div>
-                        <div class="item-2">
-                            <label>Selcted Exercises:</label>
-                            <div class="flex-container1" *ngFor="let arr of exerciseNamesForWorkout">
-                                <li class="list">{{arr}}</li>
-                                <button class="can" *ngIf="showWorkoutCreator" (click)="remove1(arr)"><mat-icon>delete_outline</mat-icon></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            -->
         </div>
     </div>
 </div>
