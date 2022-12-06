@@ -2,6 +2,10 @@
     <div class='card-header'>
         Exerciese List
     </div>
+    <div class="flex-container">
+        <button mat-raised-button mat-dialog-close>Close Window</button>
+    </div>
+    
     <div class='card-body'>
         <div class='table-responsive'>
             <table class='table' *ngIf='exercisesFilter$ | async as exercises'>

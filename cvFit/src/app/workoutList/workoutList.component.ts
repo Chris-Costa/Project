@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { ExerciseService } from "../exercise.service";
+import { ExerciseService } from "../exercises/exercise.service";
 import { catchError, EMPTY } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
-import { LiftComponent } from "src/app/form/lift.component";
+import { LiftComponent } from "src/app/lift/lift.component";
 
 @Component({
     selector: 'workouts',
@@ -52,7 +52,8 @@ export class WorkoutListComponent {
     newLift(workoutId: number){
         this.createNew = true;
         this.dialog.open(LiftComponent, {
-            width: '750px',
+            width: '75%',
+            height: '75%',
             data: {id: workoutId}
         });
     }

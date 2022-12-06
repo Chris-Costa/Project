@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
 import { EventMessage, EventType, InteractionStatus } from '@azure/msal-browser';
 import { filter } from 'rxjs/operators';
-import { ContactUsComponent } from '../form/contactUs.component';
+import { ContactUsComponent } from '../contactForm/contactUs.component';
 
 @Component({
   selector: 'app-home',

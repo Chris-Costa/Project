@@ -18,9 +18,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ExerciseListComponent } from './exercises/exercise-list.component';
 import { ExerciseDetailComponent } from './exercises/exercise-detail.component';
-import { ContactUsComponent } from './form/contactUs.component';
+import { ContactUsComponent } from './contactForm/contactUs.component';
 import { BlogComponent } from './blog/blog.component';
-import { WorkoutListComponent } from './exercises/workoutList/workoutList.component';
+import { WorkoutListComponent } from './workoutList/workoutList.component';
 import { PostComponent } from './blog/post/post.component';
 import { DiscussionComponent } from './blog/discussion/discussion.component';
 import { CalculatorComponent } from './macroCalculator/calculator.component';
@@ -28,11 +28,11 @@ import { MacroTableComponent } from './macroCalculator/macro-table.component';
 import { AZUREprofileComponent } from './azureprofile/azureprofile.component';
 import { HomeComponent } from './home/home.component';
 import { MsalRedirectComponent, MsalInterceptor, MsalModule, MsalGuard } from '@azure/msal-angular';
-import { WorkoutTitleComponent } from './form/workoutTitle.component';
+import { WorkoutTitleComponent } from './workoutTitle/workoutTitle.component';
 
 import { CalcService } from './macroCalculator/calculator.service';
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
-import { LiftComponent } from './form/lift.component';
+import { LiftComponent } from './lift/lift.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 

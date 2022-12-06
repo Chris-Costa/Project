@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { catchError, EMPTY, map } from 'rxjs';
 import { ExerciseService } from './exercise.service';
-import { WorkoutTitleComponent } from '../form/workoutTitle.component';
+import { WorkoutTitleComponent } from '../workoutTitle/workoutTitle.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
