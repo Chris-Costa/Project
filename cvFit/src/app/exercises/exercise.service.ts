@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, catchError, combineLatest, map, merge, Observable, of, scan, Subject, tap, throwError } from "rxjs";
+import { UserService } from "../azureprofile/user.service";
 import { IExercise } from "../shared/exercise";
 import { ILifts, IWorkout } from "../shared/workout";
 import { liftP, workoutP } from "../shared/workoutP";
@@ -13,6 +14,7 @@ export class ExerciseService{
     private workoutListUrl = 'https://localhost:7018/Workout?userId=';
     //temp current user id
     tempCurrentUserId: number = 1;
+    
 
     private liftUrl = 'https://localhost:7018/Lift?workoutId=';
     private liftDelete = 'https://localhost:7018/Lift/liftId?workoutId=';
@@ -22,7 +24,7 @@ export class ExerciseService{
     private secondWorkoutDelete = '&workoutId=';
     
 
-    constructor (private http: HttpClient) { }
+    constructor (private http: HttpClient, private userService: UserService) { }
     //observable to get all exercises
     exercises$ = this.http.get<IExercise[]>(this.exerciseUrl).pipe(
         tap(data => console.log('All: ', JSON.stringify(data))), 
@@ -107,18 +109,3 @@ export class ExerciseService{
         return this.http.post<liftP | Number>(this.liftUrl + workoutId, lift, this.httpOptions);
     }
 }
-//backend example for http post adding workout 
-/*
-merge(
-    this.product$,
-    this.insertAction$
-        .pipe(
-            concatMap(newProd => {
-                return this.http.post<Product>(this.url, newProd)
-            }),
-        ))
-    .pipe(
-        scan((acc, value) =>
-        (value instanceof Array) ? [...value] ; [...acc, value], [] as Product[])
-    );
-*/

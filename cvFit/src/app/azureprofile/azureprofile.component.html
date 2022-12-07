@@ -1,6 +1,30 @@
-<div>
-    <p><strong>First Name: </strong> {{profile?.givenName}}</p>
-    <p><strong>Last Name: </strong> {{profile?.surname}}</p>
-    <p><strong>Email: </strong> {{profile?.userPrincipalName}}</p>
-    <p><strong>Id: </strong> {{profile?.id}}</p>
+<div class='card' *ngIf="activeUsers$ | async as active">
+    <div class='card-header'>Active User Details</div>
+  
+    <div class='card-body' *ngIf='active'>
+        <div class='row'>
+          <div class='col-md-8'>
+            <div class='row'>
+                <div class='col-md-4'>Id:</div>
+                <div class='col-md-8'>{{active.id}}</div>
+            </div>
+            <div class='row'>
+                <div class='col-md-4'>Firstname:</div>
+                <div class='col-md-8'>{{active.firstname}}</div>
+            </div>
+            <div class='row'>
+                <div class='col-md-4'>Lastname:</div>
+                <div class='col-md-8'>{{active.lastname}}</div>
+            </div>
+            <div class='row'>
+                <div class='col-md-4'>Email:</div>
+                <div class='col-md-8'>{{active.email}}</div>
+            </div>
+            <div class='row'>
+                <div class='col-md-4'>Azure id:</div>
+                <div class='col-md-8'>{{active.azureId}}</div>
+            </div>
+          </div>
+        </div>
+    </div>
 </div>

@@ -1,11 +1,12 @@
 export interface IUser{
     id: number;
-    firstName: string;
-    lastName: string;
-    userName: string;
+    firstname: string;
+    lastname: string;
+    email: string;
+    azureId: string
     avatar: string;
-    goal: number;
-    likedPosts: number[];
+    weigthGoal: number;
+    workout: [];
     //workout list
     //liked blogPosts
 }

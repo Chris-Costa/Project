@@ -51,7 +51,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   openDialog() {
     this.dialog.open(AZUREprofileComponent, {
-      width: '500px',
+      width: '75%'
     });
   }
 }

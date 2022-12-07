@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { UserService } from './user.service';
+import { catchError, EMPTY } from 'rxjs';
+
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -12,14 +15,22 @@ type ProfileType = {
 @Component({
   selector: 'app-azureprofile',
   templateUrl: './azureprofile.component.html',
-  styleUrls: ['./azureprofile.component.css']
+  styleUrls: ['./azureprofile.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AZUREprofileComponent implements OnInit {
   profile!: ProfileType;
+  errorMessage: string;
 
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient, private userService: UserService) { }
+
+  activeUsers$ = this.userService.activeUser$
+    .pipe(
+      catchError(err => {
+        this.errorMessage = err;
+          return EMPTY;
+        })
+    );
 
   ngOnInit() {
     this.getProfile();
@@ -30,5 +41,8 @@ export class AZUREprofileComponent implements OnInit {
       .subscribe(profile => {
         this.profile = profile;
       });
+  }
+  onSelected(weigthGoal: string): void {
+    this.userService.getActiveUser(weigthGoal);
   }
 }
