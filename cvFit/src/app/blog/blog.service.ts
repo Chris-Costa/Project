@@ -4,7 +4,6 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http
 import { BehaviorSubject, catchError, combineLatest, map, merge, Observable, scan, Subject, tap, throwError } from "rxjs";
 import { PostComponent } from "./post/post.component";
 import { MatDialog } from '@angular/material/dialog';
-import { Blog } from "../shared/blog";
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +12,6 @@ import { Blog } from "../shared/blog";
 export class BlogService{
     constructor (private http: HttpClient, private dialog: MatDialog) { }
 
-    //private blogUrl = 'assets/json/blogs.json';
     private blogUrl = 'https://localhost:7018/blog/';
     private commentUrl = 'https://localhost:7018/Comment?blogId='
     disableLikedPostsButton: boolean = false //if liked posts array is empty disable button
@@ -86,13 +84,11 @@ export class BlogService{
         return throwError(errorMessage);
     }
 
-
     httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    postBlog(message: Blog): Observable<Blog | Number> {
-        return this.http.post<Blog | Number>(this.blogUrl, message, this.httpOptions);
+    postBlog(message: IBlogPost): Observable<IBlogPost | Number> {
+        return this.http.post<IBlogPost | Number>(this.blogUrl, message, this.httpOptions);
     } 
     postComment(message: IComment): Observable<IComment | Number> {
         return this.http.post<IComment | Number>(this.commentUrl + this.postSelctionSubject.value, message, this.httpOptions);
     } 
-
 }

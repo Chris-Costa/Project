@@ -1,19 +1,13 @@
+import { IWorkout } from "./workout";
+
 export interface IUserData{
     id: number;
-    userName: string;
-    password: string;
-    firstName: string;
-    lastName: string;
+    firstname: string;
+    lastname: string;
+    email: string;
+    azureId: string;
     avatar: string;
-    goal: number;
-    likedPosts?: number[];
-    workouts?: {
-        title: string;
-        lift: {
-            name: string;
-            weight: number|string;
-            sets: number;
-            reps: number;
-        }
-    }
+    weightGoal: number;
+    //likedPosts?: number[];
+    workout?: IWorkout[];
 }

@@ -38,11 +38,11 @@ export class DiscussionComponent {
     );
 
     addNewComment(): void {  
-
         let comment: IComment = {
             user: this.user, 
             reply: this.comment
         };
+        this.blogService.addComment(comment);
         this.blogService.postComment(comment)
             .pipe(catchError(err => {
                 this.errorMessage = err;

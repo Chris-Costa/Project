@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { ExerciseService } from "../exercises/exercise.service";
 import { catchError, EMPTY } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { LiftComponent } from "src/app/lift/lift.component";
+import { UserService } from "../azureprofile/user.service";
 
 @Component({
     selector: 'workouts',
@@ -11,20 +11,24 @@ import { LiftComponent } from "src/app/lift/lift.component";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkoutListComponent {
-    constructor (private exerciseService: ExerciseService, private dialog: MatDialog){ }
+    constructor (private dialog: MatDialog, private userService: UserService){ }
     errorMessage: string = '';
     success: boolean;
     createNew: boolean;
 
-    workouts$ = this.exerciseService.workoutsWithAdd$
+    currentUser$ = this.userService.activeUser$
         .pipe(catchError(err => {
             this.errorMessage = err;
             return EMPTY;
-            })
-        );    
+        }))
+    workouts$ = this.userService.workoutsWithAdd$
+        .pipe(catchError(err => {
+            this.errorMessage = err;
+            return EMPTY;
+        }))
 
     onSelected(id: number){
-        this.exerciseService.deleteWorkout(id)
+        this.userService.deleteWorkout(id)
             .pipe(catchError(err => {
                 this.errorMessage = err;
                 return EMPTY;
@@ -37,7 +41,7 @@ export class WorkoutListComponent {
     }
 
     delLift(workoutId: number, liftId : number){
-        this.exerciseService.deleteLift(workoutId, liftId)
+        this.userService.deleteLift(workoutId, liftId)
             .pipe(catchError(err => {
                 this.errorMessage = err;
                 return EMPTY;

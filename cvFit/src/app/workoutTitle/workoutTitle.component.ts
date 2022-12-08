@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { catchError, EMPTY } from "rxjs";
-import { ExerciseService } from "../exercises/exercise.service";
-import { workoutP } from "../shared/workoutP";
+import { UserService } from "../azureprofile/user.service";
+import { IWorkout } from "../shared/workout";
 
 @Component({
     selector: 'app-workoutTitle',
@@ -12,14 +12,14 @@ export class WorkoutTitleComponent {
     errorMessage: string;   
     success: boolean;
 
-    constructor(private exerciseService: ExerciseService) { }
+    constructor(private userService: UserService) { }
     
-    addNewWorkout(title: string): void {  
-        let workout: workoutP = {
-            title: title,
-            lift: []
+    newWorkout(title: string) {  
+        let workout: IWorkout = {
+            title: title
         };
-        this.exerciseService.postWorkout(workout)
+        this.userService.addWorkout(workout);
+        this.userService.postWorkout(workout)
             .pipe(catchError(err => {
                 this.errorMessage = err;
                 return EMPTY;

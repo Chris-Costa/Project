@@ -1,8 +1,10 @@
 import { Component, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { catchError, EMPTY, map } from "rxjs";
+import { UserService } from "../azureprofile/user.service";
 import { ExerciseService } from "../exercises/exercise.service";
-import { liftP } from "../shared/workoutP";
+import { ILifts } from "../shared/workout";
+
 
 @Component({
     selector: 'app-lift',
@@ -13,7 +15,7 @@ export class LiftComponent {
     errorMessage: string;
     success: boolean;
 
-    constructor(@Inject(MAT_DIALOG_DATA) private data: {id: number}, private exerciseService: ExerciseService) { }
+    constructor(@Inject(MAT_DIALOG_DATA) private data: {id: number}, private userService: UserService, private exerciseService: ExerciseService) { }
 
     //new async observables
     exercises$ = this.exerciseService.exercises$
@@ -38,10 +40,10 @@ export class LiftComponent {
     }
     
     add(name: string){
-        let lift: liftP = {
+        let lift: ILifts = {
             name: name
         }
-        this.exerciseService.postLift(lift, this.data.id)
+        this.userService.postLift(lift, this.data.id)
             .pipe(catchError(err => {
                 this.errorMessage = err;
                 return EMPTY;

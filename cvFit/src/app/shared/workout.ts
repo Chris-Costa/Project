@@ -1,5 +1,5 @@
 export interface ILifts{
-    id: number;
+    id?: number;
     name?: string,
     weight?: number|string;
     sets?: number;
@@ -7,7 +7,7 @@ export interface ILifts{
 }
 
 export interface IWorkout{
-    id: number;
-    title: string;
-    lift: ILifts[];
+    id?: number;
+    title?: string;
+    lift?: ILifts[];
 }

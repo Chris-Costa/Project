@@ -3,10 +3,10 @@
   <h1><b>Workouts</b></h1>
   <hr>
   <div class="flex-container" *ngIf='workouts$ | async as workouts'>
-      <mat-card class="workout-card" *ngFor="let workout of workouts">
+      <mat-card class="workout-card" *ngFor="let w of workouts">
         <mat-card-title-group>
-          <mat-card-title>{{workout.title}}</mat-card-title>
-          <button mat-raised-button (click)="onSelected(workout.id)"><mat-icon>delete</mat-icon></button>
+          <mat-card-title>{{w.title}}</mat-card-title>
+          <button mat-raised-button (click)="onSelected(w.id)"><mat-icon>delete</mat-icon></button>
         </mat-card-title-group>
         <mat-card-content>
           <div class="table-responsive" >
@@ -20,18 +20,18 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let x of workout.lift">
+                <tr *ngFor="let x of w.lift">
                   <td>{{x.name}}</td>
                   <td><input [(ngModel)]="x.weight" name="weight" id="weight" type="text" class="form-control" /></td>
                   <td><input [(ngModel)]="x.sets" name="sets" id="sets" type="text" class="form-control" /></td>
                   <td><input [(ngModel)]="x.reps" name="reps" id="reps" type="text" class="form-control" /></td>
-                  <td><button mat-button (click)="delLift(workout.id, x.id)">X</button></td>
+                  <td><button mat-button (click)="delLift(w.id, x.id)">X</button></td>
                 </tr>
               </tbody>
             </table>
           </div>
           <hr>
-          <button mat-raised-button (click)="newLift(workout.id)">+ Add New Lift</button>
+          <button mat-raised-button (click)="newLift(w.id)">+ Add New Lift</button>
         </mat-card-content>
       </mat-card>
   </div>

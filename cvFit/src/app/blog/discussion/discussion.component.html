@@ -22,14 +22,14 @@
             <button mat-stroked-button color="primary" (click)="addNewComment()">Submit</button>
           </div>
       </div>
-      <div>
-        <mat-card class="comments" *ngFor="let comment of blogPost.comment">
-          <mat-card-title-group>
-            <mat-card-title>{{comment.user}} </mat-card-title>
-          </mat-card-title-group>
-          <mat-card-content>{{comment.reply}}</mat-card-content>
-        </mat-card> 
-      </div>
     </div>  
+    <div *ngIf="currentComments$ | async as comments">
+      <mat-card class="comments" *ngFor="let comment of comments">
+      <mat-card-title-group>
+        <mat-card-title>{{comment.user}} </mat-card-title>
+      </mat-card-title-group>
+      <mat-card-content>{{comment.reply}}</mat-card-content>
+    </mat-card> 
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
