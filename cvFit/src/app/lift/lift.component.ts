@@ -1,7 +1,7 @@
 import { Component, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { catchError, EMPTY, map } from "rxjs";
-import { UserService } from "../azureprofile/user.service";
+import { UserService } from "../shared/user.service";
 import { ExerciseService } from "../exercises/exercise.service";
 import { ILifts } from "../shared/workout";
 

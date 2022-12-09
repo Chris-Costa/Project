@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { IBlogPost, IComment } from "../shared/blogPost";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { BehaviorSubject, catchError, combineLatest, map, merge, Observable, scan, Subject, tap, throwError } from "rxjs";
-import { PostComponent } from "./post/post.component";
 import { MatDialog } from '@angular/material/dialog';
 
 @Injectable({
@@ -10,16 +9,16 @@ import { MatDialog } from '@angular/material/dialog';
 })
 
 export class BlogService{
-    constructor (private http: HttpClient, private dialog: MatDialog) { }
+    constructor (private http: HttpClient) { }
 
     private blogUrl = 'https://localhost:7018/blog/';
     private commentUrl = 'https://localhost:7018/Comment?blogId='
-    disableLikedPostsButton: boolean = false //if liked posts array is empty disable button
     private postSelctionSubject = new BehaviorSubject<number>(0); //get a single selected blog post used in discussion component
     private blogPostInsertedSubject = new Subject<IBlogPost>();   //used to add new blogPost to list
     private commentInsertedSubject = new Subject<IComment>();
+    httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
-    blogPosts$ = this.http.get<IBlogPost[]>(this.blogUrl) //all blog posts
+    blogPosts$ = this.http.get<IBlogPost[]>(this.blogUrl) 
         .pipe(
             tap(data => console.log('Blog Posts', JSON.stringify(data))),
             catchError(this.handleError)
@@ -36,7 +35,7 @@ export class BlogService{
 
     blogPostInsertedAction$ = this.blogPostInsertedSubject.asObservable();
     
-    blogPostsWithAdd$ = merge(this.blogPosts$, this.blogPostInsertedAction$)  //combine exisitng stream with new workout
+    blogPostsWithAdd$ = merge(this.blogPosts$, this.blogPostInsertedAction$)  
         .pipe(
             scan((acc, value) =>
             (value instanceof Array) ? [...value] : [...acc, value], [] as IBlogPost[])
@@ -44,7 +43,7 @@ export class BlogService{
     
     commentInsertedAction$ = this.commentInsertedSubject.asObservable();
     
-    commentsOfCurrentPost$ = this.selectedBlogPost$ //observable of the currently selected posts comments
+    commentsOfCurrentPost$ = this.selectedBlogPost$ 
         .pipe(
             map(post => post.comment),
             tap(data => console.log('comments', JSON.stringify(data))),
@@ -57,21 +56,27 @@ export class BlogService{
             (value instanceof Array) ? [...value]: [...acc, value], [] as IComment[])
     );
 
-    selectedPostChange(selectedPostId: number): void{ //take in value that user selects
+    selectedPostChange(selectedPostId: number): void{ 
         this.postSelctionSubject.next(selectedPostId);
-        console.log('This is the id', this.postSelctionSubject.value);
+        console.log('selected post id ', this.postSelctionSubject.value);
     }
-    addBlogPost(newPost: IBlogPost) { //function to add new workout in component
+
+    addBlogPost(newPost: IBlogPost) { 
         this.blogPostInsertedSubject.next(newPost)
     }
+
+    postBlog(message: IBlogPost): Observable<IBlogPost | Number> {
+        return this.http.post<IBlogPost | Number>(this.blogUrl, message, this.httpOptions);
+    } 
+
     addComment(newComment: IComment) {
         this.commentInsertedSubject.next(newComment);
     }
-    openPostDialog(){
-        this.dialog.open(PostComponent, {
-            width: '500px',
-          });
+
+    postComment(message: IComment): Observable<IComment | Number> {
+        return this.http.post<IComment | Number>(this.commentUrl + this.postSelctionSubject.value, message, this.httpOptions);
     }
+
     private handleError(err: HttpErrorResponse){
         let errorMessage = '';
         if (err.error instanceof ErrorEvent){
@@ -83,12 +88,4 @@ export class BlogService{
         console.error(errorMessage);
         return throwError(errorMessage);
     }
-
-    httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    postBlog(message: IBlogPost): Observable<IBlogPost | Number> {
-        return this.http.post<IBlogPost | Number>(this.blogUrl, message, this.httpOptions);
-    } 
-    postComment(message: IComment): Observable<IComment | Number> {
-        return this.http.post<IComment | Number>(this.commentUrl + this.postSelctionSubject.value, message, this.httpOptions);
-    } 
 }

@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { catchError, EMPTY } from "rxjs";
-import { UserService } from "../azureprofile/user.service";
+import { UserService } from "../shared/user.service";
 import { IWorkout } from "../shared/workout";
 
 @Component({
@@ -16,6 +16,7 @@ export class WorkoutTitleComponent {
     
     newWorkout(title: string) {  
         let workout: IWorkout = {
+            azureId: 'cfc39fe5-82d4-4d2f-8889-4e13e326911f',
             title: title
         };
         this.userService.addWorkout(workout);

@@ -8,6 +8,7 @@ export interface ILifts{
 
 export interface IWorkout{
     id?: number;
+    azureId: string;
     title?: string;
     lift?: ILifts[];
 }

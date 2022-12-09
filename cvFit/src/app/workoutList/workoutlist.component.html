@@ -2,11 +2,12 @@
   <button mat-raised-button color="primary" routerLink='/exercises'>Back</button>
   <h1><b>Workouts</b></h1>
   <hr>
+  <button mat-raised-button (click)="createNewWorkout()">Create New</button>
   <div class="flex-container" *ngIf='workouts$ | async as workouts'>
       <mat-card class="workout-card" *ngFor="let w of workouts">
         <mat-card-title-group>
           <mat-card-title>{{w.title}}</mat-card-title>
-          <button mat-raised-button (click)="onSelected(w.id)"><mat-icon>delete</mat-icon></button>
+          <button mat-raised-button (click)="deleteWorkout(w.id)"><mat-icon>delete</mat-icon></button>
         </mat-card-title-group>
         <mat-card-content>
           <div class="table-responsive" >
