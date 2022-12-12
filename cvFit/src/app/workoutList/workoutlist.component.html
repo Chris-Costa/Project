@@ -13,7 +13,7 @@
         <mat-card-title><a id="workoutName" [routerLink]="['/workoutlist', workout.id]" (click)="onSelected(workout.id)" >
           {{workout.title}}</a></mat-card-title>
         <div id="del">
-          <button mat-raised-button (click)="deleteWorkout(workout.id)"><mat-icon>delete</mat-icon></button>
+          <p>Num of Lifts: </p>
         </div>
       </mat-card-title-group>
     </mat-card>

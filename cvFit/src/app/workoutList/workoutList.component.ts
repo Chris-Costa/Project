@@ -8,7 +8,7 @@ import { WorkoutTitleComponent } from "../workoutTitle/workoutTitle.component";
     selector: 'workouts',
     templateUrl: './workoutList.component.html',
     styleUrls: ['./workoutList.componet.css'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.Default
 })
 export class WorkoutListComponent {
     constructor (private dialog: MatDialog, private userService: UserService){ }
@@ -37,20 +37,6 @@ export class WorkoutListComponent {
     createNewWorkout(){
         this.dialog.open(WorkoutTitleComponent, {
             width: '500px',
-          });
-    }
-    deleteWorkout(id: number) {
-        //this.userService.removeWorkout(id);
-        this.userService.deleteWorkout(id)
-            .pipe(catchError(err => {
-                this.errorMessage = err;
-                return EMPTY;
-            }))
-            .subscribe(res => {
-                if(res) {
-                    this.success = true;
-                }
         });
     }
 }
-

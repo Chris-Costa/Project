@@ -1,11 +1,12 @@
-import { Component } from "@angular/core";
+import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { catchError, EMPTY } from "rxjs";
 import { UserService } from "../shared/user.service";
 import { IWorkout } from "../shared/workout";
 
 @Component({
     selector: 'app-workoutTitle',
-    templateUrl: './workoutTitle.component.html'
+    templateUrl: './workoutTitle.component.html',
+    changeDetection: ChangeDetectionStrategy.Default
 })
 export class WorkoutTitleComponent {
     title: string;
@@ -30,5 +31,8 @@ export class WorkoutTitleComponent {
                     this.success = true;
                 }
             });
+    }
+    reloadPage(){
+        window.location.reload()
     }
 }

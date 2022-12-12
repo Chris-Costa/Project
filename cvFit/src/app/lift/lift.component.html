@@ -1,6 +1,6 @@
-<div>
+<div *ngIf="!deleteMessage">
   <div>
-    <h1><b>Workouts</b>
+    <h1><b>Selected Workout</b>
     <button id="right" mat-raised-button routerLink="/workoutlist">Back</button></h1>
   </div>
   <hr>
@@ -9,7 +9,11 @@
         <mat-card-title-group *ngIf='selectedWorkout$ | async as workout'>
           <mat-card-title>{{workout.title}}</mat-card-title>
           <div id="addNew">
-            <button mat-raised-button (click)="addNewLift(workout.id)">+ Add New Lift</button>
+            <button mat-raised-button [matMenuTriggerFor]="menu">Options</button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="addNewLift(workout.id)">+ Add New Lift</button>
+                <button mat-menu-item (click)="deleteWorkout(workout.id, true)">Delete Workout</button>
+              </mat-menu>
           </div>
         </mat-card-title-group>
         
@@ -38,4 +42,8 @@
         </mat-card-content>
       </mat-card>
     </div>
-  </div>
+</div>
+<div class="delMessage" *ngIf="deleteMessage">
+  <h1><b>Successfully deleted the workout</b></h1>
+  <button mat-raised-button routerLink="/workoutlist">Return to Workout List</button>
+</div>

@@ -21,3 +21,6 @@ h1{
     position: absolute;
     right: 5px;
 }
+.delMessage{
+    text-align: center;
+}

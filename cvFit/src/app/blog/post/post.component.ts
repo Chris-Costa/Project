@@ -34,4 +34,7 @@ export class PostComponent {
                 }
             });
     }
+    reloadPage(){
+        window.location.reload()
+    }
 }

@@ -3,24 +3,20 @@ import { Injectable } from "@angular/core";
 import { BehaviorSubject, catchError, combineLatest, map, merge, Observable, of, scan, Subject, tap, throwError } from "rxjs";
 import { ILifts, IWorkout } from "./workout";
 
-
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
-    private workoutInsertedSubject = new Subject<IWorkout>();
     private workoutUrl = 'https://localhost:7018/Workout/';
     private deleteWorkoutUrl = 'https://localhost:7018/Workout/workoutId?workoutId=';
-    httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    private workoutSelectionSubject = new BehaviorSubject<number>(0);
-   
-    private liftInsertedSubject = new Subject<ILifts>();
     private liftUrl = 'https://localhost:7018/Lift?workoutId=';
-
-
     private liftDelete = 'https://localhost:7018/Lift/liftId?liftId=';
-    
+    httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
+    private workoutSelectionSubject = new BehaviorSubject<number>(0);
+    private workoutInsertedSubject = new Subject<IWorkout>();
+    private liftInsertedSubject = new Subject<ILifts>();
+    
     constructor(private http: HttpClient) { }
      
     workouts$ = this.http.get<IWorkout[]>(this.workoutUrl).pipe(
@@ -38,7 +34,7 @@ export class UserService {
 
     workoutSelectionAction$ = this.workoutSelectionSubject.asObservable();
 
-    selectedWorkout$ = combineLatest([this.workouts$, this.workoutSelectionAction$])
+    selectedWorkout$ = combineLatest([this.workoutsWithAdd$, this.workoutSelectionAction$])
         .pipe(
             map(([workouts, selectedWorkoutId]) => 
                 workouts.find(workout => workout.id === selectedWorkoutId)),
@@ -47,14 +43,14 @@ export class UserService {
 
     liftInsertedAction$ = this.liftInsertedSubject.asObservable();
     
-    liftsOfCurrentPost$ = this.selectedWorkout$ 
+    liftsOfCurrentWorkout$ = this.selectedWorkout$ 
         .pipe(
             map(workout => workout.lift),
             tap(data => console.log('lifts', JSON.stringify(data))),
             catchError(this.handleError)
     );
 
-    liftsWithAdd$ = merge(this.liftsOfCurrentPost$, this.liftInsertedAction$)
+    liftsWithAdd$ = merge(this.liftsOfCurrentWorkout$, this.liftInsertedAction$)
         .pipe(
             scan((acc, value) =>
             (value instanceof Array) ? [...value]: [...acc, value], [] as ILifts[])
@@ -66,7 +62,7 @@ export class UserService {
     }
 
     addWorkout(newWorkout: IWorkout) { 
-        this.workoutInsertedSubject.next(newWorkout)
+        this.workoutInsertedSubject.next(newWorkout);
     }
     
     postWorkout(message: IWorkout): Observable<IWorkout | Number> {
