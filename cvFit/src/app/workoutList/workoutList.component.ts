@@ -40,7 +40,7 @@ export class WorkoutListComponent {
           });
     }
     deleteWorkout(id: number) {
-        this.userService.removeWorkout(id);
+        //this.userService.removeWorkout(id);
         this.userService.deleteWorkout(id)
             .pipe(catchError(err => {
                 this.errorMessage = err;

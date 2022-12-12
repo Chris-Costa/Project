@@ -13,7 +13,7 @@ export class UserService {
     private deleteWorkoutUrl = 'https://localhost:7018/Workout/workoutId?workoutId=';
     httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
     private workoutSelectionSubject = new BehaviorSubject<number>(0);
-    private workoutDeleteSelectionSubject = new BehaviorSubject<number>(0);
+   
     private liftInsertedSubject = new Subject<ILifts>();
     private liftUrl = 'https://localhost:7018/Lift?workoutId=';
 
@@ -60,15 +60,8 @@ export class UserService {
             (value instanceof Array) ? [...value]: [...acc, value], [] as ILifts[])
     );
 
-    workoutDeleteSelectionAction$ = this.workoutDeleteSelectionSubject.asObservable();
-
-    combinedLifts$ = combineLatest([this.workoutsWithAdd$, this.workoutDeleteSelectionAction$])
-            .pipe(map(([workouts, selectedWorkoutId]) =>
-            workouts.find(workout => workout.id !== selectedWorkoutId)),
-            tap(workout => console.log()))
-
     selectedWorkoutChange(selectedWorkoutId: number): void{ 
-        this.workoutDeleteSelectionSubject.next(selectedWorkoutId);
+        this.workoutSelectionSubject.next(selectedWorkoutId);
         console.log('selected post id ', this.workoutSelectionSubject.value);
     }
 
@@ -78,11 +71,6 @@ export class UserService {
     
     postWorkout(message: IWorkout): Observable<IWorkout | Number> {
         return this.http.post<IWorkout | Number>(this.workoutUrl, message, this.httpOptions);
-    }
-
-    removeWorkout(id: number){
-        this.workoutDeleteSelectionSubject.next(id);
-        console.log('selected post id ', this.workoutDeleteSelectionSubject.value);
     }
 
     deleteWorkout(id: number): Observable<IWorkout> {
