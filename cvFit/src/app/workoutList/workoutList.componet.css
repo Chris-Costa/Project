@@ -4,7 +4,7 @@
     justify-content: space-around;
 }
 .workout-card{
-    width: 45%;
+    width: 95%;
     margin: 10px;
     text-align: center;
     justify-content: center;
@@ -12,4 +12,12 @@
 }
 h1{
     text-align: center;
+}
+#right{
+    position: absolute;
+    right: 110px;
+}
+#del{
+    position: absolute;
+    right: 5px;
 }

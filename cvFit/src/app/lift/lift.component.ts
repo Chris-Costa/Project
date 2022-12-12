@@ -1,10 +1,8 @@
-import { Component, Inject } from "@angular/core";
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { catchError, EMPTY, map } from "rxjs";
+import { Component } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
+import { catchError, EMPTY } from "rxjs";
 import { UserService } from "../shared/user.service";
-import { ExerciseService } from "../exercises/exercise.service";
-import { ILifts } from "../shared/workout";
-
+import { LiftAddComponent } from "../exercises/addAsLift/lift-add.component";
 
 @Component({
     selector: 'app-lift',
@@ -15,35 +13,34 @@ export class LiftComponent {
     errorMessage: string;
     success: boolean;
 
-    constructor(@Inject(MAT_DIALOG_DATA) private data: {id: number}, private userService: UserService, private exerciseService: ExerciseService) { }
+    constructor(private userService: UserService, private dialog: MatDialog) { }
 
-    //new async observables
-    exercises$ = this.exerciseService.exercises$
+    selectedWorkout$ = this.userService.selectedWorkout$
         .pipe(
             catchError(err => {
                 this.errorMessage = err;
                 return EMPTY;
             })
-        );
-    exercisesFilter$ = this.exerciseService.exercises$
-        .pipe(
-            map(exercises => 
-                exercises.filter(exercise => 
-                    exercise.name.toLocaleLowerCase().includes('')
-                    ))
-        );
+    );
 
-    selectedExercise$ = this.exerciseService.selectedExercise$;
-    
-    onSelected(exerciseId: number): void {
-        this.exerciseService.selectedExerciseChanged(exerciseId);
+    currentLifts$ = this.userService.liftsWithAdd$
+        .pipe(
+            catchError(err => {
+                this.errorMessage = err;
+                return EMPTY;
+            })
+    );    
+
+    addNewLift(workoutId: number){
+        this.dialog.open(LiftAddComponent, {
+            width: '75%',
+            height: '75%',
+            data: {id: workoutId}
+        });
     }
-    
-    add(name: string){
-        let lift: ILifts = {
-            name: name
-        }
-        this.userService.postLift(lift, this.data.id)
+
+    deleteLift(liftId : number){
+        this.userService.deleteLift(liftId)
             .pipe(catchError(err => {
                 this.errorMessage = err;
                 return EMPTY;
@@ -52,6 +49,6 @@ export class LiftComponent {
                 if(res) {
                     this.success = true;
                 }
-            });
+        });
     }
 }

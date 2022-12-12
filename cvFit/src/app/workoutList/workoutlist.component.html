@@ -1,39 +1,21 @@
 <div>
-  <button mat-raised-button color="primary" routerLink='/exercises'>Back</button>
-  <h1><b>Workouts</b></h1>
+  <h1><b>Workouts</b>
+      <button id="right" mat-raised-button [matMenuTriggerFor]="menu">Options</button>
+          <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="createNewWorkout()">Create New Workout</button>
+              <button mat-menu-item routerLink='/exercises'>View Complete Exercise List</button>
+          </mat-menu>
+  </h1>
   <hr>
-  <button mat-raised-button (click)="createNewWorkout()">Create New</button>
   <div class="flex-container" *ngIf='workouts$ | async as workouts'>
-      <mat-card class="workout-card" *ngFor="let w of workouts">
-        <mat-card-title-group>
-          <mat-card-title>{{w.title}}</mat-card-title>
-          <button mat-raised-button (click)="deleteWorkout(w.id)"><mat-icon>delete</mat-icon></button>
-        </mat-card-title-group>
-        <mat-card-content>
-          <div class="table-responsive" >
-            <table class="table" >
-              <thead>
-                <tr >
-                  <th>Exercise</th>
-                  <th>Weight</th>
-                  <th>Sets</th>
-                  <th>Reps</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let x of w.lift">
-                  <td>{{x.name}}</td>
-                  <td><input [(ngModel)]="x.weight" name="weight" id="weight" type="text" class="form-control" /></td>
-                  <td><input [(ngModel)]="x.sets" name="sets" id="sets" type="text" class="form-control" /></td>
-                  <td><input [(ngModel)]="x.reps" name="reps" id="reps" type="text" class="form-control" /></td>
-                  <td><button mat-button (click)="delLift(w.id, x.id)">X</button></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <hr>
-          <button mat-raised-button (click)="newLift(w.id)">+ Add New Lift</button>
-        </mat-card-content>
-      </mat-card>
+    <mat-card class="workout-card" *ngFor="let workout of workouts">
+      <mat-card-title-group>
+        <mat-card-title><a id="workoutName" [routerLink]="['/workoutlist', workout.id]" (click)="onSelected(workout.id)" >
+          {{workout.title}}</a></mat-card-title>
+        <div id="del">
+          <button mat-raised-button (click)="deleteWorkout(workout.id)"><mat-icon>delete</mat-icon></button>
+        </div>
+      </mat-card-title-group>
+    </mat-card>
   </div>
 </div>

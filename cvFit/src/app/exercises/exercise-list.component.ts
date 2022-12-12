@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { catchError, EMPTY, map } from 'rxjs';
 import { ExerciseService } from './exercise.service';
-import { WorkoutTitleComponent } from '../workoutTitle/workoutTitle.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -16,11 +15,12 @@ export class ExerciseListComponent {
 
     errorMessage: string;   
     success: boolean;
-    
     private _listFilter: string ="";
+
     get listFilter(): string{
         return this._listFilter
     }
+
     set listFilter(value: string){
         this._listFilter = value;
         console.log('In setter', value);
@@ -33,7 +33,7 @@ export class ExerciseListComponent {
             )
         );
     }
-    //new async observables
+    
     exercises$ = this.exerciseService.exercises$
         .pipe(
             catchError(err => {
@@ -41,6 +41,7 @@ export class ExerciseListComponent {
                 return EMPTY;
             })
         );
+
     exercisesFilter$ = this.exerciseService.exercises$
         .pipe(
             map(exercises => 
@@ -48,14 +49,10 @@ export class ExerciseListComponent {
                     exercise.name.toLocaleLowerCase().includes('')
                     ))
         );
+
     selectedExercise$ = this.exerciseService.selectedExercise$;
     
     onSelected(exerciseId: number): void {
         this.exerciseService.selectedExerciseChanged(exerciseId);
     }  
-    newWorkout(){
-        this.dialog.open(WorkoutTitleComponent, {
-            width: '500px',
-          });
-    }
- }
+}

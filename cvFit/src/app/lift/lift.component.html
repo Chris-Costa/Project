@@ -1,30 +1,41 @@
-<div class='card'>
-    <div class='card-header'>
-        Exerciese List
-    </div>
+<div>
+  <div>
+    <h1><b>Workouts</b>
+    <button id="right" mat-raised-button routerLink="/workoutlist">Back</button></h1>
+  </div>
+  <hr>
     <div class="flex-container">
-        <button mat-raised-button mat-dialog-close>Close Window</button>
+      <mat-card class="workout-card">
+        <mat-card-title-group *ngIf='selectedWorkout$ | async as workout'>
+          <mat-card-title>{{workout.title}}</mat-card-title>
+          <div id="addNew">
+            <button mat-raised-button (click)="addNewLift(workout.id)">+ Add New Lift</button>
+          </div>
+        </mat-card-title-group>
+        
+        <mat-card-content>
+          <div class="table-responsive" >
+            <table class="table" >
+              <thead>
+                <tr >
+                  <th>Exercise</th>
+                  <th>Weight</th>
+                  <th>Sets</th>
+                  <th>Reps</th>
+                </tr>
+              </thead>
+              <tbody *ngIf='currentLifts$ | async as lifts'>
+                <tr *ngFor="let lift of lifts">
+                  <td>{{lift.name}}</td>
+                  <td><input [(ngModel)]="lift.weight" name="weight" id="weight" type="text" class="form-control" /></td>
+                  <td><input [(ngModel)]="lift.sets" name="sets" id="sets" type="text" class="form-control" /></td>
+                  <td><input [(ngModel)]="lift.reps" name="reps" id="reps" type="text" class="form-control" /></td>
+                  <td><button mat-button (click)="deleteLift(lift.id)">X</button></td>
+                </tr>
+              </tbody>
+            </table> 
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
-    
-    <div class='card-body'>
-        <div class='table-responsive'>
-            <table class='table' *ngIf='exercisesFilter$ | async as exercises'>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Exercise</th>
-                        <th>Muscle Group</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor='let exercise of exercises'>
-                        <td><img [src]='exercise.imageURL' [title]="exercise.name"></td>
-                        <td>{{exercise.name}}</td>
-                        <td>{{exercise.muscleGroup}}</td>
-                        <td><button mat-raised-button color="primary" (click)="add(exercise.name)">ADD</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+  </div>
