@@ -33,10 +33,6 @@ export class LiftAddComponent {
         );
 
     selectedExercise$ = this.exerciseService.selectedExercise$;
-    
-    onSelected(exerciseId: number): void {
-        this.exerciseService.selectedExerciseChanged(exerciseId);
-    }
 
     add(name: string){
         let lift: ILifts = {

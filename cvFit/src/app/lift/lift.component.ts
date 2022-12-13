@@ -1,9 +1,6 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { MatDialog } from "@angular/material/dialog";
 import { catchError, EMPTY } from "rxjs";
 import { UserService } from "../shared/user.service";
-import { LiftAddComponent } from "../exercises/addAsLift/lift-add.component";
-import { Router } from "@angular/router";
 import { ILifts } from "../shared/workout";
 
 @Component({
@@ -17,11 +14,12 @@ export class LiftComponent {
     success: boolean;
     deleteMessage: boolean = false;
     edit: boolean = false;
+
+    constructor(private userService: UserService) { }
+
     toggleEdit(){
         this.edit = true;
     }
-
-    constructor(private userService: UserService, private dialog: MatDialog, private router: Router) { }
 
     selectedWorkout$ = this.userService.selectedWorkout$
         .pipe(
@@ -56,22 +54,8 @@ export class LiftComponent {
                     this.success = true;
                 }
             });
-
     }
     
-    deleteLift(liftId : number){
-        this.userService.deleteLift(liftId)
-            .pipe(catchError(err => {
-                this.errorMessage = err;
-                return EMPTY;
-            }))
-            .subscribe(res => {
-                if(res) {
-                    this.success = true;
-                }
-        });
-    }
-
     deleteWorkout(id: number, t: boolean) {
         this.deleteMessage = t;
         this.userService.deleteWorkout(id)

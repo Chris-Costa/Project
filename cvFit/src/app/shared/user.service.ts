@@ -93,7 +93,7 @@ export class UserService {
     }
 
     putLift(lift: ILifts, liftId: number): Observable<ILifts | Number>{
-        return this.http.put<ILifts>(this.liftPutUrl + liftId, lift, this.httpOptions)
+        return this.http.put<ILifts | Number>(this.liftPutUrl + liftId, lift, this.httpOptions)
             .pipe(
                 catchError(err => {
                     console.log(err);

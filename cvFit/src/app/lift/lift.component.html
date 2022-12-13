@@ -1,6 +1,6 @@
 <div *ngIf="!deleteMessage">
   <div>
-    <h1><b>Selected Workout</b></h1>
+    <h1><b>Edit Selected Workout</b></h1>
   </div>
   <hr>
     <div class="flex-container">
@@ -11,7 +11,6 @@
             <button  mat-raised-button [matMenuTriggerFor]="menu">Options</button>
               <mat-menu #menu="matMenu">
                 <button mat-menu-item routerLink="/workoutlist">Back to Workout List</button>
-                <button mat-menu-item (click)="toggleEdit()">Edit Exercises</button>
                 <button mat-menu-item (click)="deleteWorkout(workout.id, true)">Delete Workout</button>
               </mat-menu>
         
@@ -29,18 +28,12 @@
               </thead>
               <tbody *ngIf='currentLifts$ | async as lifts'>
                 <tr *ngFor="let lift of lifts">
-                  <!--Normal setting for delete-->
-                  <td *ngIf="!edit">{{lift.name}}</td>
-                  <td *ngIf="!edit">{{lift.weight}}</td>
-                  <td *ngIf="!edit">{{lift.sets}}</td>
-                  <td *ngIf="!edit">{{lift.reps}}</td>
-                  <td *ngIf="!edit" (click)="deleteLift(lift.id)"><button mat-raised-button><mat-icon>delete</mat-icon></button></td>
                   <!--Updated setting for put request-->
-                  <td *ngIf="edit">{{lift.name}}</td>
-                  <td *ngIf="edit"><input [(ngModel)]="lift.weight" name="weight" id="weight" type="text" class="form-control" /></td>
-                  <td *ngIf="edit"><input [(ngModel)]="lift.sets" name="sets" id="sets" type="text" class="form-control" /></td>
-                  <td *ngIf="edit"><input [(ngModel)]="lift.reps" name="reps" id="reps" type="text" class="form-control" /></td>
-                  <td *ngIf="edit"><button mat-button (click)="updateLift(lift.id)">Save</button></td>
+                  <td>{{lift.name}}</td>
+                  <td><input [(ngModel)]="lift.weight" name="weight" id="weight" type="text" class="form-control" /></td>
+                  <td><input [(ngModel)]="lift.sets" name="sets" id="sets" type="text" class="form-control" /></td>
+                  <td><input [(ngModel)]="lift.reps" name="reps" id="reps" type="text" class="form-control" /></td>
+                  <td><button mat-button (click)="updateLift(lift.id)">Save</button></td>
                 </tr>
               </tbody>
             </table> 
