@@ -53,5 +53,9 @@ export class LiftAddComponent {
                     this.success = true;
                 }
             });
+        this.reload();
+    }
+    reload(){
+        window.location.reload()
     }
 }

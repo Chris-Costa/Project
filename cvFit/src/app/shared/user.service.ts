@@ -10,6 +10,7 @@ export class UserService {
     private workoutUrl = 'https://localhost:7018/Workout/';
     private deleteWorkoutUrl = 'https://localhost:7018/Workout/workoutId?workoutId=';
     private liftUrl = 'https://localhost:7018/Lift?workoutId=';
+    private liftPutUrl = 'https://localhost:7018/Lift/';
     private liftDelete = 'https://localhost:7018/Lift/liftId?liftId=';
     httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
@@ -89,6 +90,16 @@ export class UserService {
             
         console.error(errorMessage);
         return throwError(errorMessage);
+    }
+
+    putLift(lift: ILifts, liftId: number): Observable<ILifts | Number>{
+        return this.http.put<ILifts>(this.liftPutUrl + liftId, lift, this.httpOptions)
+            .pipe(
+                catchError(err => {
+                    console.log(err);
+                    return of();
+                })
+            );
     }
    
     deleteLift(liftId: number): Observable<ILifts> {

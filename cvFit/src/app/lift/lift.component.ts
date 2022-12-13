@@ -4,6 +4,7 @@ import { catchError, EMPTY } from "rxjs";
 import { UserService } from "../shared/user.service";
 import { LiftAddComponent } from "../exercises/addAsLift/lift-add.component";
 import { Router } from "@angular/router";
+import { ILifts } from "../shared/workout";
 
 @Component({
     selector: 'app-lift',
@@ -15,6 +16,10 @@ export class LiftComponent {
     errorMessage: string;
     success: boolean;
     deleteMessage: boolean = false;
+    edit: boolean = false;
+    toggleEdit(){
+        this.edit = true;
+    }
 
     constructor(private userService: UserService, private dialog: MatDialog, private router: Router) { }
 
@@ -34,12 +39,24 @@ export class LiftComponent {
             })
     );    
 
-    addNewLift(workoutId: number){
-        this.dialog.open(LiftAddComponent, {
-            width: '75%',
-            height: '75%',
-            data: {id: workoutId}
-        });
+    updateLift(liftId : number){
+        let lift: ILifts = {
+            weight: 50,
+            sets: 50,
+            reps: 50
+        }
+        console.log(liftId)
+        this.userService.putLift(lift, liftId)
+            .pipe(catchError(err => {
+                this.errorMessage = err;
+                return EMPTY;
+            }))
+            .subscribe(res => {
+                if(res) {
+                    this.success = true;
+                }
+            });
+
     }
     
     deleteLift(liftId : number){

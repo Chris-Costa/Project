@@ -13,11 +13,14 @@
 h1{
     text-align: center;
 }
-#right{
+#button{
     position: absolute;
-    right: 110px;
+    right: 75px;
 }
 #del{
     position: absolute;
-    right: 5px;
+    right: 15px;
+}
+.new{
+    text-align: center;
 }

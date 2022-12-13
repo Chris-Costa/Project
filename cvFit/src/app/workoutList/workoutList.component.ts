@@ -3,6 +3,7 @@ import { BehaviorSubject, catchError, combineLatest, EMPTY, map } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { UserService } from "../shared/user.service";
 import { WorkoutTitleComponent } from "../workoutTitle/workoutTitle.component";
+import { LiftAddComponent } from "../exercises/addAsLift/lift-add.component";
 
 @Component({
     selector: 'workouts',
@@ -38,5 +39,12 @@ export class WorkoutListComponent {
         this.dialog.open(WorkoutTitleComponent, {
             width: '500px',
         });
+    }
+    addLift(workoutId: number){
+        this.dialog.open(LiftAddComponent, {
+            width: '50%',
+            height: '50%',
+            data: {id: workoutId}
+        })
     }
 }
