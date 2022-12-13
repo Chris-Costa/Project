@@ -37,11 +37,12 @@ export class LiftComponent {
             })
     );    
 
-    updateLift(liftId : number){
+    updateLift(liftId : number, name: string, weight: number, sets: number, reps: number){
         let lift: ILifts = {
-            weight: 50,
-            sets: 50,
-            reps: 50
+            name: name,
+            weight: weight,
+            sets: sets,
+            reps: reps
         }
         console.log(liftId)
         this.userService.putLift(lift, liftId)

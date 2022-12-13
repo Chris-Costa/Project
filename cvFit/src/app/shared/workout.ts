@@ -1,7 +1,7 @@
 export interface ILifts{
     id?: number;
     name?: string,
-    weight?: number|string;
+    weight?: number;
     sets?: number;
     reps?: number;    
 }

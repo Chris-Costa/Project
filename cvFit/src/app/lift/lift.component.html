@@ -30,10 +30,10 @@
                 <tr *ngFor="let lift of lifts">
                   <!--Updated setting for put request-->
                   <td>{{lift.name}}</td>
-                  <td><input [(ngModel)]="lift.weight" name="weight" id="weight" type="text" class="form-control" /></td>
-                  <td><input [(ngModel)]="lift.sets" name="sets" id="sets" type="text" class="form-control" /></td>
-                  <td><input [(ngModel)]="lift.reps" name="reps" id="reps" type="text" class="form-control" /></td>
-                  <td><button mat-button (click)="updateLift(lift.id)">Save</button></td>
+                  <td><input [(ngModel)]="lift.weight" name="weight" id="weight" type="number" class="form-control" /></td>
+                  <td><input [(ngModel)]="lift.sets" name="sets" id="sets" type="number" class="form-control" /></td>
+                  <td><input [(ngModel)]="lift.reps" name="reps" id="reps" type="number" class="form-control" /></td>
+                  <td><button mat-button (click)="updateLift(lift.id, lift.name, lift.weight, lift.sets, lift.reps)">Save</button></td>
                 </tr>
               </tbody>
             </table> 
