@@ -1,23 +1,40 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { catchError, EMPTY } from "rxjs";
 import { UserService } from "../shared/user.service";
 import { IWorkout } from "../shared/workout";
+const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
+type ProfileType = {
+  id?: string
+};
 @Component({
     selector: 'app-workoutTitle',
     templateUrl: './workoutTitle.component.html',
     changeDetection: ChangeDetectionStrategy.Default
 })
-export class WorkoutTitleComponent {
+export class WorkoutTitleComponent implements OnInit {
     title: string;
     errorMessage: string;   
     success: boolean;
+    profile!: ProfileType;
 
-    constructor(private userService: UserService) { }
+    constructor(private userService: UserService, private http: HttpClient) { }
     
+    ngOnInit() {
+        this.getProfile();
+    }
+    
+    getProfile() {
+        this.http.get(GRAPH_ENDPOINT)
+          .subscribe(profile => {
+            this.profile = profile;
+        });
+    }
+
     newWorkout(title: string) {  
         let workout: IWorkout = {
-            azureId: 'cfc39fe5-82d4-4d2f-8889-4e13e326911f',
+            azureId: this.profile.id,
             title: title
         };
         this.userService.addWorkout(workout);

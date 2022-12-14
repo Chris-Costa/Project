@@ -1,9 +1,16 @@
-import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { BehaviorSubject, catchError, combineLatest, EMPTY, map } from "rxjs";
+import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import { catchError, delay, EMPTY, map } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { UserService } from "../shared/user.service";
 import { WorkoutTitleComponent } from "../workoutTitle/workoutTitle.component";
 import { LiftAddComponent } from "../exercises/addAsLift/lift-add.component";
+import { HttpClient } from "@angular/common/http";
+
+const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
+
+type ProfileType = {
+  id?: string
+};
 
 @Component({
     selector: 'workouts',
@@ -11,28 +18,37 @@ import { LiftAddComponent } from "../exercises/addAsLift/lift-add.component";
     styleUrls: ['./workoutList.componet.css'],
     changeDetection: ChangeDetectionStrategy.Default
 })
-export class WorkoutListComponent {
-    constructor (private dialog: MatDialog, private userService: UserService){ }
+export class WorkoutListComponent implements OnInit {
+    constructor (private dialog: MatDialog, private userService: UserService, private http: HttpClient){ }
 
+    profile!: ProfileType;
     errorMessage: string;
     success: boolean;
     deleteMessage: boolean = false;
-    private filterSelectedSubject = new BehaviorSubject<String>('cfc39fe5-82d4-4d2f-8889-4e13e326911f'); //temp hardcode azureid string
 
-    filterSelectedAction$ = this.filterSelectedSubject.asObservable();
+    ngOnInit() {
+        this.getProfile();
+        
+    }
+    getProfile() {
+        this.http.get(GRAPH_ENDPOINT)
+          .subscribe(profile => {
+            this.profile = profile;
+        });
+    }
 
-    workouts$ = combineLatest([this.userService.workoutsWithAdd$, this.filterSelectedAction$])
-        .pipe(
-            map(([workouts, filterSelected]) =>
-            workouts.filter(workout =>
-                filterSelected ? workout.azureId === filterSelected : true)
-            ),
-            catchError(err => {
-                this.errorMessage = err;
-                return EMPTY;
-            })
-    );
-
+    
+    workouts$ = this.userService.workoutsWithAdd$
+            .pipe(delay(500),
+                map(workouts => workouts.filter(workout =>
+                    workout.azureId === this.profile.id)
+                ),
+                catchError(err => {
+                    this.errorMessage = err;
+                    return EMPTY;
+                })
+        );
+    
     onSelected(workoutId: number): void{
         this.userService.selectedWorkoutChange(workoutId);
     }
