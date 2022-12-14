@@ -1,6 +1,6 @@
 .post-button{
-    text-align: center;
-    padding: 5px;
+    text-align: left;
+    padding: 20px;
     
 }
 #postCreation{
@@ -14,7 +14,6 @@
     margin: 5px;
     width: 95%;
     height: 25%;
-    
 }
 .flex-container1{
     display: flex;
@@ -24,7 +23,8 @@
 .sideNav{
     /*This is the angular material button primary*/
     background-color: #3F51B5;
-    width: 140px;
+    width: 150px;
+    text-align: center;
 }
 .b{
     color: white;
@@ -34,4 +34,13 @@ img{
     height: 50px;
     width: 50px;
     margin: 2px; 
+}
+.post{
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    width: 100px;
+    text-align: center; 
 }

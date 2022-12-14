@@ -24,7 +24,7 @@ export class BlogComponent {
         .pipe(
             map(([posts, filterSelected]) =>
             posts.filter(post =>
-                filterSelected ? post.likes === filterSelected : true)
+                filterSelected ? post.category === filterSelected : true)
             ),
             catchError(err => {
                 this.errorMessage = err;

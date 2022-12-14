@@ -1,15 +1,18 @@
-<h1>Discussion Board</h1>
+<h1>Discussion Board
+    <button class="post" mat-raised-button (click)="openDialog()">New Post</button></h1>
 <hr>
 
 <mat-sidenav-container class="example-container">
   <mat-sidenav class="sideNav" mode="side" opened>
-    <div class="post-button">
+   <!--<div class="post-button">-->
     <mat-list role="list">
-      <mat-list-item role="listitem"><button mat-raised-button (click)="openDialog()">New Post</button></mat-list-item>
       <mat-list-item class="b" role="listitem" (click)="filterSelection(0)"><button mat-button >All Posts</button></mat-list-item>
-      <mat-list-item class="b" role="listitem" (click)="filterSelection(1)"><button mat-button >My Contributions</button></mat-list-item>
+      <mat-list-item class="b" role="listitem" (click)="filterSelection(1)"><button mat-button >Nutrition</button></mat-list-item>
+      <mat-list-item class="b" role="listitem" (click)="filterSelection(2)"><button mat-button >Weight Training</button></mat-list-item>
+      <mat-list-item class="b" role="listitem" (click)="filterSelection(3)"><button mat-button >Recovery</button></mat-list-item>
+      <mat-list-item class="b" role="listitem" (click)="filterSelection(4)"><button mat-button >General Health</button></mat-list-item>
     </mat-list>
-  </div>
+  <!--</div>-->
   </mat-sidenav>
  
   <mat-sidenav-content>

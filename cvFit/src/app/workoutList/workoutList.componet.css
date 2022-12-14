@@ -10,12 +10,9 @@
     justify-content: center;
     align-items: center;
 }
-h1{
-    text-align: center;
-}
 #button{
     position: absolute;
-    right: 75px;
+    right: 90px;
 }
 #del{
     position: absolute;

@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { IBlogPost, IComment } from "../shared/blogPost";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { BehaviorSubject, catchError, combineLatest, map, merge, Observable, scan, Subject, tap, throwError } from "rxjs";
-import { MatDialog } from '@angular/material/dialog';
 
 @Injectable({
     providedIn: 'root'

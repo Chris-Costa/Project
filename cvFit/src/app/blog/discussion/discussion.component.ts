@@ -7,8 +7,7 @@ import { HttpClient } from "@angular/common/http";
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
 type ProfileType = {
-  givenName?: string,
-  surname?: string
+  givenName?: string
 };
 @Component({
     selector: 'app-discussion',
@@ -55,7 +54,7 @@ export class DiscussionComponent implements OnInit {
 
     addNewComment(): void {  
         let comment: IComment = {
-            user: this.profile.givenName + this.profile.surname, 
+            user: this.profile.givenName,
             reply: this.comment
         };
         this.blogService.addComment(comment);
