@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { catchError, EMPTY } from "rxjs";
+import { catchError, EMPTY, take } from "rxjs";
 import { ContactUs } from "../shared/contactUs";
 import { ContactUsService } from './contactUs.service';
 
@@ -26,7 +26,8 @@ export class ContactUsComponent {
             notes: notes
         };
         this.contactUsService.postMessage(contact)
-            .pipe(catchError(err => {
+            .pipe(take(1),
+            catchError(err => {
                 this.errorMessage = err;
                 return EMPTY;
             }))
@@ -34,6 +35,6 @@ export class ContactUsComponent {
                 if(res) {
                     this.success = true;
                 }
-        });
+            });
     }
 }

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { catchError, EMPTY, map } from 'rxjs';
+import { catchError, EMPTY, map, take } from 'rxjs';
 import { UserService } from 'src/app/shared/user.service';
 import { ILifts } from 'src/app/shared/workout';
 import { ExerciseService } from '../exercise.service';
@@ -38,9 +38,9 @@ export class LiftAddComponent {
         let lift: ILifts = {
             name: name
         }
-        this.userService.addLift(lift);
         this.userService.postLift(lift, this.data.id)
-            .pipe(catchError(err => {
+            .pipe(take(1),
+            catchError(err => {
                 this.errorMessage = err;
                 return EMPTY;
             }))
@@ -49,6 +49,7 @@ export class LiftAddComponent {
                     this.success = true;
                 }
             });
+
         this.reload();
     }
     reload(){

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { catchError, delay, EMPTY, map } from "rxjs";
+import { catchError, delay, EMPTY, map, take } from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { UserService } from "../shared/user.service";
 import { WorkoutTitleComponent } from "../workoutTitle/workoutTitle.component";
@@ -32,8 +32,8 @@ export class WorkoutListComponent implements OnInit {
     }
     getProfile() {
         this.http.get(GRAPH_ENDPOINT)
-          .subscribe(profile => {
-            this.profile = profile;
+            .pipe(take(1)).subscribe(profile => {
+                this.profile = profile;
         });
     }
 
@@ -69,7 +69,8 @@ export class WorkoutListComponent implements OnInit {
 
     deleteLift(liftId : number){
         this.userService.deleteLift(liftId)
-            .pipe(catchError(err => {
+            .pipe(take(1),
+            catchError(err => {
                 this.errorMessage = err;
                 return EMPTY;
             }))
@@ -77,14 +78,15 @@ export class WorkoutListComponent implements OnInit {
                 if(res) {
                     this.success = true;
                 }
-        });
+            });
         this.reloadPage();
     }
 
     deleteWorkout(id: number, t: boolean) {
         this.deleteMessage = t;
         this.userService.deleteWorkout(id)
-            .pipe(catchError(err => {
+            .pipe(take(1),
+            catchError(err => {
                 this.errorMessage = err;
                 return EMPTY;
             }))
@@ -92,7 +94,8 @@ export class WorkoutListComponent implements OnInit {
                 if(res) {
                     this.success = true;
                 }
-        });
+            });
+
         this.reloadPage();
     }
     reloadPage(){

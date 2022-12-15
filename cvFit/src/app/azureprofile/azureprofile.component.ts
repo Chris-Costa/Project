@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { take } from 'rxjs';
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -26,8 +27,8 @@ export class AZUREprofileComponent implements OnInit {
 
   getProfile() {
     this.http.get(GRAPH_ENDPOINT)
-      .subscribe(profile => {
-        this.profile = profile;
-      });
+            .pipe(take(1)).subscribe(profile => {
+                this.profile = profile;
+        });
   }
 }

@@ -62,12 +62,9 @@ export class UserService {
         console.log('selected post id ', this.workoutSelectionSubject.value);
     }
 
-    addWorkout(newWorkout: IWorkout) { 
+    postWorkout(newWorkout: IWorkout): Observable<IWorkout | Number> {
         this.workoutInsertedSubject.next(newWorkout);
-    }
-    
-    postWorkout(message: IWorkout): Observable<IWorkout | Number> {
-        return this.http.post<IWorkout | Number>(this.workoutUrl, message, this.httpOptions);
+        return this.http.post<IWorkout | Number>(this.workoutUrl, newWorkout, this.httpOptions);
     }
 
     deleteWorkout(id: number): Observable<IWorkout> {
@@ -112,10 +109,7 @@ export class UserService {
         );
     }
     postLift(lift: ILifts, workoutId: number): Observable<ILifts | Number> {
+        this.liftInsertedSubject.next(lift);
         return this.http.post<ILifts | Number>(this.liftUrl + workoutId , lift, this.httpOptions);
-    }
-
-    addLift(newLift: ILifts) { 
-        this.liftInsertedSubject.next(newLift);
     }
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { catchError, EMPTY } from "rxjs";
+import { catchError, EMPTY, take } from "rxjs";
 import { UserService } from "../shared/user.service";
 import { IWorkout } from "../shared/workout";
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
@@ -27,8 +27,8 @@ export class WorkoutTitleComponent implements OnInit {
     
     getProfile() {
         this.http.get(GRAPH_ENDPOINT)
-          .subscribe(profile => {
-            this.profile = profile;
+            .pipe(take(1)).subscribe(profile => {
+                this.profile = profile;
         });
     }
 
@@ -37,9 +37,9 @@ export class WorkoutTitleComponent implements OnInit {
             azureId: this.profile.id,
             title: title
         };
-        this.userService.addWorkout(workout);
         this.userService.postWorkout(workout)
-            .pipe(catchError(err => {
+            .pipe(take(1),
+            catchError(err => {
                 this.errorMessage = err;
                 return EMPTY;
             }))

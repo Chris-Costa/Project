@@ -60,20 +60,14 @@ export class BlogService{
         console.log('selected post id ', this.postSelctionSubject.value);
     }
 
-    addBlogPost(newPost: IBlogPost) { 
+    postBlog(newPost: IBlogPost): Observable<IBlogPost | Number> {
         this.blogPostInsertedSubject.next(newPost)
-    }
-
-    postBlog(message: IBlogPost): Observable<IBlogPost | Number> {
-        return this.http.post<IBlogPost | Number>(this.blogUrl, message, this.httpOptions);
+        return this.http.post<IBlogPost | Number>(this.blogUrl, newPost, this.httpOptions);
     } 
 
-    addComment(newComment: IComment) {
+    postComment(newComment: IComment): Observable<IComment | Number> {
         this.commentInsertedSubject.next(newComment);
-    }
-
-    postComment(message: IComment): Observable<IComment | Number> {
-        return this.http.post<IComment | Number>(this.commentUrl + this.postSelctionSubject.value, message, this.httpOptions);
+        return this.http.post<IComment | Number>(this.commentUrl + this.postSelctionSubject.value, newComment, this.httpOptions);
     }
 
     private handleError(err: HttpErrorResponse){

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { catchError, EMPTY } from "rxjs";
+import { catchError, EMPTY, take } from "rxjs";
 import { BlogService } from "../blog.service";
 import { IComment } from "../../shared/blogPost";
 import { HttpClient } from "@angular/common/http";
@@ -47,8 +47,8 @@ export class DiscussionComponent implements OnInit {
     
     getProfile() {
         this.http.get(GRAPH_ENDPOINT)
-          .subscribe(profile => {
-            this.profile = profile;
+            .pipe(take(1)).subscribe(profile => {
+                this.profile = profile;
         });
     }
 
@@ -57,9 +57,9 @@ export class DiscussionComponent implements OnInit {
             user: this.profile.givenName,
             reply: this.comment
         };
-        this.blogService.addComment(comment);
         this.blogService.postComment(comment)
-            .pipe(catchError(err => {
+            .pipe(take(1),
+            catchError(err => {
                 this.errorMessage = err;
                 return EMPTY;
             }))

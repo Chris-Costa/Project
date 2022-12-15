@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
-import { catchError, EMPTY } from "rxjs";
+import { catchError, EMPTY, take } from "rxjs";
 import { UserService } from "../shared/user.service";
 import { ILifts } from "../shared/workout";
 
@@ -46,7 +46,8 @@ export class LiftComponent {
         }
         console.log(liftId)
         this.userService.putLift(lift, liftId)
-            .pipe(catchError(err => {
+            .pipe(take(1),
+            catchError(err => {
                 this.errorMessage = err;
                 return EMPTY;
             }))
@@ -60,7 +61,8 @@ export class LiftComponent {
     deleteWorkout(id: number, t: boolean) {
         this.deleteMessage = t;
         this.userService.deleteWorkout(id)
-            .pipe(catchError(err => {
+            .pipe((take(1)),
+            catchError(err => {
                 this.errorMessage = err;
                 return EMPTY;
             }))
@@ -68,6 +70,6 @@ export class LiftComponent {
                 if(res) {
                     this.success = true;
                 }
-        });
+            });
     }
 }

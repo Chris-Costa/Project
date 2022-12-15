@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { BlogService } from "../blog.service";
 import { IBlogPost } from "../../shared/blogPost";
-import { catchError, EMPTY } from "rxjs";
+import { catchError, EMPTY, take } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
@@ -34,8 +34,8 @@ export class PostComponent implements OnInit {
     
     getProfile() {
         this.http.get(GRAPH_ENDPOINT)
-          .subscribe(profile => {
-            this.profile = profile;
+            .pipe(take(1)).subscribe(profile => {
+                this.profile = profile;
         });
     }
     
@@ -61,9 +61,9 @@ export class PostComponent implements OnInit {
             category: this.category
         };
         
-        this.blogService.addBlogPost(blog);
         this.blogService.postBlog(blog)
-            .pipe(catchError(err => {
+            .pipe(take(1),
+            catchError(err => {
                 this.errorMessage = err;
                 return EMPTY;
             }))
@@ -72,7 +72,7 @@ export class PostComponent implements OnInit {
                     this.success = true;
                 }
             });
-        
+            
     }
     reloadPage(){
         window.location.reload()
