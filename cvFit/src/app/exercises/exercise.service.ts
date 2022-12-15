@@ -1,13 +1,14 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, catchError, combineLatest, map, tap, throwError } from "rxjs";
+import { environment } from "src/environments/environment";
 import { IExercise } from "../shared/exercise";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ExerciseService{
-    private exerciseUrl = 'https://localhost:7018/exercise';
+    private exerciseUrl = environment.baseUrl + 'exercise';
     
     constructor (private http: HttpClient) { }
   

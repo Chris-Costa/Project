@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { ContactUs } from '../shared/contactUs';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { ContactUs } from '../shared/contactUs';
 })
 export class ContactUsService {
 
-    contactUrl = 'https://localhost:7018/ContactUs/';
+    contactUrl = environment.baseUrl + 'ContactUs/';
     httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
     constructor(private http: HttpClient) { }

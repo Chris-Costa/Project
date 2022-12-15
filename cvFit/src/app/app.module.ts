@@ -34,6 +34,7 @@ import { LiftComponent } from './lift/lift.component';
 import { CalcService } from './macroCalculator/calculator.service';
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 import { LiftAddComponent } from './exercises/addAsLift/lift-add.component';
+import { environment } from 'src/environments/environment';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -59,9 +60,10 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     AppRoutingModule,
     MsalModule.forRoot( new PublicClientApplication({
       auth: {
-        clientId: '6063621e-ae81-4c3e-b0ee-6c9486c01725',
-        authority: 'https://login.microsoftonline.com/55e374bf-374e-49de-a716-836ce6f714d1',
-        redirectUri: 'http://localhost:4200'
+        clientId: environment.clientId,
+        authority: environment.authority,
+        redirectUri: '/',
+        postLogoutRedirectUri: '/'
       },
       cache: {
         cacheLocation: 'localStorage',

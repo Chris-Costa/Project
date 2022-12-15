@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { IBlogPost, IComment } from "../shared/blogPost";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { BehaviorSubject, catchError, combineLatest, map, merge, Observable, scan, Subject, tap, throwError } from "rxjs";
+import { environment } from "src/environments/environment";
 
 @Injectable({
     providedIn: 'root'
@@ -10,8 +11,8 @@ import { BehaviorSubject, catchError, combineLatest, map, merge, Observable, sca
 export class BlogService{
     constructor (private http: HttpClient) { }
 
-    private blogUrl = 'https://localhost:7018/blog/';
-    private commentUrl = 'https://localhost:7018/Comment?blogId='
+    private blogUrl = environment.baseUrl + 'blog/';
+    private commentUrl = environment.baseUrl + 'Comment?blogId='
     private postSelctionSubject = new BehaviorSubject<number>(0); //get a single selected blog post used in discussion component
     private blogPostInsertedSubject = new Subject<IBlogPost>();   //used to add new blogPost to list
     private commentInsertedSubject = new Subject<IComment>();

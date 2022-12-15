@@ -1,17 +1,21 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, catchError, combineLatest, map, merge, Observable, of, scan, Subject, tap, throwError } from "rxjs";
+import { environment } from "src/environments/environment";
 import { ILifts, IWorkout } from "./workout";
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
-    private workoutUrl = 'https://localhost:7018/Workout/';
-    private deleteWorkoutUrl = 'https://localhost:7018/Workout/workoutId?workoutId=';
-    private liftUrl = 'https://localhost:7018/Lift?workoutId=';
-    private liftPutUrl = 'https://localhost:7018/Lift/';
-    private liftDelete = 'https://localhost:7018/Lift/liftId?liftId=';
+    private workoutUrl = environment.baseUrl + 'Workout/';
+    private liftUrl = environment.baseUrl + 'Lift?workoutId=';
+
+    private deleteWorkoutUrl = environment.baseUrl + 'Workout/workoutId?workoutId=';
+    private liftDelete = environment.baseUrl + 'Lift/liftId?liftId=';
+    
+    private liftPutUrl = environment.baseUrl + 'Lift/';
+    
     httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
     private workoutSelectionSubject = new BehaviorSubject<number>(0);
