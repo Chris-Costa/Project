@@ -17,7 +17,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { AppComponent } from './app.component';
 import { ExerciseListComponent } from './exercises/exercise-list.component';
 import { ExerciseDetailComponent } from './exercises/exercise-detail.component';
-import { WelcomeComponent } from './home/welcome.component';
 import { ContactUsComponent } from './form/contactUs.component';
 import { BlogComponent } from './blog/blog.component';
 import { WorkoutListComponent } from './exercises/workoutList/workoutList.component';
@@ -32,6 +31,7 @@ import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AZUREprofileComponent } from './azureprofile/azureprofile.component';
 import { HomeComponent } from './home/home.component';
+import { environment } from 'src/environments/environment';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -41,7 +41,6 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     ExerciseListComponent,
     ExerciseDetailComponent,
     ContactUsComponent,
-    WelcomeComponent,
     BlogComponent,
     WorkoutListComponent,
     PostComponent,
@@ -55,10 +54,10 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     AppRoutingModule,
     MsalModule.forRoot( new PublicClientApplication({
       auth: {
-        clientId: '6063621e-ae81-4c3e-b0ee-6c9486c01725', // Application (client) ID from the app registration
-        //authority: 'Enter_the_Cloud_Instance_Id_Here/55e374bf-374e-49de-a716-836ce6f714d1', // The Azure cloud instance and the app's sign-in audience (tenant ID, common, organizations, or consumers)
-        authority: 'https://login.microsoftonline.com/55e374bf-374e-49de-a716-836ce6f714d1',
-        redirectUri: 'http://localhost:4200'// This is your redirect URI
+        clientId: environment.clientId, // Application (client) ID from the app registration
+        authority: environment.authority,
+        redirectUri: '/',// This is your redirect URI
+        postLogoutRedirectUri: '/'
       },
       cache: {
         cacheLocation: 'localStorage',
@@ -90,7 +89,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     RouterModule.forRoot([
       {path: 'exercises', component: ExerciseListComponent},
       {path: 'exercises/:id', component: ExerciseDetailComponent},
-      {path: 'welcome', component: WelcomeComponent},
+      {path: 'welcome', component: HomeComponent},
       {path: 'contact-us', component: ContactUsComponent},
       {path: 'blog', component: BlogComponent},
       {path: 'calc', component: CalculatorComponent},
