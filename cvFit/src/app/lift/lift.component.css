@@ -4,12 +4,20 @@
     justify-content: space-around;
 }
 .workout-card{
-    width: 45%;
+    width: 95%;
     margin: 10px;
     text-align: center;
     justify-content: center;
     align-items: center;
 }
-h1{
+#right{
+    position: absolute;
+    right: 110px;
+}
+#addNew{
+    position: absolute;
+    right: 5px;
+}
+.delMessage{
     text-align: center;
 }

@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 import { BlogService } from "./blog.service";
 import { BehaviorSubject, catchError, combineLatest, EMPTY, map } from "rxjs";
+import { PostComponent } from "./post/post.component";
+import { MatDialog } from "@angular/material/dialog";
 
 @Component({
     templateUrl: './blog.component.html',
@@ -8,7 +10,7 @@ import { BehaviorSubject, catchError, combineLatest, EMPTY, map } from "rxjs";
 })
 
 export class BlogComponent {
-    constructor (private blogService: BlogService){ }
+    constructor (private blogService: BlogService, private dialog: MatDialog){ }
 
     title: string;
     author: string;
@@ -22,7 +24,7 @@ export class BlogComponent {
         .pipe(
             map(([posts, filterSelected]) =>
             posts.filter(post =>
-                filterSelected ? post.liked === filterSelected : true)
+                filterSelected ? post.category === filterSelected : true)
             ),
             catchError(err => {
                 this.errorMessage = err;
@@ -30,13 +32,17 @@ export class BlogComponent {
             })
     );
    
-    onSelected(postId: number): void{ //for selected id value
+    onSelected(postId: number): void{
         this.blogService.selectedPostChange(postId);
     }
+
     filterSelection(num: number): void {
         this.filterSelectedSubject.next(+num);
     }
-    openDialog() { //start of create new post form functions
-        this.blogService.openPostDialog();
+
+    openDialog() { 
+        this.dialog.open(PostComponent, {
+            width: '500px',
+        });
     }
 } 

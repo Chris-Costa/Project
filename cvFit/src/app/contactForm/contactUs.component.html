@@ -4,7 +4,7 @@
 <hr>
 <div mat-dialog-content>
     
-        <form #contactForm="ngForm" (ngSubmit)="contact(contactForm.value)" autocomplete="off">
+        <form #contactForm="ngForm" (ngSubmit)="contact(contactForm.value.firstName, contactForm.value.lastName, contactForm.value.email, contactForm.value.notes)" autocomplete="off">
             <div class="'form-group">
                 <label for="firstName">Firstname:</label>
                 <input (ngModel)="firstName" name="firstName" id="firstName" type="text" class="form-control" placeholder="Enter your first name" />
@@ -25,5 +25,4 @@
             <button mat-raised-button color="primary" mat-dialog-close type="submit" >Submit</button>
             <button mat-button mat-dialog-close>Close</button>
         </form>
-    
 </div>

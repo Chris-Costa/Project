@@ -1,28 +1,80 @@
-import { Component } from "@angular/core";
-import { AuthService } from "src/app/form/auth.service";
+import { Component, OnInit } from "@angular/core";
 import { BlogService } from "../blog.service";
-import { IBlogPost } from "../blogPost";
+import { IBlogPost } from "../../shared/blogPost";
+import { catchError, EMPTY, take } from "rxjs";
+import { HttpClient } from "@angular/common/http";
 
+const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
+
+type ProfileType = {
+  givenName?: string,
+  surname?: string
+};
 @Component({
     selector: 'app-contactUs',
-    templateUrl: './post.component.html'
+    templateUrl: './post.component.html',
+    styleUrls: ['./post.component.css']
 })
-export class PostComponent {  //use this componet to add a new post to the exisiting blog posts stream
-    constructor(private auth: AuthService, private blogService: BlogService){}
+export class PostComponent implements OnInit { 
+    constructor(private blogService: BlogService, private http: HttpClient) { }
+
+    profile!: ProfileType;
     title: string = '';
-    author: string = this.auth.currentUser.firstName;
+    author: string = '';
     post: string = '';
-    id: number = 4;
-    newBlogPost: IBlogPost = {blogId: this.id, blogTitle: "", blogAuthor: this.author, blogContent: "", authorAvatar: this.auth.currentUser.avatar, liked: 1, comments: []}; 
-    
-    addNewBlogPost(): void {  
-        this.newBlogPost.blogTitle = this.title;
-        this.newBlogPost.blogContent = this.post;
-        console.log('newBlogPost', this.newBlogPost);
-        this.blogService.addBlogPost(this.newBlogPost);
-        this.newBlogPost = {blogId: this.id++, blogTitle: "", blogAuthor: this.author, blogContent: "", authorAvatar: this.auth.currentUser.avatar, liked: 1, comments: []};   
+    avatar: string= '';
+    category: number = 0;  //default no category selected 
+
+    errorMessage: string;
+    success: boolean;
+
+    ngOnInit() {
+        this.getProfile();
     }
-    blog(formValues: string){
-        console.log(formValues)
+    
+    getProfile() {
+        this.http.get(GRAPH_ENDPOINT)
+            .pipe(take(1)).subscribe(profile => {
+                this.profile = profile;
+        });
+    }
+    
+    blog(title: string, post: string, avatar: string){
+        
+        if(avatar == './assets/images/ava1-modified.png'){
+            this.category = 1;
+        }
+        else if(avatar == './assets/images/ava2-modified.png'){
+            this.category = 2;
+        }
+        else if(avatar == './assets/images/ava3-modified.png'){
+            this.category = 3;
+        }
+        else if(avatar == './assets/images/ava4-modified.png'){
+            this.category = 4;
+        }
+        let blog: IBlogPost = {
+            title: title, 
+            author: this.profile.givenName,
+            content: post,
+            avatar: avatar,
+            category: this.category
+        };
+        
+        this.blogService.postBlog(blog)
+            .pipe(take(1),
+            catchError(err => {
+                this.errorMessage = err;
+                return EMPTY;
+            }))
+            .subscribe(res => {
+                if(res) {
+                    this.success = true;
+                }
+            });
+            
+    }
+    reloadPage(){
+        window.location.reload()
     }
 }

@@ -1,20 +1,41 @@
 <h1>New Post!</h1>
 <hr>
 <div id="postCreation">
-    <form #blogForm="ngForm" (ngSubmit)="blog(blogForm.value)" autocomplete="off" novalidate>
+    <form #blogForm="ngForm" (ngSubmit)="blog(blogForm.value.title, blogForm.value.post, blogForm.value.avatar)" autocomplete="off" novalidate>
         <div class="'form-group">
             <label for="title">Title:</label>
             <input [(ngModel)]="title" name="title" id="title" type="text" class="form-control" placeholder="Name your blog post" />
         </div>
         <div class="form-group">
             <label for="author">Author:</label>
-            <input [(ngModel)]="author" name="author" id="author" type="text" class="form-control" placeholder="Enter your name" />
+            <p>{{profile.givenName}} {{profile.surname}}</p>
         </div>
         <div class="form-group">
             <label for="post">Post:</label>
             <input [(ngModel)]="post" name="post" id="post" type="text" class="form-control" placeholder="Content of blog post" />
         </div>
-        <button mat-stroked-button mat-dialog-close color="primary" type="submit" (click)="addNewBlogPost()" >Submit</button>
+        <div class="form-group">
+            <label for="post">Category:</label>
+            <div class="flex-container">
+                <div class="form-check">
+                    <input [(ngModel)]="avatar" id="avatar" class="form-check-input" type="radio" name="avatar" value="./assets/images/ava1-modified.png">
+                    <label class="form-check-label" for="inlineRadio1"><img class="ava1" src="./assets/images/ava1-modified.png"></label>
+                </div>
+                <div class="form-check">
+                    <input [(ngModel)]="avatar" class="form-check-input" type="radio" name="avatar" id="avatar" value="./assets/images/ava2-modified.png">
+                    <label class="form-check-label" for="inlineRadio2"><img class="ava2" src="./assets/images/ava2-modified.png"></label>
+                </div>
+                <div class="form-check">
+                    <input [(ngModel)]="avatar" class="form-check-input" type="radio" name="avatar" id="avatar" value="./assets/images/ava3-modified.png">
+                    <label class="form-check-label" for="inlineRadio3"><img class="ava3" src="./assets/images/ava3-modified.png"></label>
+                </div>
+                <div class="form-check">
+                    <input [(ngModel)]="avatar" class="form-check-input" type="radio" name="avatar" id="avatar" value="./assets/images/ava4-modified.png">
+                    <label class="form-check-label" for="inlineRadio4"><img class="ava4" src="./assets/images/ava4-modified.png"></label>
+                </div>
+            </div>
+        </div>
+        <button mat-stroked-button mat-dialog-close (click)="reloadPage()" color="primary" type="submit" >Submit</button>
         <button mat-stroked-button mat-dialog-close >Cancel</button>
     </form>
   </div>

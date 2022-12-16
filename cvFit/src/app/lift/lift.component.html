@@ -1,0 +1,48 @@
+<div *ngIf="!deleteMessage">
+  <div>
+    <h1>Edit Selected Workout</h1>
+  </div>
+  <hr>
+    <div class="flex-container">
+      <mat-card class="workout-card">
+        <mat-card-title-group *ngIf='selectedWorkout$ | async as workout'>
+          <mat-card-title>{{workout.title}}</mat-card-title>
+          
+            <button  mat-raised-button [matMenuTriggerFor]="menu">Options</button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item routerLink="/workoutlist">Back to Workout List</button>
+                <button mat-menu-item (click)="deleteWorkout(workout.id, true)">Delete Workout</button>
+              </mat-menu>
+        
+        </mat-card-title-group>
+        <mat-card-content>
+          <div class="table-responsive" >
+            <table class="table" >
+              <thead>
+                <tr >
+                  <th>Exercise</th>
+                  <th>Weight</th>
+                  <th>Sets</th>
+                  <th>Reps</th>
+                </tr>
+              </thead>
+              <tbody *ngIf='currentLifts$ | async as lifts'>
+                <tr *ngFor="let lift of lifts">
+                  <!--Updated setting for put request-->
+                  <td>{{lift.name}}</td>
+                  <td><input [(ngModel)]="lift.weight" name="weight" id="weight" type="number" class="form-control" /></td>
+                  <td><input [(ngModel)]="lift.sets" name="sets" id="sets" type="number" class="form-control" /></td>
+                  <td><input [(ngModel)]="lift.reps" name="reps" id="reps" type="number" class="form-control" /></td>
+                  <td><button mat-button (click)="updateLift(lift.id, lift.name, lift.weight, lift.sets, lift.reps)">Save</button></td>
+                </tr>
+              </tbody>
+            </table> 
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+</div>
+<div class="delMessage" *ngIf="deleteMessage">
+  <h1><b>Successfully deleted the workout</b></h1>
+  <button mat-raised-button routerLink="/workoutlist">Return to Workout List</button>
+</div>

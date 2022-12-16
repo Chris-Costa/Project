@@ -1,30 +1,32 @@
-<h1>Discussion Board</h1>
+<h1>Discussion Board
+    <button class="post" mat-raised-button (click)="openDialog()">New Post</button></h1>
 <hr>
 
 <mat-sidenav-container class="example-container">
   <mat-sidenav class="sideNav" mode="side" opened>
-    <div class="post-button">
+   <!--<div class="post-button">-->
     <mat-list role="list">
-      <mat-list-item role="listitem"><button mat-raised-button (click)="openDialog()">New Post</button></mat-list-item>
       <mat-list-item class="b" role="listitem" (click)="filterSelection(0)"><button mat-button >All Posts</button></mat-list-item>
-      <mat-list-item class="b" role="listitem" (click)="filterSelection(1)"><button mat-button >Liked Posts</button></mat-list-item>
+      <mat-list-item class="b" role="listitem" (click)="filterSelection(1)"><button mat-button >Nutrition</button></mat-list-item>
+      <mat-list-item class="b" role="listitem" (click)="filterSelection(2)"><button mat-button >Weight Training</button></mat-list-item>
+      <mat-list-item class="b" role="listitem" (click)="filterSelection(3)"><button mat-button >Recovery</button></mat-list-item>
+      <mat-list-item class="b" role="listitem" (click)="filterSelection(4)"><button mat-button >General Health</button></mat-list-item>
     </mat-list>
-  </div>
+  <!--</div>-->
   </mat-sidenav>
  
   <mat-sidenav-content>
     <div class="flex-container1" *ngIf="blogPosts$ | async as blogPosts">
       <mat-card class="blog-card1" *ngFor='let blogPost of blogPosts'>
         <mat-card-title-group>
-          <mat-card-title><a id="exerName" [routerLink]="['/discussion', blogPost.blogId]" (click)="onSelected(blogPost.blogId)" >
-            {{blogPost.blogTitle}}</a></mat-card-title>
+          <mat-card-title><a id="exerName" [routerLink]="['/blog', blogPost.id]" (click)="onSelected(blogPost.id)" >
+            {{blogPost.title}}</a></mat-card-title>
           
-          <mat-card-subtitle>{{blogPost.blogAuthor}} <img [src]='blogPost.authorAvatar' /></mat-card-subtitle>
+          <mat-card-subtitle>{{blogPost.author}} <img [src]='blogPost.avatar' /></mat-card-subtitle>
         </mat-card-title-group>
-        <mat-card-content>{{blogPost.blogContent}}</mat-card-content>
+        <mat-card-content>{{blogPost.content}}</mat-card-content>
         <mat-card-actions>
-          <button mat-button>LIKE</button>
-          <button mat-button>COMMENT</button>
+          <button mat-button>ADD COMMENT</button>
         </mat-card-actions>
       </mat-card>
     </div>

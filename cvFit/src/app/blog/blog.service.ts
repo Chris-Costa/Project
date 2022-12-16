@@ -1,24 +1,24 @@
 import { Injectable } from "@angular/core";
-import { IBlogPost, IComment } from "./blogPost";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { BehaviorSubject, catchError, combineLatest, map, merge, scan, Subject, tap, throwError } from "rxjs";
-import { PostComponent } from "./post/post.component";
-import { MatDialog } from '@angular/material/dialog';
+import { IBlogPost, IComment } from "../shared/blogPost";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
+import { BehaviorSubject, catchError, combineLatest, map, merge, Observable, scan, Subject, tap, throwError } from "rxjs";
+import { environment } from "src/environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class BlogService{
-    constructor (private http: HttpClient, private dialog: MatDialog) { }
+    constructor (private http: HttpClient) { }
 
-    private blogUrl = 'assets/json/blogs.json';
-    disableLikedPostsButton: boolean = false //if liked posts array is empty disable button
+    private blogUrl = environment.baseUrl + 'blog/';
+    private commentUrl = environment.baseUrl + 'Comment?blogId='
     private postSelctionSubject = new BehaviorSubject<number>(0); //get a single selected blog post used in discussion component
     private blogPostInsertedSubject = new Subject<IBlogPost>();   //used to add new blogPost to list
     private commentInsertedSubject = new Subject<IComment>();
+    httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
-    blogPosts$ = this.http.get<IBlogPost[]>(this.blogUrl) //all blog posts
+    blogPosts$ = this.http.get<IBlogPost[]>(this.blogUrl) 
         .pipe(
             tap(data => console.log('Blog Posts', JSON.stringify(data))),
             catchError(this.handleError)
@@ -29,13 +29,13 @@ export class BlogService{
     selectedBlogPost$ = combineLatest([this.blogPosts$, this.postSelectionAction$])
         .pipe(
             map(([posts, selectedPostId]) => 
-                posts.find(post => post.blogId === selectedPostId)),
+                posts.find(post => post.id === selectedPostId)),
             tap(post => console.log('selected post', post))
     );
 
     blogPostInsertedAction$ = this.blogPostInsertedSubject.asObservable();
     
-    blogPostsWithAdd$ = merge(this.blogPosts$, this.blogPostInsertedAction$)  //combine exisitng stream with new workout
+    blogPostsWithAdd$ = merge(this.blogPosts$, this.blogPostInsertedAction$)  
         .pipe(
             scan((acc, value) =>
             (value instanceof Array) ? [...value] : [...acc, value], [] as IBlogPost[])
@@ -43,9 +43,10 @@ export class BlogService{
     
     commentInsertedAction$ = this.commentInsertedSubject.asObservable();
     
-    commentsOfCurrentPost$ = this.selectedBlogPost$ //observable of the currently selected posts comments
+    commentsOfCurrentPost$ = this.selectedBlogPost$ 
         .pipe(
-            map(post => post.comments),
+            map(post => post.comment),
+            tap(data => console.log('comments', JSON.stringify(data))),
             catchError(this.handleError)
     );
 
@@ -55,20 +56,21 @@ export class BlogService{
             (value instanceof Array) ? [...value]: [...acc, value], [] as IComment[])
     );
 
-    selectedPostChange(selectedPostId: number): void{ //take in value that user selects
+    selectedPostChange(selectedPostId: number): void{ 
         this.postSelctionSubject.next(selectedPostId);
+        console.log('selected post id ', this.postSelctionSubject.value);
     }
-    addBlogPost(newPost: IBlogPost) { //function to add new workout in component
+
+    postBlog(newPost: IBlogPost): Observable<IBlogPost | Number> {
         this.blogPostInsertedSubject.next(newPost)
-    }
-    addComment(newComment: IComment) {
+        return this.http.post<IBlogPost | Number>(this.blogUrl, newPost, this.httpOptions);
+    } 
+
+    postComment(newComment: IComment): Observable<IComment | Number> {
         this.commentInsertedSubject.next(newComment);
+        return this.http.post<IComment | Number>(this.commentUrl + this.postSelctionSubject.value, newComment, this.httpOptions);
     }
-    openPostDialog(){
-        this.dialog.open(PostComponent, {
-            width: '500px',
-          });
-    }
+
     private handleError(err: HttpErrorResponse){
         let errorMessage = '';
         if (err.error instanceof ErrorEvent){

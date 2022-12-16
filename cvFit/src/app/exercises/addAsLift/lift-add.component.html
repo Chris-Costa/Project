@@ -1,15 +1,12 @@
 <div class='card'>
-    <button class="lifts" mat-raised-button color="primary" routerLink='/workoutlist'>Back to Workouts</button>
     <div class='card-header'>
         Exerciese List
     </div>
+    <div class="flex-container">
+        <button mat-raised-button mat-dialog-close>Close Window</button>
+    </div>
+    
     <div class='card-body'>
-        <div class='row'>
-            <div class='col-md-2'>Filter by:</div>
-            <div class='col-md-4'>
-                <input type='text' [(ngModel)]='listFilter' />
-            </div>
-        </div>
         <div class='table-responsive'>
             <table class='table' *ngIf='exercisesFilter$ | async as exercises'>
                 <thead>
@@ -17,17 +14,14 @@
                         <th></th>
                         <th>Exercise</th>
                         <th>Muscle Group</th>
-                        <th>Rep Range</th>
-                        <th>Difficulty</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor='let exercise of exercises'>
                         <td><img [src]='exercise.imageURL' [title]="exercise.name"></td>
-                        <td><button mat-raised-button [routerLink]="['/exercises', exercise.id]" [ngClass]="{active: exercise?.id === (selectedExercise$ | async)?.id }" (click)="onSelected(exercise.id)">{{exercise.name}}</button></td>
+                        <td>{{exercise.name}}</td>
                         <td>{{exercise.muscleGroup}}</td>
-                        <td>{{exercise.repRange}}</td>
-                        <td>{{exercise.difficulty}}</td>
+                        <td><button mat-raised-button color="primary" (click)="add(exercise.name)">ADD</button></td>
                     </tr>
                 </tbody>
             </table>

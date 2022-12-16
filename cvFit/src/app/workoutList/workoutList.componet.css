@@ -1,0 +1,23 @@
+.flex-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.workout-card{
+    width: 95%;
+    margin: 10px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+#button{
+    position: absolute;
+    right: 90px;
+}
+#del{
+    position: absolute;
+    right: 15px;
+}
+.new{
+    text-align: center;
+}
