@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, catchError, combineLatest, map, tap, throwError } from "rxjs";
+import { BehaviorSubject, catchError, combineLatest, map, take, tap, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
 import { IExercise } from "../shared/exercise";
 
@@ -33,6 +33,20 @@ export class ExerciseService{
     
     selectedExerciseChanged(selectedExerciseId: number): void {
         this.exerciseSelectionSubject.next(selectedExerciseId);
+    }
+
+    idConversion : number;
+    selectedExerciseChangedString(name: string){
+        this.exercises$.pipe(
+            take(1),
+            map(exercises => exercises.find(
+                exercise => exercise.name === name))
+            ).subscribe(
+                (data : any) => {
+                    this.idConversion =  data.id;
+                    this.exerciseSelectionSubject.next(this.idConversion);
+                }
+            );
     }
     
     private handleError(err: HttpErrorResponse){

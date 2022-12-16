@@ -20,6 +20,7 @@ export class UserService {
 
     private workoutSelectionSubject = new BehaviorSubject<number>(0);
     private workoutInsertedSubject = new Subject<IWorkout>();
+    private liftSelectionSubject = new BehaviorSubject<number>(0)
     private liftInsertedSubject = new Subject<ILifts>();
     
     constructor(private http: HttpClient) { }
@@ -61,9 +62,29 @@ export class UserService {
             (value instanceof Array) ? [...value]: [...acc, value], [] as ILifts[])
     );
 
+    liftSelectionAction$ = this.liftSelectionSubject.asObservable();
+
+    
+
+    lifts$ = this.http.get<ILifts[]>('https://localhost:7018/Lift').pipe(
+        tap(data => console.log('All: ', JSON.stringify(data))), 
+        catchError(this.handleError)
+    );
+    selectedLift$ = combineLatest([this.lifts$, this.liftSelectionAction$])
+        .pipe(
+            map(([lifts, selectedLiftId]) => 
+                lifts.find(lift => lift.id === selectedLiftId)),
+            tap(lift => console.log('selected lift', lift))
+    );
+
     selectedWorkoutChange(selectedWorkoutId: number): void{ 
         this.workoutSelectionSubject.next(selectedWorkoutId);
-        console.log('selected post id ', this.workoutSelectionSubject.value);
+        console.log('selected workout id ', this.workoutSelectionSubject.value);
+    }
+
+    selectedlifttChange(selectedLifttId: number): void{ 
+        this.liftSelectionSubject.next(selectedLifttId);
+        console.log('selected lift id ', this.liftSelectionSubject.value);
     }
 
     postWorkout(newWorkout: IWorkout): Observable<IWorkout | Number> {

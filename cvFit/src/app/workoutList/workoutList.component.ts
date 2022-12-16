@@ -5,6 +5,8 @@ import { UserService } from "../shared/user.service";
 import { WorkoutTitleComponent } from "../workoutTitle/workoutTitle.component";
 import { LiftAddComponent } from "../exercises/addAsLift/lift-add.component";
 import { HttpClient } from "@angular/common/http";
+import { ExerciseService } from "../exercises/exercise.service";
+import { LiftEditComponent } from "../lift/lift-edit.componet";
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -19,7 +21,7 @@ type ProfileType = {
     changeDetection: ChangeDetectionStrategy.Default
 })
 export class WorkoutListComponent implements OnInit {
-    constructor (private dialog: MatDialog, private userService: UserService, private http: HttpClient){ }
+    constructor (private dialog: MatDialog, private userService: UserService, private http: HttpClient, private exerciseService: ExerciseService){ }
 
     profile!: ProfileType;
     errorMessage: string;
@@ -52,10 +54,24 @@ export class WorkoutListComponent implements OnInit {
     onSelected(workoutId: number): void{
         this.userService.selectedWorkoutChange(workoutId);
     }
+
+    onSelectedExercise(exerciseName: string): void {
+        this.exerciseService.selectedExerciseChangedString(exerciseName);
+    }
+
+    onSelectedLift(id: number): void {
+        this.userService.selectedlifttChange(id);
+    }
     
     createNewWorkout(){
         this.dialog.open(WorkoutTitleComponent, {
             width: '500px',
+        });
+    }
+
+    editLiftData(){
+        this.dialog.open(LiftEditComponent, {
+            width: '75%'
         });
     }
 
