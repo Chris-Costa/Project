@@ -37,9 +37,8 @@ export class WorkoutListComponent implements OnInit {
         });
     }
 
-    
     workouts$ = this.userService.workoutsWithAdd$
-            .pipe(delay(500),
+            .pipe(
                 map(workouts => workouts.filter(workout =>
                     workout.azureId === this.profile.id)
                 ),
@@ -75,11 +74,11 @@ export class WorkoutListComponent implements OnInit {
                 return EMPTY;
             }))
             .subscribe(res => {
+                this.userService.refreshStream();
                 if(res) {
                     this.success = true;
                 }
             });
-        this.reloadPage();
     }
 
     deleteWorkout(id: number, t: boolean) {
@@ -91,14 +90,10 @@ export class WorkoutListComponent implements OnInit {
                 return EMPTY;
             }))
             .subscribe(res => {
+                this.userService.refreshStream();
                 if(res) {
                     this.success = true;
                 }
             });
-
-        this.reloadPage();
-    }
-    reloadPage(){
-        window.location.reload()
     }
 }

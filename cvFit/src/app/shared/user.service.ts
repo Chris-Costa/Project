@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, catchError, combineLatest, map, merge, Observable, of, scan, Subject, tap, throwError } from "rxjs";
+import { BehaviorSubject, catchError, combineLatest, map, merge, mergeMap, Observable, of, scan, shareReplay, Subject, tap, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
 import { ILifts, IWorkout } from "./workout";
 
@@ -21,17 +21,23 @@ export class UserService {
     private workoutSelectionSubject = new BehaviorSubject<number>(0);
     private workoutInsertedSubject = new Subject<IWorkout>();
     private liftInsertedSubject = new Subject<ILifts>();
+    private _workoutData$ = new BehaviorSubject<void>(undefined);
     
     constructor(private http: HttpClient) { }
-     
+
     workouts$ = this.http.get<IWorkout[]>(this.workoutUrl).pipe(
         tap(data => console.log('All: ', JSON.stringify(data))), 
         catchError(this.handleError)
     );
+    
+    workout$ = this._workoutData$.pipe(
+        mergeMap(() => this.workouts$),
+        shareReplay(1)
+    );
 
     workoutInsertedAction$ = this.workoutInsertedSubject.asObservable();
     
-    workoutsWithAdd$ = merge(this.workouts$, this.workoutInsertedAction$)
+    workoutsWithAdd$ = merge(this.workout$, this.workoutInsertedAction$)
         .pipe(
             scan((acc, value) =>
             (value instanceof Array) ? [...value]: [...acc, value], [] as IWorkout[])
@@ -39,7 +45,7 @@ export class UserService {
 
     workoutSelectionAction$ = this.workoutSelectionSubject.asObservable();
 
-    selectedWorkout$ = combineLatest([this.workoutsWithAdd$, this.workoutSelectionAction$])
+    selectedWorkout$ = combineLatest([this.workout$, this.workoutSelectionAction$])
         .pipe(
             map(([workouts, selectedWorkoutId]) => 
                 workouts.find(workout => workout.id === selectedWorkoutId)),
@@ -60,6 +66,10 @@ export class UserService {
             scan((acc, value) =>
             (value instanceof Array) ? [...value]: [...acc, value], [] as ILifts[])
     );
+
+    refreshStream(){
+        this._workoutData$.next();
+    }
 
     selectedWorkoutChange(selectedWorkoutId: number): void{ 
         this.workoutSelectionSubject.next(selectedWorkoutId);

@@ -52,6 +52,7 @@ export class LiftComponent {
                 return EMPTY;
             }))
             .subscribe(res => {
+                this.userService.refreshStream();
                 if(res) {
                     this.success = true;
                 }
@@ -67,6 +68,7 @@ export class LiftComponent {
                 return EMPTY;
             }))
             .subscribe(res => {
+                this.userService.refreshStream();
                 if(res) {
                     this.success = true;
                 }
