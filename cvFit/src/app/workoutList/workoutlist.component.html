@@ -36,7 +36,7 @@
             </thead>
             <tbody *ngFor="let lift of workout.lift">
               <tr>
-                <td>{{lift.name}}</td> 
+                <td><a [routerLink]="['/exercises', lift.id]" (click)="onSelectedExercise(lift.name)" >{{lift.name}}</a></td> 
                 <td>{{lift.weight}}</td>
                 <td>{{lift.sets}}</td>
                 <td>{{lift.reps}}</td>
