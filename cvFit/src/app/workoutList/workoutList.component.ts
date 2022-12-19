@@ -38,7 +38,7 @@ export class WorkoutListComponent implements OnInit {
     }
 
     workouts$ = this.userService.workoutsWithAdd$
-            .pipe(
+            .pipe(delay(1),
                 map(workouts => workouts.filter(workout =>
                     workout.azureId === this.profile.id)
                 ),
