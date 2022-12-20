@@ -44,12 +44,10 @@ export class WorkoutTitleComponent implements OnInit {
                 return EMPTY;
             }))
             .subscribe(res => {
+                this.userService.refreshStream();
                 if(res) {
                     this.success = true;
                 }
             });
-    }
-    reloadPage(){
-        window.location.reload()
     }
 }

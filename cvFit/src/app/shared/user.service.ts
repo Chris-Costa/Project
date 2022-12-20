@@ -23,18 +23,27 @@ export class UserService {
     private workoutInsertedSubject = new Subject<IWorkout>();
     private liftSelectionSubject = new BehaviorSubject<number>(0)
     private liftInsertedSubject = new Subject<ILifts>();
+
+    private _workoutData$ = new BehaviorSubject<void>(undefined);
+
     private _liftData$ = new BehaviorSubject<void>(undefined);
+
     
     constructor(private http: HttpClient) { }
-     
+
     workouts$ = this.http.get<IWorkout[]>(this.workoutUrl).pipe(
         tap(data => console.log('All: ', JSON.stringify(data))), 
         catchError(this.handleError)
     );
+    
+    workout$ = this._workoutData$.pipe(
+        mergeMap(() => this.workouts$),
+        shareReplay(1)
+    );
 
     workoutInsertedAction$ = this.workoutInsertedSubject.asObservable();
     
-    workoutsWithAdd$ = merge(this.workouts$, this.workoutInsertedAction$)
+    workoutsWithAdd$ = merge(this.workout$, this.workoutInsertedAction$)
         .pipe(
             scan((acc, value) =>
             (value instanceof Array) ? [...value]: [...acc, value], [] as IWorkout[])
@@ -42,7 +51,7 @@ export class UserService {
 
     workoutSelectionAction$ = this.workoutSelectionSubject.asObservable();
 
-    selectedWorkout$ = combineLatest([this.workoutsWithAdd$, this.workoutSelectionAction$])
+    selectedWorkout$ = combineLatest([this.workout$, this.workoutSelectionAction$])
         .pipe(
             map(([workouts, selectedWorkoutId]) => 
                 workouts.find(workout => workout.id === selectedWorkoutId)),
@@ -63,6 +72,10 @@ export class UserService {
             scan((acc, value) =>
             (value instanceof Array) ? [...value]: [...acc, value], [] as ILifts[])
     );
+
+
+    refreshStream(){
+        this._workoutData$.next();
 
     lifts$ = this.http.get<ILifts[]>(this.liftAllUrl).pipe(
         tap(data => console.log('All: ', JSON.stringify(data))), 
@@ -85,6 +98,7 @@ export class UserService {
 
     refreshLiftStream(){
         this._liftData$.next();
+
     }
 
     selectedWorkoutChange(selectedWorkoutId: number): void{ 

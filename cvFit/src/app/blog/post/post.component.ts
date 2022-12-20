@@ -68,13 +68,10 @@ export class PostComponent implements OnInit {
                 return EMPTY;
             }))
             .subscribe(res => {
+                this.blogService.refreshStream();
                 if(res) {
                     this.success = true;
                 }
             });
-            
-    }
-    reloadPage(){
-        window.location.reload()
     }
 }
