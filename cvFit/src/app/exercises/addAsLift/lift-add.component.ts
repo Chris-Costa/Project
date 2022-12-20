@@ -54,5 +54,5 @@ export class LiftAddComponent {
                     this.success = true;
                 }
             });
-
+        }
 }

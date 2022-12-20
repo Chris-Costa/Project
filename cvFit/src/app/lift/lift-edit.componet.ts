@@ -39,7 +39,8 @@ export class LiftEditComponent {
             }))
             .subscribe(res => {
                 this.userService.refreshLiftStream();
-                if(res) {
+                this.userService.refreshStream();
+                    if(res) {
                     this.success = true;
                 }
             });
