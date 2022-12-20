@@ -29,12 +29,13 @@ import { AZUREprofileComponent } from './azureprofile/azureprofile.component';
 import { HomeComponent } from './home/home.component';
 import { MsalRedirectComponent, MsalInterceptor, MsalModule, MsalGuard } from '@azure/msal-angular';
 import { WorkoutTitleComponent } from './workoutTitle/workoutTitle.component';
-import { LiftComponent } from './lift/lift.component';
 
 import { CalcService } from './macroCalculator/calculator.service';
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 import { LiftAddComponent } from './exercises/addAsLift/lift-add.component';
 import { environment } from 'src/environments/environment';
+import { LiftEditComponent } from './lift/lift-edit.componet';
+import { LiftComponent } from './lift/lift.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -53,8 +54,9 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     AZUREprofileComponent,
     HomeComponent,
     WorkoutTitleComponent,
-    LiftComponent,
-    LiftAddComponent
+    LiftEditComponent,
+    LiftAddComponent,
+    LiftComponent
   ],
   imports: [
     AppRoutingModule,

@@ -12,13 +12,14 @@
     <mat-card class="workout-card" *ngFor="let workout of workouts">
       <mat-card-title-group>
         <mat-card-title>
-          <a id="workoutName" [routerLink]="['/workoutlist', workout.id]" (click)="onSelected(workout.id)">{{workout.title}}</a>
+          {{workout.title}}
         </mat-card-title>
-        <h2 class="new">Number of Exercises: {{workout.lift.length}}</h2>
+        <!--<h2 class="new">Number of Exercises: {{workout.lift.length}}</h2>-->
         <div class="new">
           <button  mat-raised-button [matMenuTriggerFor]="menu">Options</button>
               <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="addLift(workout.id)">Add New Lift</button>
+                <button mat-menu-item [routerLink]="['/workoutlist', workout.id]" (click)="onSelected(workout.id)">Edit Workout</button>
                 <button mat-menu-item (click)="deleteWorkout(workout.id, true)">Delete Workout</button>
               </mat-menu>
         </div>
@@ -40,7 +41,7 @@
                 <td>{{lift.weight}}</td>
                 <td>{{lift.sets}}</td>
                 <td>{{lift.reps}}</td>
-                <td><button (click)="deleteLift(lift.id)" mat-raised-button><mat-icon>delete</mat-icon></button></td>
+                <!--<td><button (click)="deleteLift(lift.id)" mat-raised-button><mat-icon>delete</mat-icon></button></td>-->
               </tr>
             </tbody>
           </table> 

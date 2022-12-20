@@ -45,12 +45,12 @@ export class LiftAddComponent {
                 return EMPTY;
             }))
             .subscribe(res => {
+                this.userService.refreshLiftStream();
                 if(res) {
                     this.success = true;
                 }
             });
 
-        this.reload();
     }
     reload(){
         window.location.reload()

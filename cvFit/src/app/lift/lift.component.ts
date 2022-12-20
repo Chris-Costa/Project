@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
 import { catchError, EMPTY, take } from "rxjs";
 import { UserService } from "../shared/user.service";
 import { ILifts } from "../shared/workout";
+import { LiftEditComponent } from "./lift-edit.componet";
 
 @Component({
     selector: 'app-lift',
@@ -15,7 +17,7 @@ export class LiftComponent {
     deleteMessage: boolean = false;
     edit: boolean = false;
 
-    constructor(private userService: UserService) { }
+    constructor(private userService: UserService, private dialog: MatDialog) { }
 
     toggleEdit(){
         this.edit = true;
@@ -71,5 +73,29 @@ export class LiftComponent {
                     this.success = true;
                 }
             });
+    }
+
+    editLiftData(){
+        this.dialog.open(LiftEditComponent, {
+            width: '75%'
+        });
+    }
+
+    deleteLift(liftId : number){
+        this.userService.deleteLift(liftId)
+            .pipe(take(1),
+            catchError(err => {
+                this.errorMessage = err;
+                return EMPTY;
+            }))
+            .subscribe(res => {
+                if(res) {
+                    this.success = true;
+                }
+            });
+    }
+
+    onSelectedLift(id: number): void {
+        this.userService.selectedlifttChange(id);
     }
 }

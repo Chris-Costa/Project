@@ -6,6 +6,7 @@ import { WorkoutTitleComponent } from "../workoutTitle/workoutTitle.component";
 import { LiftAddComponent } from "../exercises/addAsLift/lift-add.component";
 import { HttpClient } from "@angular/common/http";
 import { ExerciseService } from "../exercises/exercise.service";
+import { LiftEditComponent } from "../lift/lift-edit.componet";
 
 const GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/me';
 
@@ -66,25 +67,10 @@ export class WorkoutListComponent implements OnInit {
 
     addLift(workoutId: number){
         this.dialog.open(LiftAddComponent, {
-            width: '50%',
-            height: '50%',
+            width: '75%',
+            height: '75%',
             data: {id: workoutId}
         })
-    }
-
-    deleteLift(liftId : number){
-        this.userService.deleteLift(liftId)
-            .pipe(take(1),
-            catchError(err => {
-                this.errorMessage = err;
-                return EMPTY;
-            }))
-            .subscribe(res => {
-                if(res) {
-                    this.success = true;
-                }
-            });
-        this.reloadPage();
     }
 
     deleteWorkout(id: number, t: boolean) {

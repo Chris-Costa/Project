@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, catchError, combineLatest, map, merge, Observable, of, scan, Subject, tap, throwError } from "rxjs";
+import { BehaviorSubject, catchError, combineLatest, map, merge, mergeMap, Observable, of, scan, shareReplay, Subject, tap, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
 import { ILifts, IWorkout } from "./workout";
 
@@ -15,12 +15,15 @@ export class UserService {
     private liftDelete = environment.baseUrl + 'Lift/liftId?liftId=';
     
     private liftPutUrl = environment.baseUrl + 'Lift/';
+    private liftAllUrl = environment.baseUrl + 'Lift';
     
     httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
     private workoutSelectionSubject = new BehaviorSubject<number>(0);
     private workoutInsertedSubject = new Subject<IWorkout>();
+    private liftSelectionSubject = new BehaviorSubject<number>(0)
     private liftInsertedSubject = new Subject<ILifts>();
+    private _liftData$ = new BehaviorSubject<void>(undefined);
     
     constructor(private http: HttpClient) { }
      
@@ -61,6 +64,29 @@ export class UserService {
             (value instanceof Array) ? [...value]: [...acc, value], [] as ILifts[])
     );
 
+    lifts$ = this.http.get<ILifts[]>(this.liftAllUrl).pipe(
+        tap(data => console.log('All: ', JSON.stringify(data))), 
+        catchError(this.handleError)
+    );
+
+    lift$ = this._liftData$.pipe(
+        mergeMap(() => this.lifts$),
+        shareReplay(1)
+    );
+
+    liftSelectionAction$ = this.liftSelectionSubject.asObservable();
+
+    selectedLift$ = combineLatest([this.lift$, this.liftSelectionAction$])
+        .pipe(
+            map(([lifts, selectedLiftId]) => 
+                lifts.find(lift => lift.id === selectedLiftId)),
+            tap(lift => console.log('selected lift', lift))
+    );
+
+    refreshLiftStream(){
+        this._liftData$.next();
+    }
+
     selectedWorkoutChange(selectedWorkoutId: number): void{ 
         this.workoutSelectionSubject.next(selectedWorkoutId);
         console.log('selected post id ', this.workoutSelectionSubject.value);
@@ -79,6 +105,11 @@ export class UserService {
                     return of();
                 })
             );
+    }
+
+    selectedlifttChange(selectedLifttId: number): void{ 
+        this.liftSelectionSubject.next(selectedLifttId);
+        console.log('selected lift id ', this.liftSelectionSubject.value);
     }
  
     private handleError(err: HttpErrorResponse){
