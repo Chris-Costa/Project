@@ -1,0 +1,40 @@
+<div *ngIf="!deleteLift">
+    <div class="flex-container">
+      <mat-card class="workout-card" *ngIf='lift$ | async as lift'>
+        <mat-card-title-group>
+          <mat-card-title>Edit Selected Lift</mat-card-title>
+          <div class="right">
+              <button mat-raised-button color="primary" mat-dialog-close (click)="updateLift(lift.id, lift.name, lift.weight, lift.sets, lift.reps)">Save</button>
+              <button mat-raised-button mat-dialog-close>Cancel</button>            
+          </div>
+        </mat-card-title-group>
+        <mat-card-content>
+          <div class="table-responsive" >
+            <table class="table" >
+              <thead>
+                <tr >
+                  <th>Exercise</th>
+                  <th>Weight</th>
+                  <th>Sets</th>
+                  <th>Reps</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{lift.name}}</td>
+                  <td><input [(ngModel)]="lift.weight" name="weight" id="weight" type="number" class="form-control" /></td>
+                  <td><input [(ngModel)]="lift.sets" name="sets" id="sets" type="number" class="form-control" /></td>
+                  <td><input [(ngModel)]="lift.reps" name="reps" id="reps" type="number" class="form-control" /></td>
+                </tr>
+              </tbody>
+            </table> 
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+</div>
+
+<div class="deleteLIft" *ngIf="deleteLift">
+  <h1><b>Successfully deleted the lift</b></h1>
+  <button mat-raised-button routerLink="/workoutlist">Return to Workout List</button>
+</div>
