@@ -76,7 +76,7 @@ export class UserService {
 
     refreshStream(){
         this._workoutData$.next();
-
+    }
     lifts$ = this.http.get<ILifts[]>(this.liftAllUrl).pipe(
         tap(data => console.log('All: ', JSON.stringify(data))), 
         catchError(this.handleError)
