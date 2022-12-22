@@ -35,6 +35,7 @@ import { CalcService } from './macroCalculator/calculator.service';
 import { InteractionType, PublicClientApplication } from '@azure/msal-browser';
 import { LiftAddComponent } from './exercises/addAsLift/lift-add.component';
 import { environment } from 'src/environments/environment';
+import { LiftEditComponent } from './lift/lift-edit.component';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -54,7 +55,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     HomeComponent,
     WorkoutTitleComponent,
     LiftComponent,
-    LiftAddComponent
+    LiftAddComponent,
+    LiftEditComponent
   ],
   imports: [
     AppRoutingModule,

@@ -17,13 +17,6 @@ export class LiftAddComponent {
 
     constructor(@Inject(MAT_DIALOG_DATA) private data: {id: number}, private exerciseService: ExerciseService, private userService: UserService) {}
 
-    exercises$ = this.exerciseService.exercises$
-        .pipe(
-            catchError(err => {
-                this.errorMessage = err;
-                return EMPTY;
-            })
-        );
     exercisesFilter$ = this.exerciseService.exercises$
         .pipe(
             map(exercises => 
@@ -31,8 +24,6 @@ export class LiftAddComponent {
                     exercise.name.toLocaleLowerCase().includes('')
                     ))
         );
-
-    selectedExercise$ = this.exerciseService.selectedExercise$;
 
     add(name: string){
         let lift: ILifts = {
@@ -45,14 +36,10 @@ export class LiftAddComponent {
                 return EMPTY;
             }))
             .subscribe(res => {
+                this.userService.refreshWorkoutStream();
                 if(res) {
                     this.success = true;
                 }
             });
-
-        this.reload();
-    }
-    reload(){
-        window.location.reload()
     }
 }
