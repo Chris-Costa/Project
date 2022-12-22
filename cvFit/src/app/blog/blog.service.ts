@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { IBlogPost, IComment } from "../shared/blogPost";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
-import { BehaviorSubject, catchError, combineLatest, map, merge, Observable, scan, Subject, tap, throwError } from "rxjs";
+import { BehaviorSubject, catchError, combineLatest, map, merge, mergeMap, Observable, scan, shareReplay, Subject, tap, throwError } from "rxjs";
 import { environment } from "src/environments/environment";
 
 @Injectable({
@@ -16,6 +16,7 @@ export class BlogService{
     private postSelctionSubject = new BehaviorSubject<number>(0); //get a single selected blog post used in discussion component
     private blogPostInsertedSubject = new Subject<IBlogPost>();   //used to add new blogPost to list
     private commentInsertedSubject = new Subject<IComment>();
+    private _blogData$ = new BehaviorSubject<void>(undefined);
     httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
     blogPosts$ = this.http.get<IBlogPost[]>(this.blogUrl) 
@@ -23,10 +24,15 @@ export class BlogService{
             tap(data => console.log('Blog Posts', JSON.stringify(data))),
             catchError(this.handleError)
     );
+
+    blogs$ = this._blogData$.pipe(
+        mergeMap(() => this.blogPosts$),
+        shareReplay(1)
+    );
     
     postSelectionAction$ = this.postSelctionSubject.asObservable();
 
-    selectedBlogPost$ = combineLatest([this.blogPosts$, this.postSelectionAction$])
+    selectedBlogPost$ = combineLatest([this.blogs$, this.postSelectionAction$])
         .pipe(
             map(([posts, selectedPostId]) => 
                 posts.find(post => post.id === selectedPostId)),
@@ -35,7 +41,7 @@ export class BlogService{
 
     blogPostInsertedAction$ = this.blogPostInsertedSubject.asObservable();
     
-    blogPostsWithAdd$ = merge(this.blogPosts$, this.blogPostInsertedAction$)  
+    blogPostsWithAdd$ = merge(this.blogs$, this.blogPostInsertedAction$)  
         .pipe(
             scan((acc, value) =>
             (value instanceof Array) ? [...value] : [...acc, value], [] as IBlogPost[])
@@ -55,6 +61,10 @@ export class BlogService{
             scan((acc, value) =>
             (value instanceof Array) ? [...value]: [...acc, value], [] as IComment[])
     );
+
+    refreshStream(){
+        this._blogData$.next();
+    }
 
     selectedPostChange(selectedPostId: number): void{ 
         this.postSelctionSubject.next(selectedPostId);
