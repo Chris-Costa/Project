@@ -27,7 +27,7 @@ export class ExerciseDetailComponent {
       this.router.navigate(['/exercises']);
     }
     else {
-      this.router.navigate(['/workoutlist'])
+      this.router.navigate(['/workoutlist']);
     }
   }
 }
