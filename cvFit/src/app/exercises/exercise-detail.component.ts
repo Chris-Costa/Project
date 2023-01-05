@@ -23,6 +23,11 @@ export class ExerciseDetailComponent {
     );
 
   onBack(): void {
-    this.router.navigate(['/exercises']);
+    if (this.exerciseService.detailsMethod){
+      this.router.navigate(['/exercises']);
+    }
+    else {
+      this.router.navigate(['/workoutlist']);
+    }
   }
 }
