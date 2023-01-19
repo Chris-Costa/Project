@@ -64,8 +64,8 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       auth: {
         clientId: environment.clientId,
         authority: environment.authority,
-        redirectUri: 'https://cvfitazure.azurewebsites.net/',
-        postLogoutRedirectUri: 'https://cvfitazure.azurewebsites.net/'
+        redirectUri: '/',
+        postLogoutRedirectUri: '/'
       },
       cache: {
         cacheLocation: 'localStorage',
