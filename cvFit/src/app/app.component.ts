@@ -39,7 +39,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
   logout(){
     this.msalService.logoutRedirect({
-      postLogoutRedirectUri: '/'
+      postLogoutRedirectUri: 'https://cvfitazure.azurewebsites.net/'
     });
   }
   setLoginDisplay(){
