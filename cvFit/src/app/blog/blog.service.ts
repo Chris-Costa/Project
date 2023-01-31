@@ -11,7 +11,7 @@ import { environment } from "src/environments/environment";
 export class BlogService{
     constructor (private http: HttpClient) { }
 
-    private blogUrl = environment.baseUrl + 'blog/';
+    private blogUrl = environment.baseUrl + 'Blog/';
     private commentUrl = environment.baseUrl + 'Comment?blogId='
     private postSelctionSubject = new BehaviorSubject<number>(0); //get a single selected blog post used in discussion component
     private blogPostInsertedSubject = new Subject<IBlogPost>();   //used to add new blogPost to list
