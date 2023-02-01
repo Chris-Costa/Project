@@ -9,6 +9,11 @@
   </h1>
   <hr>
   <div class="flex-container" *ngIf='workouts$ | async as workouts'>
+    <div *ngIf="!workouts?.length">
+      <h1>No workouts to display!</h1>
+      <div class="center">
+      <button mat-raised-button (click)="createNewWorkout()">Create My First Workout</button></div>
+    </div>
     <mat-card class="workout-card" *ngFor="let workout of workouts">
       <mat-card-title-group>
         <mat-card-title>
