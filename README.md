@@ -1,28 +1,38 @@
-#  CV Fitness Web Page
+#  CV Fitness
 
-### Description 
-This project is a web page for a fitness training team.  The application facilitates the management of current subscription members.  Users will be able to log into
-their accounts and use the following fuctionalities:
+## Table of Contents
+* [General Information](#general_info)
+* [Pages](#pages)
+* [Layout](#layout)
+* [Technologies](#technologies)
+* [Bootcamp Goals](#bootcamp_goals)
 
-* Access discusion boards (reply as memeber of community or ask new questions)
-* Access tutorial information like written guides or walk thorugh videos
-* Track progress through weights and rep progressions
-* All other subcription based services like traing programs 
+## General Info
+CV Fit is all in one fitness application for two imaginary personal trainers.  This app's default page serves as an andvertisment for the trainers and helps to 
+obtain new business leads through a contact form.  Besides the default page the app serves as fitness tracker for exisiting members.  Members gain access to 
+an extensive list of exercises.  With these exercises members can create and plan workouts to track progress and manage progress.  Memebers also have access to a
+community discussion board to ask questions and help others in the community.
 
-The application will also be used as an advertisment base and faciliate connections with prospective clients.  This will be done though submitable reach out forms as 
-well as a contact and about us tab stratigically placed on the website.  
+## Pages
 
-### Technologies Used
+* Homepage(Advert page)
+* Contact Us Form
+* Exercise List
+* Exercise Detail 
+* Account Profile
+* Workout Creation
+* Workout Management
+* Disscussion Board
+* Post Disscussion Dialog
+* Disscussion Board Detail
+* Post Comment Dialog
 
-+ Angular
-+ Excel
-+ SQL?
+## Layout
 
-## Instal and Run
-
-## Tests
+## Technologies
+* Angular
+    * HTML5, CSS, JavaScript, TypeScript, RxJS
 
 
-## Inspiration 
+## Bootcamp Goals
 
-![Workout plan](https://raw.githubusercontent.com/wger-project/wger/master/wger/software/static/images/workout.png)
