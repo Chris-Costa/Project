@@ -29,10 +29,43 @@ community discussion board to ask questions and help others in the community.
 
 ## Layout
 
+- Homepage
+    - Marketing page for two personal trainers
+         -Payment plans
+         -Testimonials
+    - Contact Us form
+- Dashboard
+    - Macronutrients Calculator
+         -General Facts
+         -Reactive Personal Calculator
+    - Workouts
+         -Exercise List
+         -Exercise Detials
+            -Description, Image, Video Tutorial
+         -Workout Creation 
+         -Workout Details
+            -Edit or delete Weights, Sets, Reps for individual exercises
+    - Disscussion Board
+         -Blog Post Creation Form
+         -Blog Posts
+            -Filters: All Posts, Nutrition, Weight Training, Recovery, General Health
+         -Blog Post Details
+            -Includes selected post and associated comments
+            -Create new reply comment form
+     - Login with Azure Id
+         -Azure Id redirect 
+         -Associated Azure Profile information
+            -Firstname, Lastname, Email, AzureID
+
+
 ## Technologies
 * Angular
     * HTML5, CSS, JavaScript, TypeScript, RxJS
 
 
 ## Bootcamp Goals
-
+* HTML5 + CSS website design 
+* RxJS Observables
+* Testing with Jasmine
+* Azure Id login
+* Azure Deployment
